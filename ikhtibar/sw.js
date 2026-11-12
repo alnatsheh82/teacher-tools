@@ -6,7 +6,7 @@ const VERSION = 'ikhtibar-2026-11-12-v20';
 const FILES = [
     './', 'index.html', 'manifest.webmanifest',
     'static/style.css', 'static/awraq.css', 'static/exam.css', 'static/jszip.min.js',
-    'static/exam-template.js', 'static/exam-fonts.js', 'static/quran-data.js', 'static/exam-engine.js', 'static/exam-preview.js', 'static/spec-words.js', 'static/spec.js', 'static/checker.js', 'static/importer.js', 'static/app.js', 'static/local.js', 'static/pdfjs/pdf.min.js', 'static/pdfjs/pdf.worker.min.js',
+    'static/exam-template.js', 'static/exam-engine.js', 'static/exam-preview.js', 'static/spec-words.js', 'static/spec.js', 'static/checker.js', 'static/importer.js', 'static/app.js', 'static/local.js', 'static/pdfjs/pdf.min.js', 'static/pdfjs/pdf.worker.min.js',
     'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-192.png', 'icons/maskable-512.png',
     'icons/apple-touch-icon.png', 'icons/favicon-32.png', 'icons/favicon-16.png'
 ];

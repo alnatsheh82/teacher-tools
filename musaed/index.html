@@ -66,6 +66,17 @@
       </div>
       <input type="file" id="logoFile" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" hidden>
     </div>
+    <div class="logo-box">
+      <span class="logo-title">توقيع المنسق <span class="hint-inline">(اختياري — صورة التوقيع تظهر بجانب اسم المنسق في خانة «توقيع المنسق بالاعتماد»)</span></span>
+      <div class="logo-row">
+        <div class="logo-preview sign-preview" id="signPreview"><span>لا يوجد توقيع</span></div>
+        <div class="logo-actions">
+          <button type="button" class="mini" id="signBtn">رفع صورة التوقيع</button>
+          <button type="button" class="mini danger-mini" id="signRemove" hidden>حذف التوقيع</button>
+        </div>
+      </div>
+      <input type="file" id="signFile" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" hidden>
+    </div>
   </div>
 </section>
 
@@ -160,12 +171,21 @@
   <h2>استراتيجيات التعلم المقترحة - كما في النموذج</h2>
   <p class="note">اختر ما تريد إبرازه في جدول الاستراتيجيات أسفل مستند Word. الاستراتيجيات المختارة داخل الأهداف تُحدَّد هنا تلقائيًا <span class="auto-sample">بهذا اللون</span>.</p>
   <div id="selected_strategies" class="checkgrid four"></div>
+  <div class="others-box">
+    <strong>أخرى:</strong>
+    <span id="other_auto" class="others-auto"></span>
+    <label class="others-input">استراتيجيات أخرى تضيفها <span class="hint-inline">(افصل بينها بفاصلة)</span><input id="other_strategies" placeholder="مثال: التعلم باللعب، الرؤوس المرقمة"></label>
+  </div>
+  <p class="note">تُكتب في خانة «أخرى» بجانب «الاستنتاج» في Word، ومعها تلقائيًا ما اخترته في الأهداف من استراتيجيات ليست في النموذج (مثل التعلم بالقصة والكرسي الساخن) أو كتبته بنفسك.</p>
 </section>
 
 <section>
   <h2>الغلق الختامي والواجب</h2>
   <div class="grid">
-    <label>الغلق الختامي<textarea id="closure" rows="3"></textarea></label>
+    <div class="closure-box">
+      <label>الغلق الختامي<select id="closure_type"></select></label>
+      <label class="mt">تفاصيل الغلق <span class="hint-inline" id="closureHint">(اختياري)</span><textarea id="closure" rows="2" placeholder="مثال: يكتب كل طالب سؤالًا عن الدرس ويضعه في الصندوق"></textarea></label>
+    </div>
     <label>زمن الغلق (دقائق)<input id="closure_time" type="number" min="1" max="180" value="5"></label>
     <label>الواجب<textarea id="homework" rows="3"></textarea></label>
   </div>
@@ -259,10 +279,11 @@
 
 <script src="static/local.js?v=2026-11-12"></script>
 <script>
-TTLocal.start({ id: 'musaed', app: 'musaed-tahdeer', title: 'مساعد التحضير الإلكتروني', out: 'التحضيرات', version: '2.1', fallbackName: 'تحضير', backupDir: 'نسخ احتياطية للمسودة',
+TTLocal.start({ id: 'musaed', app: 'musaed-tahdeer', title: 'مساعد التحضير الإلكتروني', out: 'التحضيرات', version: '2.2', fallbackName: 'تحضير', backupDir: 'نسخ احتياطية للمسودة',
   store: {
     draft: { key: 'lessonPrepDraft_v1', file: 'المسودة.json' },
     logo: { key: 'schoolLogo_v1', file: 'شعار_المدرسة.json' },
+    sign: { key: 'coordinatorSign_v1', file: 'توقيع_المنسق.json' },
     flags: { key: 'musaed.flags.v1', file: 'إعدادات.json' } } },
   ["static/lists.js?v=2026-11-12",
   "static/lessons.js?v=2026-11-12",

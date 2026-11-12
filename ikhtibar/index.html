@@ -69,16 +69,21 @@
   <p class="note">تظهر في غلاف الاختبار وصفحة التعليمات والتذييل. والمادة ثابتة: التربية الإسلامية.</p>
   <div class="grid">
     <label class="span2">اسم الاختبار
-      <input id="exam_name" list="exam_names" placeholder="مثال: نهاية الفصل الدراسي الثاني &quot;منهاج النصف الثاني&quot;">
-      <span class="hint-inline">ما تضعه بين علامتي تنصيص "..." يُكتب بلون العنوان كما في القالب.</span>
+      <select id="exam_name">
+        <option value="">اختر اسم الاختبار (من القائمة الوزارية)</option>
+        <option>اختبار منتصف الفصل الدراسي الأول (منهاج النصف الأول – نهاري).</option>
+        <option>اختبار نهاية الفصل الدراسي الأول (منهاج النصف الثاني – نهاري).</option>
+        <option>اختبار نهاية الفصل الأول – منهاج كامل (نهاري/تعليم كبار/المنازل).</option>
+        <option>اختبار ملحق نهاية الفصل الأول – منهاج النصف الثاني (نهاري/المعذورين).</option>
+        <option>اختبار ملحق نهاية الفصل الأول – منهاج كامل (نهاري/تعليم كبار/المنازل).</option>
+        <option>اختبار منتصف الفصل الثاني – منهاج النصف الأول (نهاري).</option>
+        <option>اختبار نهاية الفصل الثاني – منهاج النصف الثاني (نهاري).</option>
+        <option>اختبار نهاية الفصل الثاني – منهاج كامل (نهاري – المعذورين – تعليم كبار/المنازل).</option>
+        <option>اختبار الدور الثاني – منهاج النصف الثاني (نهاري/المعذورين).</option>
+        <option>اختبار الدور الثاني – منهاج الفصل الثاني كاملاً (نهاري/تعليم كبار/المنازل).</option>
+        <option>اختبار الدور الثاني – منهاج الفصلين (نهاري/تعليم كبار/المنازل).</option>
+      </select>
     </label>
-    <datalist id="exam_names">
-      <option value="منتصف الفصل الدراسي الأول"></option>
-      <option value="نهاية الفصل الدراسي الأول"></option>
-      <option value="منتصف الفصل الدراسي الثاني"></option>
-      <option value="نهاية الفصل الدراسي الثاني"></option>
-      <option value="نهاية الفصل الدراسي الثاني &quot;منهاج النصف الثاني&quot;"></option>
-    </datalist>
     <label>اسم المدرسة<input id="school" placeholder="مثال: قطر التقنية الثانوية للبنين">
       <span class="field-hint" id="school_hint" hidden></span></label>
     <label>نوع المدرسة
@@ -87,12 +92,12 @@
     <label>الصف
       <select id="grade">
         <option value="">اختر الصف</option>
-        <option>الأول</option><option>الثاني</option><option>الثالث</option><option>الرابع</option>
-        <option>الخامس</option><option>السادس</option><option>السابع</option><option>الثامن</option>
-        <option>التاسع</option><option>العاشر</option><option>الحادي عشر</option><option>الثاني عشر</option>
+        <option>الثالث</option><option>الرابع</option><option>الخامس</option><option>السادس</option><option>السابع</option>
+        <option>الثامن</option><option>التاسع</option><option>العاشر</option><option>الحادي عشر</option>
       </select>
     </label>
-    <label>العام الأكاديمي<input id="year" placeholder="مثال: 2026/2027" dir="ltr" class="ltr-in"></label>
+    <label>العام الأكاديمي
+      <select id="year"><option>2025-2026</option><option>2026-2027</option><option>2027-2028</option><option>2028-2029</option><option>2029-2030</option></select></label>
     <label>زمن الاختبار<input id="duration" list="durations" placeholder="مثال: ساعة ونصف"></label>
     <datalist id="durations">
       <option value="حصة واحدة"></option><option value="حصتان"></option><option value="ساعة"></option>
@@ -103,9 +108,9 @@
       <div class="seg" id="mcq_mark_seg"><button type="button" data-v="1">درجة واحدة</button><button type="button" data-v="2">درجتان</button></div>
       <span class="hint-inline">تُكتب تلقائيًا في كل سؤال موضوعي، ويمكن تعديلها في السؤال نفسه.</span>
     </div>
-    <label>المجموع الكلي المتوقع
-      <input id="expected_total" class="marks-in" inputmode="decimal" placeholder="مثال: 50">
-      <span class="hint-inline" id="exp_note">يُقترح من اسم الاختبار: المنتصف 30، والنهاية 50.</span>
+    <label>المجموع الكلي للاختبار
+      <select id="expected_total"><option value="">اختر</option><option value="30">30 درجة</option><option value="50">50 درجة</option></select>
+      <span class="hint-inline" id="exp_note">يُقترح من اسم الاختبار: المنتصف 30، والنهاية والملحق والدور الثاني 50.</span>
     </label>
     <div class="field oral-box">
       <label class="check-line"><input type="checkbox" id="oral_on"> الاختبار الشفوي</label>
@@ -325,7 +330,7 @@
 
 <script src="static/local.js?v=2026-11-12"></script>
 <script>
-TTLocal.start({ id: 'ikhtibar', app: 'muead-ikhtibarat', title: 'معد الاختبارات المدرسية', out: 'الاختبارات', version: '2.0', fallbackName: 'اختبار',
+TTLocal.start({ id: 'ikhtibar', app: 'muead-ikhtibarat', title: 'معد الاختبارات المدرسية', out: 'الاختبارات', version: '2.1', fallbackName: 'اختبار',
   store: {
     profile: { key: 'ikhtibar.profile.v1', file: 'بيانات المدرسة.json' },
     draft: { key: 'ikhtibar.draft.v1', file: 'المسودة.json' },
@@ -333,8 +338,8 @@ TTLocal.start({ id: 'ikhtibar', app: 'muead-ikhtibarat', title: 'معد الاخ
     specs: { key: 'ikhtibar.specs.v1', file: 'جداول المواصفات.json' } } },
   ["static/jszip.min.js?v=2026-11-12",
   "static/exam-template.js?v=2026-11-12",
-  "static/exam-fonts.js?v=2026-11-12",
-  "static/quran-data.js?v=2026-11-12",
+  { shared: "fonts.js", fallback: "static/exam-fonts.js" },
+  { shared: "quran-data.js", fallback: "static/quran-data.js" },
   "static/exam-engine.js?v=2026-11-12",
   "static/exam-preview.js?v=2026-11-12",
   "static/spec-words.js?v=2026-11-12",
