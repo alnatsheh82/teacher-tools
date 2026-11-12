@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مساعد التحضير الإلكتروني</title>
+<meta name="description" content="مساعد التحضير الإلكتروني لمعلمي التربية الإسلامية: تحضير يومي سريع وتصدير إلى Word.">
+<meta name="theme-color" content="#78213d">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="مساعد التحضير">
+<link rel="stylesheet" href="static/style.css?v=2026-11-07">
+</head>
+<body>
+
+<header>
+  <h1 class="brand"><img src="icons/icon-192.png" alt="" width="34" height="34"> مساعد التحضير الإلكتروني <small>الصفوف من الأول إلى الثاني عشر</small></h1>
+  <div class="header-actions">
+    <div class="time-badge" id="time_badge" title="مجموع أزمنة التهيئة والأهداف والغلق">الزمن: 0 / 45 د</div>
+    <details class="menu">
+      <summary>المزيد ▾</summary>
+      <div class="menu-list">
+        <button type="button" id="newBtn">تحضير جديد (مسح النموذج)</button>
+        <button type="button" id="nextBtn">الحصة التالية لنفس الدرس</button>
+        <button type="button" id="lintBtn">تدقيق التحضير</button>
+        <button type="button" id="saveFileBtn">حفظ التحضير في ملف</button>
+        <button type="button" id="openFileBtn">فتح تحضير محفوظ</button>
+        <button type="button" id="openFolderBtn" hidden>فتح مجلد التحضيرات</button>
+        <button type="button" id="installBtn">تثبيت المساعد على هذا الجهاز</button>
+        <button type="button" id="helpBtn">طريقة التثبيت والمساعدة</button>
+        <button type="button" id="toolsBtn">من أدواتنا</button>
+        <button type="button" id="quitBtn" class="danger" hidden>إيقاف المساعد</button>
+      </div>
+    </details>
+    <button id="previewBtn" type="button">معاينة</button>
+    <button id="exportBtn" type="button" class="primary">تصدير إلى Word</button>
+  </div>
+  <input type="file" id="openFile" accept=".json,application/json" hidden>
+</header>
+
+<main>
+<div id="error" role="alert" class="error-msg" hidden></div>
+
+<section>
+  <h2>بيانات المدرسة</h2>
+  <p class="note" id="storageNote">تُحفظ على جهازك فلا تحتاج إلى إدخالها في كل تحضير.</p>
+  <div class="grid school-grid">
+    <label>اسم المدرسة <span class="hint-inline">(يظهر في تذييل التحضير)</span><input id="school_name" placeholder="مثال: مدرسة قطر التقنية الثانوية للبنين"></label>
+    <fieldset class="school-type"><legend>نوع المدرسة</legend>
+      <label><input type="radio" name="school_type_r" value="بنين" checked> بنين</label>
+      <label><input type="radio" name="school_type_r" value="بنات"> بنات</label>
+      <input type="hidden" id="school_type" value="بنين">
+      <p class="note">في مدارس البنات تُكتب الإجراءات بصيغة المؤنث (تقرأ الطالبة...).</p>
+    </fieldset>
+    <div class="logo-box">
+      <span class="logo-title">شعار المدرسة <span class="hint-inline">(اختياري — يظهر يسار رأس التحضير مقابل شعار الوزارة)</span></span>
+      <div class="logo-row">
+        <div class="logo-preview" id="logoPreview"><span>لا يوجد شعار</span></div>
+        <div class="logo-actions">
+          <button type="button" class="mini" id="logoBtn">رفع صورة الشعار</button>
+          <button type="button" class="mini danger-mini" id="logoRemove" hidden>حذف الشعار</button>
+        </div>
+      </div>
+      <input type="file" id="logoFile" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" hidden>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>بيانات الدرس</h2>
+  <div class="grid">
+    <label><span id="teacherLabel">اسم المعلم</span><input id="teacher_name"></label>
+    <label>اسم المنسق<input id="coordinator_name" placeholder="يُكتب في خانة توقيع المنسق"></label>
+    <label>العام الدراسي<input id="school_year" type="text" placeholder="مثال: 2026 / 2027" autocomplete="off" inputmode="numeric"></label>
+    <label>المادة<input id="subject" value="التربية الإسلامية"></label>
+
+    <label>الصف الدراسي
+      <select id="grade">
+        <option value="">اختر الصف</option>
+        <option>الأول</option><option>الثاني</option><option>الثالث</option><option>الرابع</option>
+        <option>الخامس</option><option>السادس</option><option>السابع</option><option>الثامن</option>
+        <option>التاسع</option><option>العاشر</option><option>الحادي عشر</option><option>الثاني عشر</option>
+      </select>
+    </label>
+    <label>الشعبة أو الشعب <span class="hint-inline">(افصل بينها بفاصلة)</span><input id="grade_section" placeholder="مثال: 4، 5، 6"></label>
+    <label>الفصل الدراسي
+      <select id="semester"><option value="الأول">الفصل الأول</option><option value="الثاني">الفصل الثاني</option></select>
+    </label>
+
+    <label>المجال<select id="unit"><option value="">اختر الصف والفصل أولًا</option></select></label>
+    <label>اسم الدرس<select id="lesson_id" disabled><option value="">اختر المجال أولًا</option></select></label>
+    <label>الباب <span class="hint-inline">(يُحدَّد تلقائيًا من الدرس)</span><input id="chapter" readonly tabindex="-1" class="readonly" value=""></label>
+
+    <input type="hidden" id="lesson_title">
+
+    <div class="lesson-details" style="grid-column:1/-1">
+      <p class="note" id="lesson_hint">تُعرض دروس الصف والفصل الدراسي المختارين فقط.</p>
+      <div class="grid">
+        <label>عدد حصص الدرس<input id="sessions_total" type="number" min="1" max="20" value="2"></label>
+        <label>رقم هذه الحصة<input id="session_number" type="number" min="1" max="20" value="1"></label>
+        <input type="hidden" id="day_date">
+      </div>
+      <div id="dates-box">
+        <div class="dates-head">
+          <strong>اليوم والتاريخ</strong>
+          <button type="button" class="mini" id="addDateBtn">+ إضافة تاريخ آخر لشعبة</button>
+        </div>
+        <div id="dates-list"></div>
+        <p class="note" id="dates-note"></p>
+      </div>
+      <div class="grid" id="verses-box" hidden>
+        <label>من الآية<input id="verses_from" type="number" min="1" placeholder="رقم الآية الأولى"></label>
+        <label>إلى الآية<input id="verses_to" type="number" min="1" placeholder="رقم الآية الأخيرة"></label>
+      </div>
+      <p class="note">عنوان التحضير: <strong id="lesson_preview">اختر درسًا لعرض عنوانه في Word.</strong></p>
+    </div>
+
+    <label>المصطلحات الرئيسة<input id="terms"></label>
+    <label>مصادر التعلم الرئيسة<input id="main_sources" value="الكتاب المدرسي"></label>
+    <label>مصادر التعلم المساندة<input id="support_sources"></label>
+  </div>
+</section>
+
+<section>
+  <h2>الاختيارات الثابتة من النموذج الوزاري</h2>
+  <p class="note">يمكنك تحديد أكثر من خيار، وسيبقى ترتيبها ومكانها في Word كما في النموذج الأصلي.</p>
+  <div class="grid">
+    <fieldset><legend>الكفايات الأساسية</legend><div id="selected_competencies" class="checkgrid"></div></fieldset>
+    <fieldset><legend>القيم الأساسية</legend><div id="selected_values" class="checkgrid"></div></fieldset>
+    <fieldset><legend>الوسائل التعليمية</legend><div id="selected_tools" class="checkgrid"></div></fieldset>
+    <fieldset><legend>المعايير المهنية للمعلمين</legend><div id="selected_standards" class="checkgrid"></div></fieldset>
+  </div>
+</section>
+
+<section>
+  <h2>التهيئة</h2>
+  <div class="grid">
+    <label class="span2">نشاط التهيئة<textarea id="warmup" rows="3"></textarea></label>
+    <div>
+      <label>زمن التهيئة (دقائق)<input id="warmup_time" type="number" min="1" max="180" value="5"></label>
+      <label class="mt">زمن الحصة كاملة (دقائق)<input id="class_duration" type="number" min="10" max="180" value="45"></label>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <h2>أهداف التعلم وأنشطة التعليم والتعلم</h2>
+    <button type="button" class="secondary" id="addBtn">+ إضافة هدف</button>
+  </div>
+  <p class="note">عند اختيار الاستراتيجية تظهر إجراءاتها تلقائيًا، ويمكنك تعديلها أو إضافة خطوات من البنك أسفل الحقل.</p>
+  <div id="objectives-container"></div>
+  <button type="button" class="secondary add-bottom" id="addBtn2">+ إضافة هدف</button>
+</section>
+
+<section>
+  <h2>استراتيجيات التعلم المقترحة - كما في النموذج</h2>
+  <p class="note">اختر ما تريد إبرازه في جدول الاستراتيجيات أسفل مستند Word. الاستراتيجيات المختارة داخل الأهداف تُحدَّد هنا تلقائيًا <span class="auto-sample">بهذا اللون</span>.</p>
+  <div id="selected_strategies" class="checkgrid four"></div>
+</section>
+
+<section>
+  <h2>الغلق الختامي والواجب</h2>
+  <div class="grid">
+    <label>الغلق الختامي<textarea id="closure" rows="3"></textarea></label>
+    <label>زمن الغلق (دقائق)<input id="closure_time" type="number" min="1" max="180" value="5"></label>
+    <label>الواجب<textarea id="homework" rows="3"></textarea></label>
+  </div>
+</section>
+
+<div class="bottom-bar">
+  <p id="status" role="status"></p>
+  <button type="button" id="previewBtn2">معاينة</button>
+  <button type="button" id="exportBtn2" class="primary">تصدير إلى Word</button>
+</div>
+</main>
+
+<footer class="credit">
+  <img src="icons/icon-192.png" alt="" width="22" height="22">
+  <span>مساعد التحضير الإلكتروني — إعداد وتصميم: أ. محمد سعيد النتشة – مدرسة قطر التقنية الثانوية للبنين</span>
+</footer>
+
+<dialog id="previewDialog">
+  <div class="dialog-head">
+    <h2>معاينة التحضير</h2>
+    <div>
+      <button type="button" id="previewExport" class="primary">تصدير إلى Word</button>
+      <button type="button" id="previewClose">إغلاق</button>
+    </div>
+  </div>
+  <div id="previewBody"></div>
+</dialog>
+
+<dialog id="toolsDialog">
+  <div class="dialog-head">
+    <h2>من أدواتنا</h2>
+    <div><button type="button" id="toolsClose">إغلاق</button></div>
+  </div>
+  <div class="help-body">
+    <p class="note">أدوات مجانية للمعلمين من إعداد أ. محمد سعيد النتشة. رابط التحميل واحد للأدوات كلها.</p>
+    <div class="tool-card tool-current">
+      <span class="tool-svg"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M8 7h7"/></svg></span>
+      <div>
+        <h3>مساعد التحضير الإلكتروني <span class="tool-here">هذه الأداة</span></h3>
+        <p>تحضير الدروس اليومي لمعلمي التربية الإسلامية للصفوف من الأول إلى الثاني عشر، على القالب الوزاري. تختار الصف والدرس، فيُعدّ لك التحضير جاهزًا للتعديل، ويُصدَّر إلى Word في دقائق بدل ساعات.</p>
+        <a class="plan-btn" href="https://drive.google.com/file/d/1kXBooXYsA51xmHlGNCUMFe1D51Qqzi2A/view?usp=sharing" target="_blank" rel="noopener">تحميل المساعد</a>
+      </div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-svg"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h4"/></svg></span>
+      <div>
+        <h3>معد أوراق العمل</h3>
+        <p>أوراق العمل والاختبارات القصيرة لكل المواد. تكتب أسئلتك، والأداة تنسّق الورقة وتوزّع الدرجات وترتّب الصفحات، وتُخرجها في Word جاهزة للطباعة. وفيها نموذجان (أ/ب)، ونسخ بأسماء الطلاب.</p>
+        <p class="tool-slogan">«أسئلتك من إعدادك… وتنسيقها علينا!»</p>
+        <a class="plan-btn primary" href="https://drive.google.com/file/d/1kXBooXYsA51xmHlGNCUMFe1D51Qqzi2A/view?usp=sharing" target="_blank" rel="noopener">تحميل المعد</a>
+      </div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-svg"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></span>
+      <div>
+        <h3>معد الاختبارات المدرسية</h3>
+        <p>اختبارات التربية الإسلامية على القالب الوزاري. تكتب الأسئلة وإجاباتها، فيُخرج لك ملفي Word: ورقة الاختبار ونموذج الإجابة. وفيه المصحف بالرسم العثماني، والأحاديث المشكولة من الكتب الستة، وبناء الاختبار من جدول المواصفات ومطابقته.</p>
+        <a class="plan-btn primary" href="https://drive.google.com/file/d/1kXBooXYsA51xmHlGNCUMFe1D51Qqzi2A/view?usp=sharing" target="_blank" rel="noopener">تحميل المعد</a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="helpDialog">
+  <div class="dialog-head">
+    <h2>تثبيت المساعد والمساعدة</h2>
+    <div><button type="button" id="helpClose">إغلاق</button></div>
+  </div>
+  <div class="help-body">
+    <h3>على الكمبيوتر (Chrome أو Edge)</h3>
+    <p>اضغط زر «تثبيت المساعد على هذا الجهاز» من قائمة «المزيد»، أو أيقونة التثبيت في شريط العنوان أعلى المتصفح. ستظهر أيقونة «مساعد التحضير» على سطح المكتب وفي قائمة ابدأ.</p>
+    <h3>على الآيفون والآيباد (Safari)</h3>
+    <p>اضغط زر المشاركة <strong>⬆︎</strong> أسفل الشاشة، ثم «إضافة إلى الشاشة الرئيسية».</p>
+    <h3>على أجهزة أندرويد (Chrome)</h3>
+    <p>افتح قائمة المتصفح ⋮ ثم «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية».</p>
+    <h3>أين يُحفظ عملي؟</h3>
+    <p>يُحفظ التحضير تلقائيًا على جهازك أنت فقط. لنقله إلى جهاز آخر استخدم «حفظ التحضير في ملف» ثم «فتح تحضير محفوظ» على الجهاز الآخر.</p>
+    <p class="note">بعد أول فتح يعمل المساعد حتى دون اتصال بالإنترنت.</p>
+  </div>
+</dialog>
+
+<div class="splash" id="splash" hidden>
+  <div class="splash-card">
+    <img src="icons/icon-192.png" alt="" width="96" height="96">
+    <h1>مساعد التحضير الإلكتروني</h1>
+    <p>تحضير يومي سريع لمعلمي التربية الإسلامية، مع التصدير إلى Word.</p>
+    <p class="splash-credit">إعداد وتصميم: أ. محمد سعيد النتشة<br>مدرسة قطر التقنية الثانوية للبنين</p>
+    <button type="button" class="primary" id="splashStart">ابدأ التحضير</button>
+  </div>
+</div>
+
+<script src="static/local.js?v=2026-11-12"></script>
+<script>
+TTLocal.start({ id: 'musaed', app: 'musaed-tahdeer', title: 'مساعد التحضير الإلكتروني', out: 'التحضيرات', version: '2.1', fallbackName: 'تحضير', backupDir: 'نسخ احتياطية للمسودة',
+  store: {
+    draft: { key: 'lessonPrepDraft_v1', file: 'المسودة.json' },
+    logo: { key: 'schoolLogo_v1', file: 'شعار_المدرسة.json' },
+    flags: { key: 'musaed.flags.v1', file: 'إعدادات.json' } } },
+  ["static/lists.js?v=2026-11-12",
+  "static/lessons.js?v=2026-11-12",
+  "static/strategy_bank.js?v=2026-11-12",
+  "static/template.js?v=2026-11-12",
+  "static/jszip.min.js?v=2026-11-12",
+  "static/docx-export.js?v=2026-11-12",
+  "static/lint.js?v=2026-11-12",
+  "static/app.js?v=2026-11-12"]);
+</script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!doctype html>
+<!-- معد أوراق العمل — جميع الحقوق محفوظة © 2026 أ. محمد سعيد النتشة (m.alnatsheh0701@education.qa) -->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>معد أوراق العمل</title>
+<meta name="description" content="معد أوراق العمل والاختبارات القصيرة: يكتب المعلم الأسئلة، والأداة تنسّق الورقة وتوزّع الدرجات وتخرجها جاهزة للطباعة في Word.">
+<meta name="theme-color" content="#78213d">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="static/style.css?v=28">
+<link rel="stylesheet" href="static/awraq.css?v=28b">
+</head>
+<body>
+
+<header>
+  <h1 class="brand"><img src="icons/icon-192.png" alt="" width="34" height="34"> معد أوراق العمل <small>أوراق العمل والاختبارات القصيرة لكل المواد</small></h1>
+  <div class="header-actions">
+    <div class="time-badge" id="marks_badge" title="مجموع درجات الأسئلة">الدرجة الكلية: 0</div>
+    <details class="menu">
+      <summary>المزيد ▾</summary>
+      <div class="menu-list">
+        <button type="button" id="newBtn">ورقة جديدة (مسح الأسئلة)</button>
+        <button type="button" id="openBtn">فتح ورقة سابقة (ملف Word)</button>
+        <button type="button" id="recentBtn">الأوراق الأخيرة</button>
+        <button type="button" id="bankBtn">بنك الأسئلة</button>
+        <button type="button" id="lintBtn">تدقيق الورقة (أخطاء شائعة)</button>
+        <button type="button" id="backupBtn">حفظ نسخة احتياطية</button>
+        <button type="button" id="restoreBtn">استعادة نسخة احتياطية</button>
+        <button type="button" id="openFolderBtn" hidden>فتح مجلد الأوراق</button>
+        <button type="button" id="toolsBtn">من أدواتنا</button>
+        <button type="button" id="contactBtn">تواصل معنا</button>
+        <button type="button" id="quitBtn" class="danger" hidden>إيقاف الأداة</button>
+      </div>
+    </details>
+    <button id="previewBtn" type="button">معاينة</button>
+    <button id="exportBtn" type="button" class="primary">تصدير إلى Word</button>
+  </div>
+</header>
+
+<main>
+<div id="error" role="alert" class="error-msg" hidden></div>
+
+<section>
+  <div class="sec-title"><span class="sec-ico" data-icon="school"></span><h2>بيانات المدرسة والمعلم</h2></div>
+  <p class="note" id="storeNote">تُحفظ على جهازك، فلا تكتبها مرة أخرى.</p>
+  <div class="grid school-grid">
+    <label>اسم المدرسة<input id="school_name" placeholder="مثال: مدرسة قطر التقنية الثانوية للبنين"></label>
+    <fieldset class="school-type"><legend>نوع المدرسة</legend>
+      <label><input type="radio" name="school_type" value="boys" checked> بنين</label>
+      <label><input type="radio" name="school_type" value="girls"> بنات</label>
+      <p class="note">في مدارس البنات تُكتب النصوص الثابتة وأفعال الأمر بصيغة المؤنث (اسم الطالبة، اكتبي).</p>
+    </fieldset>
+    <div class="logo-box">
+      <span class="logo-title">شعار المدرسة <span class="hint-inline">(اختياري — يظهر مقابل شعار الوزارة بالأبيض والأسود)</span></span>
+      <div class="logo-row">
+        <div class="logo-preview" id="logoPreview"><span>لا يوجد شعار</span></div>
+        <div class="logo-actions">
+          <button type="button" class="mini" id="logoBtn">رفع صورة الشعار</button>
+          <button type="button" class="mini danger-mini" id="logoRemove" hidden>حذف الشعار</button>
+        </div>
+      </div>
+      <input type="file" id="logoFile" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" hidden>
+    </div>
+    <label>اسم المعلم<input id="teacher_name"></label>
+    <label class="check-line"><input type="checkbox" id="teacher_show" checked> إظهار اسمي على الورقة</label>
+    <label>المادة<input id="subject" placeholder="مثال: العلوم"></label>
+    <div class="closing-box span3">
+      <label class="check-line"><input type="checkbox" id="closing_show" checked> عبارة ختامية في آخر الورقة</label>
+      <input id="closing_text" placeholder="مع تمنياتي لكم بالتوفيق والنجاح">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-title"><span class="sec-ico" data-icon="sheet"></span><h2>الورقة</h2></div>
+  <div class="grid">
+    <div class="field"><span class="field-label">لغة الورقة</span>
+      <div class="seg" id="lang_seg"><button type="button" data-v="ar" class="on">العربية</button><button type="button" data-v="en">English</button></div>
+    </div>
+    <div class="field"><span class="field-label">نوع الورقة</span>
+      <div class="seg wrap" id="kind_seg"><button type="button" data-v="quiz" class="on">اختبار قصير</button><button type="button" data-v="worksheet">ورقة عمل</button><button type="button" data-v="support">ورقة دعم</button><button type="button" data-v="enrichment">ورقة إثرائية</button></div>
+    </div>
+    <label>رقم الورقة<input id="number" type="number" min="1" max="99"></label>
+    <label>اسم الدرس<input id="lesson" placeholder="مثال: المادة وتغيراتها"></label>
+    <label>الصف
+      <select id="grade">
+        <option value="">اختر الصف</option>
+        <option>الأول</option><option>الثاني</option><option>الثالث</option><option>الرابع</option>
+        <option>الخامس</option><option>السادس</option><option>السابع</option><option>الثامن</option>
+        <option>التاسع</option><option>العاشر</option><option>الحادي عشر</option><option>الثاني عشر</option>
+      </select>
+    </label>
+    <label>عدد الصفحات
+      <select id="pages"><option value="1">صفحة واحدة</option><option value="2">صفحتان</option><option value="3">3 صفحات</option><option value="4">4 صفحات</option><option value="5">5 صفحات</option><option value="6">6 صفحات</option><option value="7">7 صفحات</option><option value="8">8 صفحات</option></select>
+    </label>
+    <label id="time_wrap">الزمن (بالدقائق)<input id="time_min" type="number" min="1" max="180" placeholder="مثال: 20"></label>
+    <label class="check-line" id="show_time_wrap" hidden><input type="checkbox" id="show_time"> إظهار الزمن في ورقة العمل</label>
+    <label class="check-line" id="grades_wrap" hidden><input type="checkbox" id="grades_on"> إضافة درجات</label>
+    <label id="total_wrap">الدرجة الكلية <span class="hint-inline">(وزّعها على الأسئلة، والعدّاد يبين الباقي)</span><input id="total" type="text" inputmode="decimal" placeholder="مثال: 10"></label>
+    <label class="check-line"><input type="checkbox" id="show_seat"> إضافة رقم الجلوس</label>
+    <label class="check-line" title="حجم خط أكبر ومسافات أوسع، يُختار تلقائيًا للصفوف من الأول إلى الثالث"><input type="checkbox" id="big_font"> خط كبير (للصفوف الدنيا)</label>
+    <label class="check-line" title="نسخة ثانية من الورقة نفسها بترتيب مختلف للفقرات والاختيارات، لمنع الغش بين المتجاورين"><input type="checkbox" id="ab_on"> نموذجان (أ) و(ب)</label>
+    <label class="check-line" id="duplex_line" hidden title="تبدأ كل نسخة على ورقة جديدة، فلا تختلط الأوراق عند الطباعة على الوجهين. تُضاف صفحة فارغة عند الحاجة فقط."><input type="checkbox" id="duplex_on"> تجهيز للطباعة على الوجهين</label>
+  </div>
+  <div class="roster-bar" id="roster_bar" hidden>
+    <span class="sec-ico" data-icon="users"></span>
+    <div><b>نسخة لكل طالب</b><p class="note">ارفع كشف الأسماء (Excel أو Word) واختر الطلاب، فيخرج ملف واحد فيه ورقة باسم كل طالب.</p></div>
+    <button type="button" id="rosterBtn" class="soft">كشف الأسماء</button>
+  </div>
+</section>
+
+<div class="q-layout">
+<section class="q-main">
+  <div class="section-head">
+    <div class="sec-title"><span class="sec-ico" data-icon="list"></span><h2>الأسئلة</h2></div>
+    <div class="counter" id="counter" role="status"></div>
+  </div>
+  <p class="note">اكتب الأسئلة فقط، والأداة تتولى الترقيم والتنسيق وتوزيع الصفحات.</p>
+  <div id="notice" class="notice" role="status" hidden></div>
+  <div id="questions"></div>
+  <button type="button" id="addMobileBtn" class="soft add-mobile"><span data-icon="plus"></span> إضافة سؤال</button>
+</section>
+<aside class="add-panel" id="addPanel" aria-label="إضافة سؤال">
+  <h3><span data-icon="plus"></span> إضافة سؤال</h3>
+  <p class="note">اضغط النوع فيُضاف في آخر الورقة. ولإضافته بين سؤالين اضغط «+» بينهما.</p>
+  <div id="addGroups"></div>
+</aside>
+</div>
+
+<div class="bottom-bar">
+  <button type="button" id="kbdBtn" class="soft" title="لوحة الرموز ومحرر الكسور والجذور"><span data-icon="kbd"></span> الرموز</button>
+  <div id="fill" class="fill" role="status"></div>
+  <p id="status" role="status"></p>
+  <button type="button" id="previewBtn2" class="soft"><span data-icon="eye"></span> معاينة</button>
+  <button type="button" id="exportBtn2" class="primary">تصدير إلى Word</button>
+</div>
+</main>
+
+<footer class="credit">
+  <img src="icons/icon-192.png" alt="" width="22" height="22">
+  <span>معد أوراق العمل — إعداد وتصميم: أ. محمد سعيد النتشة – مدرسة قطر التقنية الثانوية للبنين</span>
+  <span class="credit-links"><button type="button" class="link-btn" id="toolsLink">من أدواتنا</button> · <button type="button" class="link-btn" id="contactLink">تواصل معنا</button></span>
+  <span class="copyright">جميع الحقوق محفوظة © 2026 أ. محمد سعيد النتشة</span>
+</footer>
+
+<dialog id="previewDialog">
+  <div class="dialog-head">
+    <h2>معاينة الورقة</h2>
+    <div>
+      <button type="button" id="previewExport" class="primary">تصدير إلى Word</button>
+      <button type="button" id="previewClose">إغلاق</button>
+    </div>
+  </div>
+  <p class="note" id="previewNote"></p>
+  <div id="previewBody" class="pv-wrap"></div>
+</dialog>
+
+<dialog id="contactDialog" class="small-dialog">
+  <div class="dialog-head">
+    <h2>تواصل معنا</h2>
+    <div><button type="button" id="contactClose">إغلاق</button></div>
+  </div>
+  <div class="help-body contact-body">
+    <p>يسعدنا استقبال ملاحظاتكم واقتراحاتكم لتطوير الأداة، والإبلاغ عن أي مشكلة تواجهكم.</p>
+    <p class="contact-name">أ. محمد سعيد النتشة<br><small>مدرسة قطر التقنية الثانوية للبنين</small></p>
+    <p class="contact-mail" dir="ltr">m.alnatsheh0701@education.qa</p>
+    <div class="contact-actions">
+      <a class="plan-btn primary" href="mailto:m.alnatsheh0701@education.qa?subject=%D9%85%D9%84%D8%A7%D8%AD%D8%B8%D8%A7%D8%AA%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D8%AF%20%D8%A3%D9%88%D8%B1%D8%A7%D9%82%20%D8%A7%D9%84%D8%B9%D9%85%D9%84">إرسال رسالة</a>
+      <button type="button" id="copyMailBtn">نسخ الإيميل</button>
+    </div>
+    <p class="note" id="copyMsg" role="status"></p>
+    <p class="copyright">جميع الحقوق محفوظة © 2026 أ. محمد سعيد النتشة</p>
+  </div>
+</dialog>
+
+<dialog id="toolsDialog" class="small-dialog">
+  <div class="dialog-head">
+    <h2>من أدواتنا</h2>
+    <div><button type="button" id="toolsClose">إغلاق</button></div>
+  </div>
+  <div class="help-body">
+    <p class="note">أدوات مجانية للمعلمين من إعداد أ. محمد سعيد النتشة. رابط التحميل واحد للأدوات كلها.</p>
+    <div class="tool-card">
+      <span class="sec-ico" data-icon="book"></span>
+      <div>
+        <h3>مساعد التحضير الإلكتروني</h3>
+        <p>تحضير الدروس اليومي لمعلمي التربية الإسلامية للصفوف من الأول إلى الثاني عشر، على القالب الوزاري. تختار الصف والدرس، فيُعدّ لك التحضير جاهزًا للتعديل، ويُصدَّر إلى Word في دقائق بدل ساعات.</p>
+        <a class="plan-btn primary" href="https://drive.google.com/file/d/1kXBooXYsA51xmHlGNCUMFe1D51Qqzi2A/view?usp=sharing" target="_blank" rel="noopener">تحميل المساعد</a>
+      </div>
+    </div>
+    <div class="tool-card tool-current">
+      <span class="sec-ico" data-icon="sheet"></span>
+      <div>
+        <h3>معد أوراق العمل <span class="tool-here">هذه الأداة</span></h3>
+        <p>أوراق العمل والاختبارات القصيرة لكل المواد. تكتب أسئلتك، والأداة تنسّق الورقة وتوزّع الدرجات وترتّب الصفحات، وتُخرجها في Word جاهزة للطباعة. وفيها نموذجان (أ/ب)، ونسخ بأسماء الطلاب.</p>
+        <p class="tool-slogan">«أسئلتك من إعدادك… وتنسيقها علينا!»</p>
+        <a class="plan-btn" href="https://drive.google.com/file/d/1kXBooXYsA51xmHlGNCUMFe1D51Qqzi2A/view?usp=sharing" target="_blank" rel="noopener">تحميل المعد</a>
+      </div>
+    </div>
+    <div class="tool-card">
+      <span class="sec-ico" data-icon="t_mcq"></span>
+      <div>
+        <h3>معد الاختبارات المدرسية</h3>
+        <p>اختبارات التربية الإسلامية على القالب الوزاري. تكتب الأسئلة وإجاباتها، فيُخرج لك ملفي Word: ورقة الاختبار ونموذج الإجابة. وفيه المصحف بالرسم العثماني، والأحاديث المشكولة من الكتب الستة، وبناء الاختبار من جدول المواصفات ومطابقته.</p>
+        <a class="plan-btn primary" href="https://drive.google.com/file/d/1kXBooXYsA51xmHlGNCUMFe1D51Qqzi2A/view?usp=sharing" target="_blank" rel="noopener">تحميل المعد</a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<!-- لوحة الرموز -->
+<div id="kbd" class="kbd" hidden role="dialog" aria-label="لوحة الرموز">
+  <div class="kbd-head">
+    <div class="kbd-tabs" id="kbdTabs"></div>
+    <button type="button" id="mathBtn" class="primary mini">محرر الكسور والجذور</button>
+    <button type="button" class="ibtn sm" id="kbdClose" title="إغلاق" aria-label="إغلاق"><span data-icon="x"></span></button>
+  </div>
+  <div class="kbd-recent" id="kbdRecent"></div>
+  <div class="kbd-keys" id="kbdKeys"></div>
+  <p class="kbd-hint" id="kbdHint">ضع المؤشر في خانة النص، ثم اضغط الرمز ليُكتب مكان المؤشر.</p>
+</div>
+
+<dialog id="mathDialog" class="small-dialog">
+  <div class="dialog-head"><h2>محرر الكسور والجذور</h2><div><button type="button" id="mathClose">إغلاق</button></div></div>
+  <div class="help-body">
+    <div class="seg small wrap" id="mathKind">
+      <button type="button" data-v="frac" class="on">كسر</button><button type="button" data-v="mixed">عدد كسري</button>
+      <button type="button" data-v="sqrt">جذر تربيعي</button><button type="button" data-v="root">جذر بدليل</button>
+      <button type="button" data-v="pow">أس</button><button type="button" data-v="sub">دليل سفلي</button>
+    </div>
+    <div class="math-fields" id="mathFields"></div>
+    <div class="math-out"><span class="field-label">في الورقة:</span><div id="mathPreview" class="math-preview"></div></div>
+    <p class="note">يمكن أن تكتب داخل الخانات عمليات، مثل: x+1 أو 2x. وتُكتب المعادلة في الورقة من اليسار لليمين.</p>
+    <div class="contact-actions"><button type="button" id="mathInsert" class="primary">إدراج في النص</button></div>
+  </div>
+</dialog>
+
+<dialog id="addDialog">
+  <div class="dialog-head"><h2>اختر نوع السؤال</h2><div><button type="button" id="addClose">إغلاق</button></div></div>
+  <p class="note" id="addWhere"></p>
+  <div id="addDialogGroups" class="add-dialog-body"></div>
+</dialog>
+
+<dialog id="bankDialog">
+  <div class="dialog-head"><h2>بنك الأسئلة</h2><div><button type="button" id="bankSaveAll">حفظ كل أسئلة الورقة</button> <button type="button" id="bankClose">إغلاق</button></div></div>
+  <div class="bank-filters">
+    <input id="bankSearch" placeholder="بحث في نصوص الأسئلة">
+    <select id="bankSubject"></select>
+    <select id="bankType"></select>
+  </div>
+  <p class="note" id="bankNote"></p>
+  <div id="bankList" class="bank-list"></div>
+</dialog>
+
+<dialog id="recentDialog" class="small-dialog">
+  <div class="dialog-head"><h2>الأوراق الأخيرة</h2><div><button type="button" id="recentClose">إغلاق</button></div></div>
+  <p class="note">آخر الأوراق التي صدّرتها على هذا الجهاز. اختر ورقة لفتحها والتعديل عليها.</p>
+  <div id="recentList" class="bank-list"></div>
+</dialog>
+
+<dialog id="rosterDialog">
+  <div class="dialog-head"><h2>كشف الأسماء</h2><div><button type="button" id="rosterExport" class="primary">تصدير النسخ إلى Word</button> <button type="button" id="rosterClose">إغلاق</button></div></div>
+  <div class="roster-load">
+    <select id="rosterSaved"></select>
+    <button type="button" id="rosterFileBtn" class="soft">رفع كشف (Excel أو Word)</button>
+    <button type="button" id="rosterPasteBtn" class="soft">لصق الأسماء</button>
+    <button type="button" id="rosterDelete" class="mini danger-mini" hidden>حذف هذا الكشف</button>
+    <input type="file" id="rosterFile" accept=".xlsx,.docx,.csv,.txt" hidden>
+  </div>
+  <div id="rosterPaste" class="roster-paste" hidden>
+    <textarea id="rosterPasteText" rows="6" placeholder="اسم كل طالب في سطر. ويمكن أن تلصق أعمدة من Excel كما هي."></textarea>
+    <button type="button" id="rosterPasteOk" class="primary mini">قراءة الأسماء</button>
+  </div>
+  <div id="rosterBody"></div>
+</dialog>
+
+<div id="toast" class="toast" role="status" hidden></div>
+<input type="file" id="openFile" accept=".docx" hidden>
+<input type="file" id="restoreFile" accept=".json" hidden>
+
+<script src="static/local.js?v=2026-11-12"></script>
+<script>
+TTLocal.start({ id: 'awraq', app: 'muead-awraq', title: 'معد أوراق العمل', out: 'الأوراق', version: '1.6', fallbackName: 'ورقة',
+  store: {
+    profile: { key: 'awraq.profile.v1', file: 'الملف الشخصي.json' },
+    draft: { key: 'awraq.draft.v1', file: 'المسودة.json' },
+    bank: { key: 'awraq.bank.v1', file: 'بنك الأسئلة.json' },
+    recent: { key: 'awraq.recent-sheets.v1', file: 'الأوراق الأخيرة.json' },
+    rosters: { key: 'awraq.rosters.v1', file: 'كشوف الأسماء.json' } } },
+  ["static/jszip.min.js?v=2026-11-12",
+  "static/ministry-logo.js?v=2026-11-12",
+  "static/sheet-engine.js?v=2026-11-12",
+  "static/preview.js?v=2026-11-12",
+  "static/roster.js?v=2026-11-12",
+  "static/tools.js?v=2026-11-12",
+  "static/lint.js?v=2026-11-12",
+  "static/app.js?v=2026-11-12"]);
+</script>
+</body>
+</html>
