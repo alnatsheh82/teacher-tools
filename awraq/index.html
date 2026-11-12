@@ -104,6 +104,16 @@
     <label class="check-line"><input type="checkbox" id="show_seat"> إضافة رقم الجلوس</label>
     <label class="check-line" title="حجم خط أكبر ومسافات أوسع، يُختار تلقائيًا للصفوف من الأول إلى الثالث"><input type="checkbox" id="big_font"> خط كبير (للصفوف الدنيا)</label>
     <label class="check-line" title="نسخة ثانية من الورقة نفسها بترتيب مختلف للفقرات والاختيارات، لمنع الغش بين المتجاورين"><input type="checkbox" id="ab_on"> نموذجان (أ) و(ب)</label>
+    <div class="fmt-box">
+      <span class="fmt-title">تنسيق الورقة</span>
+      <label>التباعد بين الأسئلة
+        <select id="gap_mode"><option value="compact">مضغوط</option><option value="normal">عادي</option><option value="wide">واسع</option></select>
+      </label>
+      <label>أسطر الإجابة
+        <select id="line_delta"><option value="-1">أقل بسطر</option><option value="0">كما حددتها</option><option value="1">أكثر بسطر</option></select>
+      </label>
+      <label class="check-line" title="تُوضع الأسئلة في أقل عدد من الصفحات بخط أصغر وتباعد أقل (حتى عدد الصفحات المختار)"><input type="checkbox" id="compress_on"> ضغط الورقة قدر المستطاع</label>
+    </div>
     <label class="check-line" id="duplex_line" hidden title="تبدأ كل نسخة على ورقة جديدة، فلا تختلط الأوراق عند الطباعة على الوجهين. تُضاف صفحة فارغة عند الحاجة فقط."><input type="checkbox" id="duplex_on"> تجهيز للطباعة على الوجهين</label>
   </div>
   <div class="roster-bar" id="roster_bar" hidden>
@@ -224,6 +234,35 @@
   <p class="kbd-hint" id="kbdHint">ضع المؤشر في خانة النص، ثم اضغط الرمز ليُكتب مكان المؤشر.</p>
 </div>
 
+<dialog id="verseDialog">
+  <div class="dialog-head"><h2>إدراج آية من المصحف</h2><div><button type="button" id="vInsert" class="primary">إدراج</button> <button type="button" id="vClose">إغلاق</button></div></div>
+  <p class="note">المصحف برواية حفص بالرسم العثماني (مجمع الملك فهد لطباعة المصحف الشريف)، ويُطبع بخط المجمع المضمّن في ملف Word.</p>
+  <div class="verse-form">
+    <label>السورة<select id="vSura"></select></label>
+    <label>من الآية<input id="vFrom" type="number" min="1" value="1"></label>
+    <label>إلى الآية<input id="vTo" type="number" min="1" value="1"></label>
+    <label class="check-line"><input type="checkbox" id="vRef" checked> إضافة [اسم السورة: رقم الآية]</label>
+  </div>
+  <input id="vSearch" class="v-search" placeholder="أو ابحث بكلمة من الآية (دون تشكيل)، مثل: يهدي للتي هي أقوم">
+  <div id="vResults" class="v-results"></div>
+  <div class="v-label">ما سيُدرج:</div>
+  <div id="vPreview" class="v-preview"></div>
+</dialog>
+
+<dialog id="hadithDialog">
+  <div class="dialog-head"><h2>إدراج حديث من الكتب الستة</h2><div><button type="button" id="hInsert" class="primary">إدراج</button> <button type="button" id="hClose">إغلاق</button></div></div>
+  <p class="note">صحيح البخاري، وصحيح مسلم، وسنن أبي داود، والترمذي، والنسائي، وابن ماجه — نصوص مشكولة. ابحث بكلمات من الحديث دون تشكيل، ثم اختر الرواية.</p>
+  <div class="h-tools">
+    <input type="search" id="hSearch" placeholder="مثال: إنما الأعمال بالنيات">
+    <select id="hBook"><option value="">كل الكتب</option></select>
+    <label class="check-line"><input type="checkbox" id="hIsnad" checked> حذف السند (يبدأ من الصحابي)</label>
+  </div>
+  <div id="hStatus" class="note"></div>
+  <div id="hResults" class="h-results"></div>
+  <div class="v-label">ما سيُدرج (يمكنك تعديله):</div>
+  <textarea id="hText" spellcheck="false"></textarea>
+</dialog>
+
 <dialog id="mathDialog" class="small-dialog">
   <div class="dialog-head"><h2>محرر الكسور والجذور</h2><div><button type="button" id="mathClose">إغلاق</button></div></div>
   <div class="help-body">
@@ -284,7 +323,7 @@
 
 <script src="static/local.js?v=2026-11-12"></script>
 <script>
-TTLocal.start({ id: 'awraq', app: 'muead-awraq', title: 'معد أوراق العمل', out: 'الأوراق', version: '1.6', fallbackName: 'ورقة',
+TTLocal.start({ id: 'awraq', app: 'muead-awraq', title: 'معد أوراق العمل', out: 'الأوراق', version: '1.7', fallbackName: 'ورقة',
   store: {
     profile: { key: 'awraq.profile.v1', file: 'الملف الشخصي.json' },
     draft: { key: 'awraq.draft.v1', file: 'المسودة.json' },
@@ -292,11 +331,13 @@ TTLocal.start({ id: 'awraq', app: 'muead-awraq', title: 'معد أوراق ال�
     recent: { key: 'awraq.recent-sheets.v1', file: 'الأوراق الأخيرة.json' },
     rosters: { key: 'awraq.rosters.v1', file: 'كشوف الأسماء.json' } } },
   ["static/jszip.min.js?v=2026-11-12",
+  { shared: "fonts.js" },
   "static/ministry-logo.js?v=2026-11-12",
   "static/sheet-engine.js?v=2026-11-12",
   "static/preview.js?v=2026-11-12",
   "static/roster.js?v=2026-11-12",
   "static/tools.js?v=2026-11-12",
+  "static/islamic.js?v=2026-11-12",
   "static/lint.js?v=2026-11-12",
   "static/app.js?v=2026-11-12"]);
 </script>
