@@ -1,0 +1,347 @@
+<!doctype html>
+<!-- معد الاختبارات المدرسية — جميع الحقوق محفوظة © 2026 أ. محمد سعيد النتشة (m.alnatsheh0701@education.qa) -->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>معد الاختبارات المدرسية</title>
+<meta name="description" content="معد الاختبارات المدرسية: يكتب المعلم الأسئلة وإجاباتها، والأداة تخرج الاختبار ونموذج الإجابة على القالب الوزاري في Word.">
+<meta name="theme-color" content="#78213d">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="static/style.css?v=8">
+<link rel="stylesheet" href="static/awraq.css?v=8">
+<link rel="stylesheet" href="static/exam.css?v=8">
+</head>
+<body>
+
+<header>
+  <h1 class="brand"><img src="icons/icon-192.png" alt="" width="34" height="34"> معد الاختبارات المدرسية <small>اختبارات التربية الإسلامية على القالب الوزاري</small></h1>
+  <div class="header-actions">
+    <div class="time-badge" id="marks_badge" title="مجموع درجات الاختبار">المجموع: 0</div>
+    <details class="menu">
+      <summary>المزيد ▾</summary>
+      <div class="menu-list">
+        <small class="menu-grp">الاختبار</small>
+        <button type="button" id="newBtn">اختبار جديد (مسح الأسئلة)</button>
+        <button type="button" id="openBtn">فتح اختبار سابق (ملف Word)</button>
+        <button type="button" id="recentBtn">الاختبارات الأخيرة</button>
+        <small class="menu-grp">الاستيراد والمواصفات</small>
+        <button type="button" id="importBtn">استيراد أسئلة من اختبارات سابقة</button>
+        <button type="button" id="specBtn">اختبار جديد من جدول المواصفات</button>
+        <button type="button" id="matchBtn">مطابقة الاختبار على جدول المواصفات</button>
+        <small class="menu-grp">المراجعة</small>
+        <button type="button" id="lintBtn">تدقيق الاختبار (أخطاء شائعة)</button>
+        <small class="menu-grp">الحفظ</small>
+        <button type="button" id="backupBtn">حفظ نسخة احتياطية</button>
+        <button type="button" id="restoreBtn">استعادة نسخة احتياطية</button>
+        <button type="button" id="openFolderBtn" hidden>فتح مجلد الاختبارات</button>
+        <small class="menu-grp">أخرى</small>
+        <button type="button" id="toolsBtn">من أدواتنا</button>
+        <button type="button" id="contactBtn">تواصل معنا</button>
+        <button type="button" id="quitBtn" class="danger" hidden>إيقاف الأداة</button>
+      </div>
+    </details>
+    <button id="previewBtn" type="button">معاينة</button>
+    <button id="exportBtn" type="button" class="primary">استخراج الاختبار ونموذج الإجابة</button>
+  </div>
+</header>
+<div id="fontBar" class="font-bar" hidden>
+  <span class="grow" id="fontMsg"></span>
+  <button type="button" id="fontInstall" class="primary">تثبيت الخطوط</button>
+  <button type="button" id="fontLater" class="mini">لاحقًا</button>
+</div>
+
+<nav class="ex-tabs" id="tabs" aria-label="أقسام المعد">
+  <button type="button" data-tab="data" class="on"><span data-icon="school"></span> البيانات</button>
+  <button type="button" data-tab="mcq"><span data-icon="t_mcq"></span> الأسئلة الموضوعية <b id="tab_mcq"></b></button>
+  <button type="button" data-tab="essay"><span data-icon="t_free"></span> الأسئلة المقالية <b id="tab_essay"></b></button>
+</nav>
+
+<main>
+<div id="error" role="alert" class="error-msg" hidden></div>
+
+<!-- ===================== ١. البيانات ===================== -->
+<section class="tab-pane" data-pane="data">
+  <div class="sec-title"><span class="sec-ico" data-icon="school"></span><h2>بيانات الاختبار</h2></div>
+  <p class="note">تظهر في غلاف الاختبار وصفحة التعليمات والتذييل. والمادة ثابتة: التربية الإسلامية.</p>
+  <div class="grid">
+    <label class="span2">اسم الاختبار
+      <input id="exam_name" list="exam_names" placeholder="مثال: نهاية الفصل الدراسي الثاني &quot;منهاج النصف الثاني&quot;">
+      <span class="hint-inline">ما تضعه بين علامتي تنصيص "..." يُكتب بلون العنوان كما في القالب.</span>
+    </label>
+    <datalist id="exam_names">
+      <option value="منتصف الفصل الدراسي الأول"></option>
+      <option value="نهاية الفصل الدراسي الأول"></option>
+      <option value="منتصف الفصل الدراسي الثاني"></option>
+      <option value="نهاية الفصل الدراسي الثاني"></option>
+      <option value="نهاية الفصل الدراسي الثاني &quot;منهاج النصف الثاني&quot;"></option>
+    </datalist>
+    <label>اسم المدرسة<input id="school" placeholder="مثال: قطر التقنية الثانوية للبنين">
+      <span class="field-hint" id="school_hint" hidden></span></label>
+    <label>نوع المدرسة
+      <select id="gender"><option value="auto">تلقائي من اسم المدرسة</option><option value="boys">بنين</option><option value="girls">بنات</option></select>
+      <span class="hint-inline" id="gender_note"></span></label>
+    <label>الصف
+      <select id="grade">
+        <option value="">اختر الصف</option>
+        <option>الأول</option><option>الثاني</option><option>الثالث</option><option>الرابع</option>
+        <option>الخامس</option><option>السادس</option><option>السابع</option><option>الثامن</option>
+        <option>التاسع</option><option>العاشر</option><option>الحادي عشر</option><option>الثاني عشر</option>
+      </select>
+    </label>
+    <label>العام الأكاديمي<input id="year" placeholder="مثال: 2026/2027" dir="ltr" class="ltr-in"></label>
+    <label>زمن الاختبار<input id="duration" list="durations" placeholder="مثال: ساعة ونصف"></label>
+    <datalist id="durations">
+      <option value="حصة واحدة"></option><option value="حصتان"></option><option value="ساعة"></option>
+      <option value="ساعة ونصف"></option><option value="ساعتان"></option>
+    </datalist>
+    <div class="field">
+      <span class="field-label">درجة السؤال الموضوعي</span>
+      <div class="seg" id="mcq_mark_seg"><button type="button" data-v="1">درجة واحدة</button><button type="button" data-v="2">درجتان</button></div>
+      <span class="hint-inline">تُكتب تلقائيًا في كل سؤال موضوعي، ويمكن تعديلها في السؤال نفسه.</span>
+    </div>
+    <label>المجموع الكلي المتوقع
+      <input id="expected_total" class="marks-in" inputmode="decimal" placeholder="مثال: 50">
+      <span class="hint-inline" id="exp_note">يُقترح من اسم الاختبار: المنتصف 30، والنهاية 50.</span>
+    </label>
+    <div class="field oral-box">
+      <label class="check-line"><input type="checkbox" id="oral_on"> الاختبار الشفوي</label>
+      <label class="inline" id="oral_marks_wrap">درجته <input id="oral_marks" class="marks-in" inputmode="decimal"></label>
+    </div>
+  </div>
+
+  <h3 class="dist-title">توزيع الدرجات <span class="hint-inline">(يُحسب من درجات الأسئلة، ويُكتب في جدول الغلاف)</span></h3>
+  <div class="dist-wrap"><table class="dist" id="dist"></table></div>
+  <p class="note" id="qcount"></p>
+  <p class="field-hint" id="exp_check" hidden></p>
+
+  <h3 class="dist-title">جدول المواصفات <span class="hint-inline">(اختياري: يُبنى منه الاختبار، ويُطابق عليه)</span></h3>
+  <div class="spec-box" id="specBox"></div>
+  <div class="next-row"><button type="button" class="soft" data-go="mcq">التالي: الأسئلة الموضوعية ←</button></div>
+</section>
+
+<!-- ===================== ٢. الأسئلة الموضوعية ===================== -->
+<section class="tab-pane" data-pane="mcq" hidden>
+  <div class="section-head">
+    <div class="sec-title"><span class="sec-ico" data-icon="t_mcq"></span><h2>الأسئلة الموضوعية</h2></div>
+    <div class="counter" id="mcq_counter"></div>
+    <button type="button" class="mini live-btn">معاينة جانبية</button>
+  </div>
+  <p class="note">اكتب السؤال وبدائله الأربعة، واختر الإجابة الصحيحة. تُرتَّب البدائل في الاختبار تلقائيًا من الأقصر إلى الأطول، ويُعاد حساب حرف الإجابة في نموذج الإجابة.</p>
+  <p class="field-hint" id="ansDist"></p>
+  <div id="mcq_domains"></div>
+  <div class="next-row"><button type="button" class="soft" data-go="essay">التالي: الأسئلة المقالية ←</button></div>
+</section>
+
+<!-- ===================== ٣. الأسئلة المقالية ===================== -->
+<section class="tab-pane" data-pane="essay" hidden>
+  <div class="section-head">
+    <div class="sec-title"><span class="sec-ico" data-icon="t_free"></span><h2>الأسئلة المقالية</h2></div>
+    <div class="counter" id="essay_counter"></div>
+    <button type="button" class="mini live-btn">معاينة جانبية</button>
+  </div>
+  <p class="note">اختر عدد الفروع ثم اضغط «إضافة سؤال» تحت المجال. لكل فرع نوعه ودرجته وإجابته: سؤال حر (بأسطر)، أو مقارنة (جدول)، أو أكمل كتابة الحديث الشريف.</p>
+  <div id="essay_domains"></div>
+  <div class="next-row"><button type="button" class="soft" id="previewBtn3"><span data-icon="eye"></span> معاينة</button> <button type="button" class="primary" id="exportBtn3">استخراج الاختبار ونموذج الإجابة</button></div>
+</section>
+
+<div class="bottom-bar">
+  <p id="status" role="status"></p>
+  <button type="button" id="previewBtn2" class="soft"><span data-icon="eye"></span> معاينة</button>
+  <button type="button" id="exportBtn2" class="primary">استخراج الاختبار ونموذج الإجابة</button>
+</div>
+</main>
+
+<footer class="credit">
+  <img src="icons/icon-192.png" alt="" width="22" height="22">
+  <span>معد الاختبارات المدرسية — إعداد وتصميم: أ. محمد سعيد النتشة – مدرسة قطر التقنية الثانوية للبنين</span>
+  <span class="credit-links"><button type="button" class="link-btn" id="toolsLink">من أدواتنا</button> · <button type="button" class="link-btn" id="contactLink">تواصل معنا</button></span>
+  <span class="copyright">جميع الحقوق محفوظة © 2026 أ. محمد سعيد النتشة</span>
+</footer>
+
+<dialog id="contactDialog" class="small-dialog">
+  <div class="dialog-head">
+    <h2>تواصل معنا</h2>
+    <div><button type="button" id="contactClose">إغلاق</button></div>
+  </div>
+  <div class="help-body contact-body">
+    <p>يسعدنا استقبال ملاحظاتكم واقتراحاتكم لتطوير الأداة، والإبلاغ عن أي مشكلة تواجهكم.</p>
+    <p class="contact-name">أ. محمد سعيد النتشة<br><small>مدرسة قطر التقنية الثانوية للبنين</small></p>
+    <p class="contact-mail" dir="ltr">m.alnatsheh0701@education.qa</p>
+    <div class="contact-actions">
+      <a class="plan-btn primary" href="mailto:m.alnatsheh0701@education.qa?subject=%D9%85%D9%84%D8%A7%D8%AD%D8%B8%D8%A7%D8%AA%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D8%AF%20%D8%A7%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AF%D8%B1%D8%B3%D9%8A%D8%A9">إرسال رسالة</a>
+      <button type="button" id="copyMailBtn">نسخ الإيميل</button>
+    </div>
+    <p class="note" id="copyMsg" role="status"></p>
+    <p class="copyright">جميع الحقوق محفوظة © 2026 أ. محمد سعيد النتشة</p>
+  </div>
+</dialog>
+
+<dialog id="toolsDialog" class="small-dialog">
+  <div class="dialog-head">
+    <h2>من أدواتنا</h2>
+    <div><button type="button" id="toolsClose">إغلاق</button></div>
+  </div>
+  <div class="help-body">
+    <p class="note">أدوات مجانية للمعلمين من إعداد أ. محمد سعيد النتشة. رابط التحميل واحد للأدوات كلها.</p>
+    <div class="tool-card">
+      <span class="sec-ico" data-icon="book"></span>
+      <div>
+        <h3>مساعد التحضير الإلكتروني</h3>
+        <p>تحضير الدروس اليومي لمعلمي التربية الإسلامية للصفوف من الأول إلى الثاني عشر، على القالب الوزاري. تختار الصف والدرس، فيُعدّ لك التحضير جاهزًا للتعديل، ويُصدَّر إلى Word في دقائق بدل ساعات.</p>
+        <a class="plan-btn primary" href="https://drive.google.com/file/d/1kXBooXYsA51xmHlGNCUMFe1D51Qqzi2A/view?usp=sharing" target="_blank" rel="noopener">تحميل المساعد</a>
+      </div>
+    </div>
+    <div class="tool-card">
+      <span class="sec-ico" data-icon="sheet"></span>
+      <div>
+        <h3>معد أوراق العمل</h3>
+        <p>أوراق العمل والاختبارات القصيرة لكل المواد. تكتب أسئلتك، والأداة تنسّق الورقة وتوزّع الدرجات وترتّب الصفحات، وتُخرجها في Word جاهزة للطباعة. وفيها نموذجان (أ/ب)، ونسخ بأسماء الطلاب.</p>
+        <p class="tool-slogan">«أسئلتك من إعدادك… وتنسيقها علينا!»</p>
+        <a class="plan-btn primary" href="https://drive.google.com/file/d/1kXBooXYsA51xmHlGNCUMFe1D51Qqzi2A/view?usp=sharing" target="_blank" rel="noopener">تحميل المعد</a>
+      </div>
+    </div>
+    <div class="tool-card tool-current">
+      <span class="sec-ico" data-icon="t_mcq"></span>
+      <div>
+        <h3>معد الاختبارات المدرسية <span class="tool-here">هذه الأداة</span></h3>
+        <p>اختبارات التربية الإسلامية على القالب الوزاري. تكتب الأسئلة وإجاباتها، فيُخرج لك ملفي Word: ورقة الاختبار ونموذج الإجابة. وفيه المصحف بالرسم العثماني، والأحاديث المشكولة من الكتب الستة، وبناء الاختبار من جدول المواصفات ومطابقته.</p>
+        <a class="plan-btn" href="https://drive.google.com/file/d/1kXBooXYsA51xmHlGNCUMFe1D51Qqzi2A/view?usp=sharing" target="_blank" rel="noopener">تحميل المعد</a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="previewDialog">
+  <div class="dialog-head">
+    <h2>معاينة</h2>
+    <div class="seg pv-tabs" id="pvTabs"><button type="button" data-v="exam" class="on">ورقة الاختبار</button><button type="button" data-v="key">نموذج الإجابة</button></div>
+    <div>
+      <button type="button" id="previewExport" class="primary">استخراج الاختبار ونموذج الإجابة</button>
+      <button type="button" id="previewClose">إغلاق</button>
+    </div>
+  </div>
+  <p class="note" id="previewNote">تقسيم الصفحات في المعاينة تقريبي، والتقسيم النهائي يحدده Word عند فتح الملف: لا يُقسم السؤال، والمجال المقالي يبقى كاملًا في صفحة واحدة.</p>
+  <div class="xpv-body">
+    <aside class="pv-panel" id="pvPanel" aria-label="خيارات التنسيق"></aside>
+    <div class="pv-scroll" id="pvScroll"><div class="pv-stack" id="pvStack"></div></div>
+  </div>
+</dialog>
+
+<dialog id="verseDialog">
+  <div class="dialog-head"><h2>إدراج آية من المصحف</h2><div><button type="button" id="vInsert" class="primary">إدراج</button> <button type="button" id="vClose">إغلاق</button></div></div>
+  <p class="note">المصحف برواية حفص بالرسم العثماني (مجمع الملك فهد لطباعة المصحف الشريف)، ويُطبع بخط المجمع.</p>
+  <div class="verse-form">
+    <label>السورة<select id="vSura"></select></label>
+    <label>من الآية<input id="vFrom" type="number" min="1" value="1"></label>
+    <label>إلى الآية<input id="vTo" type="number" min="1" value="1"></label>
+    <label class="check-line"><input type="checkbox" id="vRef" checked> إضافة [اسم السورة: رقم الآية]</label>
+  </div>
+  <input id="vSearch" class="v-search" placeholder="أو ابحث بكلمة من الآية (دون تشكيل)، مثل: يهدي للتي هي أقوم">
+  <div id="vResults" class="v-results"></div>
+  <div class="v-label">ما سيُدرج:</div>
+  <div id="vPreview" class="v-preview"></div>
+</dialog>
+
+<dialog id="recentDialog" class="small-dialog">
+  <div class="dialog-head"><h2>الاختبارات الأخيرة</h2><div><button type="button" id="recentClose">إغلاق</button></div></div>
+  <p class="note">آخر الاختبارات التي استخرجتها على هذا الجهاز. اختر اختبارًا لفتحه والتعديل عليه.</p>
+  <div id="recentList" class="bank-list"></div>
+</dialog>
+
+<dialog id="hadithDialog">
+  <div class="dialog-head"><h2>إدراج حديث من الكتب الستة</h2><div><button type="button" id="hInsert" class="primary">إدراج</button> <button type="button" id="hClose">إغلاق</button></div></div>
+  <p class="note">صحيح البخاري، وصحيح مسلم، وسنن أبي داود، والترمذي، والنسائي، وابن ماجه — نصوص مشكولة. ابحث بكلمات من الحديث دون تشكيل، ثم اختر الرواية.</p>
+  <div class="imp-tools">
+    <input type="search" id="hSearch" placeholder="مثال: إنما الأعمال بالنيات">
+    <select id="hBook"><option value="">كل الكتب</option></select>
+    <label class="check-line"><input type="checkbox" id="hIsnad" checked> حذف السند (يبدأ من الصحابي)</label>
+  </div>
+  <div id="hStatus" class="note"></div>
+  <div id="hResults" class="h-results"></div>
+  <div class="v-label">ما سيُدرج (يمكنك تعديله، ثم ضع خطًا تحت ما يكتبه الطالب):</div>
+  <textarea id="hText" spellcheck="false"></textarea>
+</dialog>
+
+<dialog id="importDialog">
+  <div class="dialog-head"><h2>استيراد أسئلة من اختبارات سابقة</h2><div><button type="button" id="impAdd" class="primary">إضافة المحدد</button> <button type="button" id="impClose">إغلاق</button></div></div>
+  <p class="note">اختر ملفات Word لاختبارات سابقة: ما استخرجته هذه الأداة، أو اختبارات على القالب الوزاري (يُفضل اختيار ملف الاختبار مع نموذج إجابته معًا لتؤخذ الإجابات منه). ثم حدد الأسئلة أو الفروع، والمجال الذي تضاف إليه.</p>
+  <div class="imp-tools">
+    <button type="button" id="impPick" class="soft">اختيار ملفات…</button>
+    <input type="search" id="impSearch" placeholder="بحث في الأسئلة">
+    <label class="check-line"><input type="checkbox" id="impAll"> تحديد الكل</label>
+    <select id="impMode" title="أين تضاف الأسئلة"><option value="add">إضافة إلى الاختبار الحالي</option><option value="new">البدء باختبار جديد (تُمسح الأسئلة الحالية)</option><option value="struct">اختبار جديد على هيكله فقط (دون نصوص)</option></select>
+  </div>
+  <div id="impStatus" class="note"></div>
+  <div id="impList" class="imp-list"></div>
+</dialog>
+
+<dialog id="lintDialog">
+  <div class="dialog-head"><h2>تدقيق الاختبار</h2><div><button type="button" id="lintGo" class="primary">متابعة الاستخراج</button> <button type="button" id="lintClose">إغلاق</button></div></div>
+  <p class="note" id="lintNote">ملاحظات لغوية وشكلية شائعة. اضغط «تصحيح» لقبول الاقتراح، أو «تجاهل». وللتدقيق الإملائي والنحوي الكامل افتح الملف في Word: مراجعة ← تدقيق إملائي ونحوي.</p>
+  <div id="lintList" class="lint-list"></div>
+</dialog>
+
+<dialog id="specDialog">
+  <div class="dialog-head"><h2>جدول المواصفات</h2><div><button type="button" id="spBuild" class="primary">بناء اختبار جديد منه</button> <button type="button" id="spLink">ربطه بالاختبار الحالي</button> <button type="button" id="spClose">إغلاق</button></div></div>
+  <div class="imp-tools">
+    <button type="button" id="spPick" class="soft">رفع ملف المواصفات (PDF أو Word)…</button>
+    <select id="spSaved" title="الجداول المحفوظة"></select>
+    <button type="button" id="spDel" class="mini">حذف المحفوظ</button>
+  </div>
+  <div id="spStatus" class="note"></div>
+  <div id="spEdit" class="sp-edit"></div>
+</dialog>
+
+<dialog id="matchDialog">
+  <div class="dialog-head"><h2>مطابقة الاختبار على جدول المواصفات</h2><div><button type="button" id="mtClose">إغلاق</button></div></div>
+  <div id="mtBody" class="mt-body"></div>
+</dialog>
+
+<dialog id="mapDialog">
+  <div class="dialog-head"><h2>توزيع الأسئلة المستوردة على جدول المواصفات</h2><div><button type="button" id="mpApply" class="primary">تطبيق</button> <button type="button" id="mpAsIs">الاستيراد كما هو دون الجدول</button> <button type="button" id="mpClose">إلغاء</button></div></div>
+  <p class="note" id="mpSum"></p>
+  <div id="mpBody" class="imp-list"></div>
+</dialog>
+
+<aside id="livePane" class="live-pane" hidden aria-label="معاينة جانبية">
+  <div class="lp-head">
+    <b>معاينة جانبية</b>
+    <div class="seg small" id="lpTabs"><button type="button" data-v="exam">ورقة الاختبار</button><button type="button" data-v="key">نموذج الإجابة</button></div>
+    <button type="button" id="lpClose" class="mini" title="إخفاء المعاينة الجانبية">✕</button>
+  </div>
+  <div class="lp-info"><span id="lpInfo"></span> <button type="button" id="lpFull" class="mini">فتح المعاينة الكاملة</button></div>
+  <div class="lp-body" id="lpBody"></div>
+</aside>
+
+<div id="toast" class="toast" role="status" hidden></div>
+<input type="file" id="specFile" accept=".pdf,.docx" hidden>
+<input type="file" id="importFile" accept=".docx" multiple hidden>
+<input type="file" id="openFile" accept=".docx" hidden>
+<input type="file" id="restoreFile" accept=".json" hidden>
+
+<script src="static/local.js?v=2026-11-12"></script>
+<script>
+TTLocal.start({ id: 'ikhtibar', app: 'muead-ikhtibarat', title: 'معد الاختبارات المدرسية', out: 'الاختبارات', version: '2.0', fallbackName: 'اختبار',
+  store: {
+    profile: { key: 'ikhtibar.profile.v1', file: 'بيانات المدرسة.json' },
+    draft: { key: 'ikhtibar.draft.v1', file: 'المسودة.json' },
+    recent: { key: 'ikhtibar.recent.v1', file: 'الاختبارات الأخيرة.json' },
+    specs: { key: 'ikhtibar.specs.v1', file: 'جداول المواصفات.json' } } },
+  ["static/jszip.min.js?v=2026-11-12",
+  "static/exam-template.js?v=2026-11-12",
+  "static/exam-fonts.js?v=2026-11-12",
+  "static/quran-data.js?v=2026-11-12",
+  "static/exam-engine.js?v=2026-11-12",
+  "static/exam-preview.js?v=2026-11-12",
+  "static/spec-words.js?v=2026-11-12",
+  "static/spec.js?v=2026-11-12",
+  "static/checker.js?v=2026-11-12",
+  "static/importer.js?v=2026-11-12",
+  "static/app.js?v=2026-11-12"]);
+</script>
+</body>
+</html>
