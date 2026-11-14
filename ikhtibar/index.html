@@ -243,6 +243,7 @@
     <label>السورة<select id="vSura"></select></label>
     <label>من الآية<input id="vFrom" type="number" min="1" value="1"></label>
     <label>إلى الآية<input id="vTo" type="number" min="1" value="1"></label>
+    <label class="check-line"><input type="checkbox" id="vPre" checked> إضافة «قال الله تعالى:» قبل الآية</label>
     <label class="check-line"><input type="checkbox" id="vRef" checked> إضافة [اسم السورة: رقم الآية]</label>
   </div>
   <input id="vSearch" class="v-search" placeholder="أو ابحث بكلمة من الآية (دون تشكيل)، مثل: يهدي للتي هي أقوم">
@@ -330,7 +331,7 @@
 
 <script src="static/local.js?v=2026-11-12"></script>
 <script>
-TTLocal.start({ id: 'ikhtibar', app: 'muead-ikhtibarat', title: 'معد الاختبارات المدرسية', out: 'الاختبارات', version: '2.1', fallbackName: 'اختبار',
+TTLocal.start({ id: 'ikhtibar', app: 'muead-ikhtibarat', title: 'معد الاختبارات المدرسية', out: 'الاختبارات', version: '2.1.1', fallbackName: 'اختبار',
   store: {
     profile: { key: 'ikhtibar.profile.v1', file: 'بيانات المدرسة.json' },
     draft: { key: 'ikhtibar.draft.v1', file: 'المسودة.json' },
