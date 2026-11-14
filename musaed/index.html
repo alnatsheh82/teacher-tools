@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="مساعد التحضير">
-<link rel="stylesheet" href="static/style.css?v=2026-11-07">
+<link rel="stylesheet" href="static/style.css?v=2026-11-14">
 </head>
 <body>
 
@@ -279,20 +279,23 @@
 
 <script src="static/local.js?v=2026-11-12"></script>
 <script>
-TTLocal.start({ id: 'musaed', app: 'musaed-tahdeer', title: 'مساعد التحضير الإلكتروني', out: 'التحضيرات', version: '2.2', fallbackName: 'تحضير', backupDir: 'نسخ احتياطية للمسودة',
+TTLocal.start({ id: 'musaed', app: 'musaed-tahdeer', title: 'مساعد التحضير الإلكتروني', out: 'التحضيرات', version: '2.3', fallbackName: 'تحضير', backupDir: 'نسخ احتياطية للمسودة',
   store: {
     draft: { key: 'lessonPrepDraft_v1', file: 'المسودة.json' },
     logo: { key: 'schoolLogo_v1', file: 'شعار_المدرسة.json' },
     sign: { key: 'coordinatorSign_v1', file: 'توقيع_المنسق.json' },
-    flags: { key: 'musaed.flags.v1', file: 'إعدادات.json' } } },
+    flags: { key: 'musaed.flags.v1', file: 'إعدادات.json' },
+    timetable: { key: 'musaed.timetable.v1', file: 'جدول_الحصص.json' },
+    mystrat: { key: 'musaed.myStrategies.v1', file: 'استراتيجياتي.json' } } },
   ["static/lists.js?v=2026-11-12",
   "static/lessons.js?v=2026-11-12",
-  "static/strategy_bank.js?v=2026-11-12",
+  "static/strategy_bank.js?v=2026-11-14",
   "static/template.js?v=2026-11-12",
   "static/jszip.min.js?v=2026-11-12",
-  "static/docx-export.js?v=2026-11-12",
+  "static/docx-export.js?v=2026-11-14",
   "static/lint.js?v=2026-11-12",
-  "static/app.js?v=2026-11-12"]);
+  "static/planner.js?v=2026-11-14",
+  "static/app.js?v=2026-11-14"]);
 </script>
 </body>
 </html>

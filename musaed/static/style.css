@@ -1069,3 +1069,27 @@ header .menu-list button:hover {
 .closure-box { display: flex; flex-direction: column; }
 .strategy-other[hidden] { display: none !important; }
 .sign-preview img { background: repeating-conic-gradient(#f2f2f2 0 25%, #fff 0 50%) 0 0 / 12px 12px; }
+
+/* ===== 2.3: جدول الحصص واستراتيجياتي ===== */
+.tt-periods { display: flex; flex-wrap: wrap; gap: 4px 12px; flex-basis: 100%; margin-top: 4px; font-size: .92em; }
+.tt-p { color: #1F6F78; font-weight: 600; }
+.tt-warn { color: #a15c00; }
+.tt-pick.need { outline: 2px solid #e0a100; }
+.tt-dialog, .ms-dialog { width: min(980px, 96vw); max-height: 92vh; border: 0; border-radius: 12px; padding: 14px 18px; }
+.tt-dialog .dialog-head, .ms-dialog .dialog-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.tt-dialog h3, .ms-dialog h3 { margin: 0; color: #8A1538; }
+.tt-wrap { overflow: auto; }
+.tt-grid { border-collapse: collapse; width: 100%; min-width: 640px; }
+.tt-grid th, .tt-grid td { border: 1px solid #ddd; padding: 3px; text-align: center; }
+.tt-grid thead th, .tt-grid tbody th { background: #f6eef1; color: #6b0f2c; font-size: .9em; white-space: nowrap; }
+.tt-grid input { width: 100%; box-sizing: border-box; text-align: center; padding: 5px 2px; }
+.dialog-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.ms-list { display: flex; flex-direction: column; gap: 6px; margin: 6px 0; }
+.ms-item { display: flex; align-items: center; gap: 8px; border: 1px solid #e3e5ea; border-radius: 8px; padding: 6px 10px; }
+.ms-item .grow { flex: 1; }
+.ms-dialog .block { display: flex; flex-direction: column; gap: 4px; margin: 8px 0; }
+.ms-two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ms-two .mini { align-self: flex-start; }
+.ms-comps { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+@media (max-width: 700px) { .ms-two { grid-template-columns: 1fr; } }
+.tt-toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 8px 16px; border-radius: 8px; z-index: 99; }
