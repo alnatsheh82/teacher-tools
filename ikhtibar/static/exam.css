@@ -567,3 +567,7 @@ table.xp-cmp { margin: 0 auto 1mm; }
 .ans-box .fbar { opacity: .85; }
 .ans-box .fbar .sym { font-size: 12px; }
 .mp-notes { display: flex; flex-wrap: wrap; gap: 2px 12px; padding: 0 10px 6px; }
+
+/* 2.1.5 توزيع الإجابات */
+.order-note .dist-note { color: #0b6b3a; }
+#ansDist .mini { margin-inline-start: 6px; }
