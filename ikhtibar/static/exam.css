@@ -557,3 +557,12 @@ table.xp-cmp { margin: 0 auto 1mm; }
 .xp-appr td { height: 20mm; }
 .pp-br > span:last-child { display: inline-flex; align-items: center; gap: 6px; }
 .pp-br .pp-n { min-width: 2.4em; text-align: center; display: inline-block; }
+
+/* 2.1.3: تحريك الفروع، وشريط إدراج خاص بالإجابة */
+.br-move { display: inline-flex; gap: 4px; margin-inline-start: auto; }
+.br-mv[disabled] { opacity: .35; cursor: default; }
+.branch.flash { animation: qflash 1.2s ease-out; }
+.ans-box { display: flex; flex-direction: column; gap: 3px; }
+.ans-box .fbar { opacity: .85; }
+.ans-box .fbar .sym { font-size: 12px; }
+.mp-notes { display: flex; flex-wrap: wrap; gap: 2px 12px; padding: 0 10px 6px; }
