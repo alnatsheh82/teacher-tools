@@ -104,7 +104,7 @@ label.block { display: flex; flex-direction: column; gap: 3px; font-weight: norm
 .xp-page.xp-probe { height: auto; }
 .xp-content { position: relative; }
 .xp-foot { position: absolute; bottom: 6mm; left: 12.7mm; right: 12.7mm; text-align: center; font-weight: bold; font-size: 9pt; line-height: 1.25; }
-.xp-sk { font-family: "XP Brk", "KFGQPC Uthman Taha Naskh", "Sakkal Majalla", serif; font-size: 16pt; font-weight: normal; }
+.xp-sk { font-family: "XP Brk", "KFGQPC Uthman Taha Naskh", "Sakkal Majalla", serif; font-size: 13pt; font-weight: normal; }
 .xp-ph { color: #a9a9b3; font-weight: normal; font-style: italic; }
 .xp-red { color: #f00; }
 .xp-mr { color: #a40136; }
@@ -228,7 +228,7 @@ table.xp-cmp { width: 96%; margin: 2mm auto 1mm; border-collapse: collapse; }
 .pv-holder .pv-pn { position: absolute; top: 4px; left: -42px; font-size: 12px; color: #697589; }
 
 /* خط المصحف والرموز (مضمّنان في الأداة) */
-.xp-qr { font-family: "XP Quran", "KFGQPC HAFS Uthmanic Script", serif; font-size: 16pt; font-weight: normal; }
+.xp-qr { font-family: "XP Quran", "KFGQPC HAFS Uthmanic Script", serif; font-size: 13pt; font-weight: normal; }
 .xp-hon { font-family: "XP Sym", "Noto Naskh Arabic", serif; font-weight: normal; }
 .xp-gap { letter-spacing: 0; word-break: break-all; font-weight: normal; }
 
@@ -504,7 +504,8 @@ table.xp-ess { width: 173.5mm; border: .75pt dotted #000; direction: rtl; }
    كل سطر في جزء الأسئلة بارتفاع ثابت بالملم، كما في ملف Word (تباعد «بالضبط»). */
 .xp-q, .xp-dom, .xp-sec, .xp-end { line-height: 7.2mm; }
 .xp-q .xp-hon { line-height: 8.4mm; }
-.xp-q .xp-qr, .xp-q .xp-sk { line-height: 10.4mm; }
+.xp-q .xp-qr, .xp-q .xp-sk { line-height: 1; }
+.xp-q :has(> .xp-qr) { line-height: 8.6mm; }
 .xp-sec, .xp-sec-m { position: relative; height: 7.2mm; margin: 0; display: block; }
 .xp-sec span, .xp-sec-m .xp-secbox { position: absolute; left: 50%; transform: translateX(-50%); top: -7.4mm; margin: 0; }
 .xp-sec-m { text-align: right; font-family: "Sakkal Majalla", serif; font-weight: bold; }
