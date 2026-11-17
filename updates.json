@@ -122,15 +122,14 @@
  },
  "muead-ikhtibarat": {
   "name": "معد الاختبارات المدرسية",
-  "number": "2.1.5",
-  "version": "2.1.5",
+  "number": "2.1.6",
+  "version": "2.1.6",
   "date": "2026-11-17",
   "dir": "ikhtibar",
-  "message": "صدر معد الاختبارات المدرسية 2.1.5.",
+  "message": "صدر معد الاختبارات المدرسية 2.1.6.",
   "notes": [
-   "لا تتكرر الإجابة الصحيحة بالحرف نفسه في ثلاثة أسئلة متتالية: زر «وزّع الإجابات»، ويُعرض التوزيع عند الاستخراج إن لزم. ويُفضَّل ألا يتكرر في سؤالين متتاليين.",
-   "ترتيب البدائل من الأقصر إلى الأطول يقيس الطول بخط الطباعة نفسه، والمدّ بالكشيدة موزع على الكلمات ومحدود ليبقى الخط مرتبًا.",
-   "اسم ملف Word أقصر (الاختبار والصف فقط)، لأن Word لا يفتح ملفًا مساره طويل جدًا."
+   "توزيع الإجابات تلقائي فعلًا: يُمدّ البديل بالكشيدة حتى يتدرج تمامًا (حتى 4 في الكلمة)، فلا يطلب منك التعديل يدويًا إلا نادرًا.",
+   "لا يتكرر الحرف نفسه في ثلاثة أسئلة متتالية، ويُتجنب في سؤالين متتاليين، ولا يزيد حرف على 40% ما أمكن؛ ويُصحح ذلك من المدقق بزر «تصحيح» أيضًا."
   ],
   "download": "",
   "files": {
@@ -148,12 +147,12 @@
    "icons/ikhtibar.ico": "ad9efcb789ca38f0461a63ed7509655d2e9c068fdbab47512806d0fb0cf34a40",
    "icons/maskable-192.png": "eb02d5bfb759a04bce02966483d221377e152a79fcec42f3d7379af6364b7a79",
    "icons/maskable-512.png": "2fed1a029a4e8c756a4eb4501ab610d354dd9525bc2a4dbab369be1ba38e48b6",
-   "index.html": "d1ba3fa91dc39059d4c20398d518c2653e8e80b7c1a55dd3208760d3f247c58a",
+   "index.html": "ce4ec226c958252243d533b8b9ce393d3146399a299b7a4cc9e297df2249dae2",
    "manifest.webmanifest": "f6cc5a7f9d3b6a8285a781db827a7943c30b3b629e33bc0cd443e6a8bcf24727",
-   "static/app.js": "231984858b10975c7e2b7296211b885d162f8a8ddc3e94f663472ea3b2e0998b",
+   "static/app.js": "ded1d78553fd3874504965ce74b8817418408be48cfdbc910d75c2947594d426",
    "static/awraq.css": "0bc256dd09eebb88c2b0f2317bad4093f8dc3512b116cfe59eee5734884d5351",
    "static/checker.js": "4e6193fc53b6a3696d1c5440bd809b35d486099919781aedd3ac088843ca7a8c",
-   "static/exam-engine.js": "37aab1cf84182a995127bb02300c627327dc6f779fdf9fb7cd3f02ba46433823",
+   "static/exam-engine.js": "5c63f28045441f2483d38dc7d46640f9a7d20ee0187d939b8a37db4da3236f66",
    "static/exam-preview.js": "937367e3b02d8a986e536b1bae453d195df0d51ce074c7ae850cdba98f2c518c",
    "static/exam-template.js": "56dc8ed2809aea3fa0ed0a36232063e5a364e4edabc339810ccbc5e3bfa6f6d7",
    "static/exam.css": "f9b3a11b9e3be6b26e96c94deb763c09e7aa928ab2800dcf55418db7b5ca1b1b",
