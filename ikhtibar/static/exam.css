@@ -571,3 +571,12 @@ table.xp-cmp { margin: 0 auto 1mm; }
 /* 2.1.5 توزيع الإجابات */
 .order-note .dist-note { color: #0b6b3a; }
 #ansDist .mini { margin-inline-start: 6px; }
+
+/* 2.1.7 فراغات أكمل الحديث */
+.xp-gdots, .xp-wfill { white-space: nowrap; letter-spacing: 0; }
+.xp-wfill { color: transparent; }
+.gap-ctl { margin: 6px 0; display: grid; gap: 4px; }
+.gap-ctl .gap-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.gap-ctl .gap-m { color: #555; max-width: 22em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gap-ctl .gap-v { min-width: 8.5em; text-align: center; font-weight: bold; }
+.gap-ctl .gap-auto { color: #0b6b3a; font-size: .85em; }
