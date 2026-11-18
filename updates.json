@@ -122,14 +122,14 @@
  },
  "muead-ikhtibarat": {
   "name": "معد الاختبارات المدرسية",
-  "number": "2.1.10",
-  "version": "2.1.10",
+  "number": "2.1.11",
+  "version": "2.1.11",
   "date": "2026-11-18",
   "dir": "ikhtibar",
-  "message": "صدر معد الاختبارات المدرسية 2.1.10.",
+  "message": "صدر معد الاختبارات المدرسية 2.1.11.",
   "notes": [
-   "شريط الرموز لم يعد يغطي البدائل: عند الكتابة في بديل أو خانة صغيرة يظهر الشريط في أعلى السؤال.",
-   "«أكمل كتابة الحديث»: آخر كلمة في الحديث عند حافة الجدول، والنقاط قبلها تأخذ ما بقي من السطر؛ وتنبيه عند نجمة زائدة؛ وزر «فراغ» في الحديث يضع النجمتين حول المحدد أو يصنع فراغًا متصلًا."
+   "نقطة في آخر كل بديل في الأسئلة الموضوعية: تُضاف تلقائيًا إن لم تكن موجودة، ولا تُضاف بعد «؟» أو «!» أو قوس.",
+   "شريط الرموز لا يغطي البدائل: عند الكتابة في بديل يظهر الشريط في أعلى السؤال."
   ],
   "download": "",
   "files": {
@@ -147,12 +147,12 @@
    "icons/ikhtibar.ico": "ad9efcb789ca38f0461a63ed7509655d2e9c068fdbab47512806d0fb0cf34a40",
    "icons/maskable-192.png": "eb02d5bfb759a04bce02966483d221377e152a79fcec42f3d7379af6364b7a79",
    "icons/maskable-512.png": "2fed1a029a4e8c756a4eb4501ab610d354dd9525bc2a4dbab369be1ba38e48b6",
-   "index.html": "6477e27bf055802b6be8461283fa50b2fbdc714fc655434f984d9933fae9b593",
+   "index.html": "53bbf4282ad3145688253d644c9ccb8c066342ef43a846a52f93e6ca6d1a578f",
    "manifest.webmanifest": "f6cc5a7f9d3b6a8285a781db827a7943c30b3b629e33bc0cd443e6a8bcf24727",
    "static/app.js": "b7a7930d05da24107d7835983bbdffa7117b28cf1dda3ec6d88ed0151ec01e62",
    "static/awraq.css": "0bc256dd09eebb88c2b0f2317bad4093f8dc3512b116cfe59eee5734884d5351",
    "static/checker.js": "4e6193fc53b6a3696d1c5440bd809b35d486099919781aedd3ac088843ca7a8c",
-   "static/exam-engine.js": "2e0765f903b875a8ca65195edc33b10a5b273b5ed3b0429f68ba3663667db69f",
+   "static/exam-engine.js": "9d9ffa439f05c40e3abdb9981e866a6617a1c0e7b54388bb9691e6abdad21286",
    "static/exam-preview.js": "80197c126c07d86aac6c57537c63eee56a13aa63f0f3de57ed333217b04e81bc",
    "static/exam-template.js": "56dc8ed2809aea3fa0ed0a36232063e5a364e4edabc339810ccbc5e3bfa6f6d7",
    "static/exam.css": "2fecd5470abb025597db62af22ba4ffbce85c015dc1b164a045cde9de3d80abc",
