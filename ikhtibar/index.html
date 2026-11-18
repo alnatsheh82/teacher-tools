@@ -13,7 +13,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="static/style.css?v=8">
 <link rel="stylesheet" href="static/awraq.css?v=8">
-<link rel="stylesheet" href="static/exam.css?v=14">
+<link rel="stylesheet" href="static/exam.css?v=15">
 </head>
 <body>
 
@@ -58,6 +58,7 @@
   <button type="button" data-tab="data" class="on"><span data-icon="school"></span> البيانات</button>
   <button type="button" data-tab="mcq"><span data-icon="t_mcq"></span> الأسئلة الموضوعية <b id="tab_mcq"></b></button>
   <button type="button" data-tab="essay"><span data-icon="t_free"></span> الأسئلة المقالية <b id="tab_essay"></b></button>
+  <button type="button" class="mini live-btn tab-live">معاينة جانبية</button>
 </nav>
 
 <main>
@@ -133,7 +134,6 @@
   <div class="section-head">
     <div class="sec-title"><span class="sec-ico" data-icon="t_mcq"></span><h2>الأسئلة الموضوعية</h2></div>
     <div class="counter" id="mcq_counter"></div>
-    <button type="button" class="mini live-btn">معاينة جانبية</button>
   </div>
   <p class="note">اكتب السؤال وبدائله الأربعة، واختر الإجابة الصحيحة. تُرتَّب البدائل في الاختبار تلقائيًا من الأقصر إلى الأطول، ويُعاد حساب حرف الإجابة في نموذج الإجابة.</p>
   <p class="field-hint" id="ansDist"></p>
@@ -146,7 +146,6 @@
   <div class="section-head">
     <div class="sec-title"><span class="sec-ico" data-icon="t_free"></span><h2>الأسئلة المقالية</h2></div>
     <div class="counter" id="essay_counter"></div>
-    <button type="button" class="mini live-btn">معاينة جانبية</button>
   </div>
   <p class="note">اختر عدد الفروع ثم اضغط «إضافة سؤال» تحت المجال. لكل فرع نوعه ودرجته وإجابته: سؤال حر (بأسطر)، أو مقارنة (جدول)، أو أكمل كتابة الحديث الشريف.</p>
   <div id="essay_domains"></div>
@@ -331,7 +330,7 @@
 
 <script src="static/local.js?v=2026-11-12"></script>
 <script>
-TTLocal.start({ id: 'ikhtibar', app: 'muead-ikhtibarat', title: 'معد الاختبارات المدرسية', out: 'الاختبارات', version: '2.1.7', fallbackName: 'اختبار',
+TTLocal.start({ id: 'ikhtibar', app: 'muead-ikhtibarat', title: 'معد الاختبارات المدرسية', out: 'الاختبارات', version: '2.1.8', fallbackName: 'اختبار',
   store: {
     profile: { key: 'ikhtibar.profile.v1', file: 'بيانات المدرسة.json' },
     draft: { key: 'ikhtibar.draft.v1', file: 'المسودة.json' },
@@ -341,13 +340,13 @@ TTLocal.start({ id: 'ikhtibar', app: 'muead-ikhtibarat', title: 'معد الاخ
   "static/exam-template.js?v=2026-11-12",
   { shared: "fonts.js", fallback: "static/exam-fonts.js" },
   { shared: "quran-data.js", fallback: "static/quran-data.js" },
-  "static/exam-engine.js?v=2026-11-17e",
-  "static/exam-preview.js?v=2026-11-17e",
+  "static/exam-engine.js?v=2026-11-18",
+  "static/exam-preview.js?v=2026-11-18",
   "static/spec-words.js?v=2026-11-12",
   "static/spec.js?v=2026-11-12",
   "static/checker.js?v=2026-11-12",
   "static/importer.js?v=2026-11-12",
-  "static/app.js?v=2026-11-17e"]);
+  "static/app.js?v=2026-11-18"]);
 </script>
 </body>
 </html>

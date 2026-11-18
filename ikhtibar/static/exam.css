@@ -580,3 +580,33 @@ table.xp-cmp { margin: 0 auto 1mm; }
 .gap-ctl .gap-m { color: #555; max-width: 22em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .gap-ctl .gap-v { min-width: 8.5em; text-align: center; font-weight: bold; }
 .gap-ctl .gap-auto { color: #0b6b3a; font-size: .85em; }
+
+/* 2.1.8 أكمل الحديث: فقرة متصلة ممتدة بين الحافتين، والسطر الأخير تكمله النقاط */
+.xp-hflow { text-align: justify; text-align-last: right; overflow: hidden; line-height: 8.5mm; }
+.xp-hflow .xp-gdots, .xp-hflow .xp-wfill { white-space: normal; word-break: normal; }
+.xp-hflow .xp-hbg { background: #fff; position: relative; z-index: 1; }
+.xp-hflow:not(.xp-hk)::after { content: ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."; float: left; width: 0; white-space: nowrap; direction: ltr; letter-spacing: -0.12em; }
+.hd-student .xp-hflow { line-height: 2.1; }
+
+/* 2.1.8 شريط التبويبات ثابت تحت الشريط العلوي، ومعه زر المعاينة الجانبية */
+.ex-tabs { top: var(--hdrH, 0px); z-index: 19; align-items: center; }
+.ex-tabs .tab-live { margin-inline-start: 14px; border-radius: 22px; padding: 6px 14px; }
+.ex-tabs .tab-live.on { background: var(--maroon); color: #fff; }
+html { scroll-padding-top: calc(var(--hdrH, 0px) + 70px); }
+
+/* 2.1.8 بطاقة السؤال: شريط رموز واحد للخانة النشطة، وإطار لكل فرع، والسؤال أبيض والإجابة خضراء */
+.q-card .fbar { display: none; }
+.q-card .fbar.on { display: flex; margin: 0 0 4px; background: #fff; border: 1px solid #c9a7b3; border-radius: 8px; padding: 4px; box-shadow: 0 3px 10px rgba(0,0,0,.08); }
+.q-card .q-stem { background: #fbf6ea; border: 1px solid #e6d6b0; border-radius: 10px; padding: 10px 12px; margin-bottom: 16px; }
+.q-card .q-stem > .field-label { color: #8a6d1f; }
+.q-card .branch { position: relative; background: #fff; border: 1px solid #d9d0d3; border-right: 6px solid var(--maroon); border-radius: 10px; padding: 10px 14px 12px; margin: 0 0 18px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+.q-card .br-head { font-size: .9em; gap: 6px; padding-bottom: 8px; border-bottom: 1px dashed #e3d9dc; margin-bottom: 8px; flex-wrap: wrap; align-items: center; }
+.q-card .br-head .br-row { margin: 0; margin-inline-start: auto; }
+.q-card .br-letter { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; height: 34px; padding: 0 6px; border-radius: 17px; background: var(--maroon); color: #fff !important; font-size: 1.1em; }
+.q-card .br-letter.wide { font-size: .9em; padding: 0 12px; }
+.q-card .fld-lbl { display: block; font-weight: bold; color: var(--maroon); margin: 2px 0 4px; font-size: .92em; }
+.q-card .ans { background: #eef8f1; border: 1px solid #9fd3ad; border-right: 4px solid #2e8b57; border-radius: 8px; padding: 8px 10px; margin-top: 10px; }
+.q-card .ans .ans-label { color: #1f7a45; font-weight: bold; }
+.q-card .ans textarea { background: #fff; }
+.q-card .br-body .qpv { display: none; }
+.q-card textarea:focus, .q-card input:focus { outline: 2px solid var(--maroon); outline-offset: 0; }
