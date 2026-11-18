@@ -610,3 +610,6 @@ html { scroll-padding-top: calc(var(--hdrH, 0px) + 70px); }
 .q-card .ans textarea { background: #fff; }
 .q-card .br-body .qpv { display: none; }
 .q-card textarea:focus, .q-card input:focus { outline: 2px solid var(--maroon); outline-offset: 0; }
+.xp-hflow .xp-tail { float: left; background: #fff; position: relative; z-index: 1; padding-right: .25em; }
+.xp-hflow.xp-nolead::after { content: none; }
+.hd-warn.bad { color: #b00020; font-weight: bold; }
