@@ -49,13 +49,13 @@
  },
  "muead-awraq": {
   "name": "معد أوراق العمل",
-  "number": "1.7.3",
-  "version": "1.7.3",
+  "number": "1.7.4",
+  "version": "1.7.4",
   "date": "2026-11-22",
   "dir": "awraq",
-  "message": "صدر معد أوراق العمل 1.7.3.",
+  "message": "صدر معد أوراق العمل 1.7.4.",
   "notes": [
-   "نوع جديد «مقابلة فردية»: نموذج مقابلة فردية مع الطالب لمناقشة أسباب وعلاج تدنّي نسبة التحصيل، بالترويسة نفسها و«قسم المادة» في أعلاها، وبنود قابلة للتعديل، ونسخة لكل طالب من كشف الأسماء كما في ورقة الدعم."
+   "المقابلة الفردية: بعد التصدير يظهر زر «فتح المجلد» ونافذة مكان الحفظ كما في الأوراق."
   ],
   "download": "",
   "files": {
@@ -68,11 +68,11 @@
    "icons/icon.svg": "2ee189f7483a7311b306df09b479867536507e10230f034b8840d6e5488fd3ad",
    "icons/maskable-192.png": "c0ef6dd5bfe9ded35a7364e1b46ff1926a7f92794ab81a5567a88364e291fb23",
    "icons/maskable-512.png": "ef41c8ee2fd67eb607cc8558082b8a051d4154991ad099bad446098b9a132ac5",
-   "index.html": "8db52990b27c84726fb4356f96f89884cfad716f1d85dba9bc9f1ab5228c9ed0",
+   "index.html": "08d717786240a308121239cdcba71802f125360832f794f391bfea15fe7bbcee",
    "manifest.webmanifest": "ffa7167e3797889adbdcf0c8cd2b6a0aff4701993bef5b91c88f4c607f745017",
    "static/app.js": "ec2761d9f3a6b3a30be593743ce90f7698550c65fd6949d32ce39a300dda6c0b",
    "static/awraq.css": "d67283f40ca99d10b6703f74a0df2a082c08572ad85440e7d820e545c50e6795",
-   "static/interview.js": "983689bb28baa7c8cbd4310704af33440b27258f3c25b2febbfd48be05c502c1",
+   "static/interview.js": "c46d97c01afc28aa820f277918fa39ca38e13a48ed01e13c223150d9a7e4f692",
    "static/islamic.js": "9c2a85485a3ad36a96fdad3b5abd9601460fdadd717b8aa2010466f5c65c30d6",
    "static/jszip.min.js": "acc7e41455a80765b5fd9c7ee1b8078a6d160bbbca455aeae854de65c947d59e",
    "static/lint.js": "cde157085320dacdfdbb205ab6c30922195b8fc1259d040c6824a8302a89c4e9",
