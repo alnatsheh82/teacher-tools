@@ -49,16 +49,13 @@
  },
  "muead-awraq": {
   "name": "معد أوراق العمل",
-  "number": "1.8.0",
-  "version": "1.8.0",
+  "number": "1.8.1",
+  "version": "1.8.1",
   "date": "2026-11-22",
   "dir": "awraq",
-  "message": "صدر معد أوراق العمل 1.8.0.",
+  "message": "صدر معد أوراق العمل 1.8.1.",
   "notes": [
-   "تبويب جديد «الخطة العلاجية»: ارفع كشوف «تصنيف الأداء» فتُحلَّل النتائج، ويخرج التقرير الكمي الوصفي وإجراءات رفع التحصيل بالأسماء على القالبين المعتمدين.",
-   "تُحفظ نتائج كل اختبار، فتُحسب القيمة المضافة ويُملأ «مستوى التقدم» عند الاختبار التالي.",
-   "طلاب الدعم (أقل من 70%) والإثراء (90% فأكثر) يُحدَّدون تلقائيًا في «كشف الأسماء» لأوراق الدعم والإثراء والمقابلات الفردية.",
-   "المقابلة الفردية: زر «فتح المجلد» بعد التصدير."
+   "الخطة العلاجية: تنسيق جدول التقرير الكمي الوصفي (يبقى داخل الصفحة كاملًا، وعمود الإجمالي أعرض، وصفوف المستويات بنفس الخط)."
   ],
   "download": "",
   "files": {
@@ -71,7 +68,7 @@
    "icons/icon.svg": "2ee189f7483a7311b306df09b479867536507e10230f034b8840d6e5488fd3ad",
    "icons/maskable-192.png": "c0ef6dd5bfe9ded35a7364e1b46ff1926a7f92794ab81a5567a88364e291fb23",
    "icons/maskable-512.png": "ef41c8ee2fd67eb607cc8558082b8a051d4154991ad099bad446098b9a132ac5",
-   "index.html": "9d8bded3a054bad3a0728117c2dabac2608351e01b4cce540cbd9193708e0158",
+   "index.html": "f4051b27841095bd16aaf9a2671cd339dcb2d174046d9044de587e769f25980d",
    "manifest.webmanifest": "ffa7167e3797889adbdcf0c8cd2b6a0aff4701993bef5b91c88f4c607f745017",
    "static/app.js": "ec2761d9f3a6b3a30be593743ce90f7698550c65fd6949d32ce39a300dda6c0b",
    "static/awraq.css": "d67283f40ca99d10b6703f74a0df2a082c08572ad85440e7d820e545c50e6795",
@@ -92,8 +89,8 @@
    "static/promo/v-prep.jpg": "51e311e286b220c468f37773fe96685f8940b2c5cc5349fbb0b331e582beef99",
    "static/promo/v-start.jpg": "48028fb5f60f79d610c1e884e7aec587b57a6e1a95e93d3298646ed3470e6d7f",
    "static/promo/v-ws.jpg": "08b72f21a055d8778401bb2e6c7c44e31daffa9bea79600848c179b1d3a3ed5c",
-   "static/remedial-tpl.js": "e73ed2a138085976a7e96219fb26ac72240f3341d92a2007975a7bd556704a4b",
-   "static/remedial.js": "e6d1f5b791c824ef437e48c66889defd97669d2ceb40f34eda8f037bb04b06e2",
+   "static/remedial-tpl.js": "6764522926f7b938cc1092cfb444577aa9243f8d35b4c1fd5b7c30a12af547fb",
+   "static/remedial.js": "ebb0e38ff7bd38332cac5e49b5d66243c3f8e37e1fa9424f8020be794d5b8a21",
    "static/roster.js": "52739a529aa75a3a87743ac5540d098e9b7f7751ad22f8f1eec77b6f4a814812",
    "static/sheet-engine.js": "9b3cd10ce2ce55971c29e4c1d68100725c778e59b07c04e695d5503957374946",
    "static/style.css": "d0f2bc2400399cb6ec4fd2eb5332746988731aa02c19a07873a64827afc84f5e",
