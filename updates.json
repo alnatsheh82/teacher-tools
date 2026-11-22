@@ -49,13 +49,16 @@
  },
  "muead-awraq": {
   "name": "معد أوراق العمل",
-  "number": "1.7.4",
-  "version": "1.7.4",
+  "number": "1.8.0",
+  "version": "1.8.0",
   "date": "2026-11-22",
   "dir": "awraq",
-  "message": "صدر معد أوراق العمل 1.7.4.",
+  "message": "صدر معد أوراق العمل 1.8.0.",
   "notes": [
-   "المقابلة الفردية: بعد التصدير يظهر زر «فتح المجلد» ونافذة مكان الحفظ كما في الأوراق."
+   "تبويب جديد «الخطة العلاجية»: ارفع كشوف «تصنيف الأداء» فتُحلَّل النتائج، ويخرج التقرير الكمي الوصفي وإجراءات رفع التحصيل بالأسماء على القالبين المعتمدين.",
+   "تُحفظ نتائج كل اختبار، فتُحسب القيمة المضافة ويُملأ «مستوى التقدم» عند الاختبار التالي.",
+   "طلاب الدعم (أقل من 70%) والإثراء (90% فأكثر) يُحدَّدون تلقائيًا في «كشف الأسماء» لأوراق الدعم والإثراء والمقابلات الفردية.",
+   "المقابلة الفردية: زر «فتح المجلد» بعد التصدير."
   ],
   "download": "",
   "files": {
@@ -68,11 +71,11 @@
    "icons/icon.svg": "2ee189f7483a7311b306df09b479867536507e10230f034b8840d6e5488fd3ad",
    "icons/maskable-192.png": "c0ef6dd5bfe9ded35a7364e1b46ff1926a7f92794ab81a5567a88364e291fb23",
    "icons/maskable-512.png": "ef41c8ee2fd67eb607cc8558082b8a051d4154991ad099bad446098b9a132ac5",
-   "index.html": "08d717786240a308121239cdcba71802f125360832f794f391bfea15fe7bbcee",
+   "index.html": "9d8bded3a054bad3a0728117c2dabac2608351e01b4cce540cbd9193708e0158",
    "manifest.webmanifest": "ffa7167e3797889adbdcf0c8cd2b6a0aff4701993bef5b91c88f4c607f745017",
    "static/app.js": "ec2761d9f3a6b3a30be593743ce90f7698550c65fd6949d32ce39a300dda6c0b",
    "static/awraq.css": "d67283f40ca99d10b6703f74a0df2a082c08572ad85440e7d820e545c50e6795",
-   "static/interview.js": "c46d97c01afc28aa820f277918fa39ca38e13a48ed01e13c223150d9a7e4f692",
+   "static/interview.js": "aa90b165eeddb93ba81e51d1a9f8295da04f158fc7a4e6d58cba84fea2905948",
    "static/islamic.js": "9c2a85485a3ad36a96fdad3b5abd9601460fdadd717b8aa2010466f5c65c30d6",
    "static/jszip.min.js": "acc7e41455a80765b5fd9c7ee1b8078a6d160bbbca455aeae854de65c947d59e",
    "static/lint.js": "cde157085320dacdfdbb205ab6c30922195b8fc1259d040c6824a8302a89c4e9",
@@ -89,6 +92,8 @@
    "static/promo/v-prep.jpg": "51e311e286b220c468f37773fe96685f8940b2c5cc5349fbb0b331e582beef99",
    "static/promo/v-start.jpg": "48028fb5f60f79d610c1e884e7aec587b57a6e1a95e93d3298646ed3470e6d7f",
    "static/promo/v-ws.jpg": "08b72f21a055d8778401bb2e6c7c44e31daffa9bea79600848c179b1d3a3ed5c",
+   "static/remedial-tpl.js": "e73ed2a138085976a7e96219fb26ac72240f3341d92a2007975a7bd556704a4b",
+   "static/remedial.js": "e6d1f5b791c824ef437e48c66889defd97669d2ceb40f34eda8f037bb04b06e2",
    "static/roster.js": "52739a529aa75a3a87743ac5540d098e9b7f7751ad22f8f1eec77b6f4a814812",
    "static/sheet-engine.js": "9b3cd10ce2ce55971c29e4c1d68100725c778e59b07c04e695d5503957374946",
    "static/style.css": "d0f2bc2400399cb6ec4fd2eb5332746988731aa02c19a07873a64827afc84f5e",
