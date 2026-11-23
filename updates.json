@@ -1,245 +1,246 @@
 {
- "_ملاحظة": "ملف التحديثات لأدوات المعلمين. تقرؤه الأدوات من GitHub عند فتحها، وإن وجدت رقم إصدار أحدث ظهر زر «حدّث الآن». لا تعدّله يدويًا؛ يُبنى مع كل إصدار.",
- "musaed-tahdeer": {
-  "name": "مساعد التحضير الإلكتروني",
-  "number": "2.3.2",
-  "version": "2.3.2",
-  "date": "2026-11-18",
-  "dir": "musaed",
-  "message": "صدر مساعد التحضير الإلكتروني 2.3.2.",
-  "notes": [
-   "نافذة «من أدواتنا»: لكل أداة فيديو شرحها وبوسترها (يُفتح ويُحفظ لإرساله)، وفيديو البدء بالأدوات في أعلاها."
-  ],
-  "download": "",
-  "files": {
-   "icons/apple-touch-icon.png": "b009d879c357f660038d28eb6ed3086e2d6ad1d56579a9585a27d45141a9e044",
-   "icons/favicon-16.png": "b22188ec3bd4e58526a15c756793902d630e0eeea11e312f469c843a3e1fa1af",
-   "icons/favicon-32.png": "0e51a443bce3e9ff263f1c50a3bca5f26ac3fe4a5b9fa99c9efbb31cafdfe469",
-   "icons/icon-192.png": "7ea0468f217e3fb99a07e3958f1068d411614aa57c810ade0551be0d4a5fafba",
-   "icons/icon-512.png": "c6b7dd3ed1cc18adf787d91ac840c3df6528ebdb560fe7a68fd9eeed23ac9a4a",
-   "icons/icon.svg": "d0bc9b627407a33bd90ebc5100659ef4fc19da500db07d303118367065cfe95a",
-   "icons/maskable-192.png": "c50937bda3621d523c81b1354d8e828d51c1a46a0ec5a3cc8a3fd062b10eacaf",
-   "icons/maskable-512.png": "424ff50656ff5d9b911a63d17a10026354e7929533112ea41206b02bb0331f6a",
-   "icons/musaed.ico": "1895a53c6410a135e9bbc9dbe530dfb0ac3d1f835e609620fa745d115339c78c",
-   "index.html": "3f6d2cabcbc7c762ee82e11b9a3eb4d5829b66ab53fe7040f1e05ade0e4e0323",
-   "manifest.webmanifest": "4dfa0d288647a4650bde3a438b417fb26cb8ed9b5de720beb7c2d186115f6d9a",
-   "static/app.js": "6df1cfd17752fba02c62bdf026ebbb8e17cdc8a9e3d4df970d92afa2dbf8aec6",
-   "static/docx-export.js": "54d7f9156a534dcbb56d319eff0ed3b854e1062c180c974ce3a9bbf70764ff0b",
-   "static/jszip.min.js": "acc7e41455a80765b5fd9c7ee1b8078a6d160bbbca455aeae854de65c947d59e",
-   "static/lessons.js": "e8a0749f1ef3a8d8c52fd182970f3ff7e29ab3cefc3758ba94aedc600f56eda1",
-   "static/lint.js": "3f5484604e79444fb0237b8cedef189ef64a7fb72e97ef50fb4c7e19f8fd34a4",
-   "static/lists.js": "4a77183cd8d814a3079ea0e68e5e27ae0f4df0cadc089559cefaa0242743b285",
-   "static/local.js": "a712fd53cca15cc7e5b4038c080781b9638229c5ce09c628bed620d8fd3e6afe",
-   "static/planner.js": "cd0226aee9a4714352b88456c6fbe1db576b8ad44c0f39334d3df3b88d454c50",
-   "static/promo/poster-ex-s.jpg": "72f67c9f59814b97a40ebf6c78e79fa6b28d4fac03f86f101b3746ea08c1e020",
-   "static/promo/poster-ex.jpg": "0d11cce465ceeb2249bd0cb5ec212a7403511e292fe4f03cf46fbc4f875cca0d",
-   "static/promo/poster-prep-s.jpg": "427c568bed6f66988dbb46d25aab861572fecf74aa937f7705df4e1deee29370",
-   "static/promo/poster-prep.jpg": "39d37e5890058ecab5bc936a67a4cd8e13c589a85bfd4247021f656a445cefd3",
-   "static/promo/poster-ws-s.jpg": "b7970321d3b02ebdc2fec99bc5f12474b5ad85589b40ea991a6f6722f53bb23a",
-   "static/promo/poster-ws.jpg": "b51a31ee8065392a736ae0a1f372174a4e818fa6abdd38d9049ed8892626b160",
-   "static/promo/v-ex.jpg": "3114aa7a1a08e6090ea8d6933c132757786d19d10d81ce4848f15e0d3432d542",
-   "static/promo/v-prep.jpg": "51e311e286b220c468f37773fe96685f8940b2c5cc5349fbb0b331e582beef99",
-   "static/promo/v-start.jpg": "48028fb5f60f79d610c1e884e7aec587b57a6e1a95e93d3298646ed3470e6d7f",
-   "static/promo/v-ws.jpg": "08b72f21a055d8778401bb2e6c7c44e31daffa9bea79600848c179b1d3a3ed5c",
-   "static/strategy_bank.js": "eafd9ebafd4dfbd6f59ec5bab58f82e21190f0c9fb8954b776997fa304e81661",
-   "static/style.css": "1ec22d574597d788020ad094359d89f716df256aa991a905484eba6a03aee055",
-   "static/template.js": "0685b2d18f6a06da8cb30282e9396a415568256c8b0fb391dbb0abff5fa068b2",
-   "sw.js": "b4dd78a44b69045e9e0843afdeef8c5ee756a0845d26c7fe0bdb9c328d95db4e"
-  }
- },
- "muead-awraq": {
-  "name": "معد أوراق العمل",
-  "number": "1.9.4",
-  "version": "1.9.4",
-  "date": "2026-11-23",
-  "dir": "awraq",
-  "message": "صدر معد أوراق العمل 1.9.4.",
-  "notes": [
-   "ملفات الطلاب: الأوراق داخل ملف كل طالب مرقّمة: ورقة دعم (1)، (2)، (3)…"
-  ],
-  "download": "",
-  "files": {
-   "icons/apple-touch-icon.png": "1bacac75bce23bd75467a6268c1bf4546173916dc7cbc7fb0b131bce81823765",
-   "icons/awraq.ico": "20a50467f172095f548795a594bfd4be4ace49bf35842080d1a062854b5b1460",
-   "icons/favicon-16.png": "7a4967f90650031e0e7dff437d972564f4a0cd903a8a0a46a0b8a9d0e69cd791",
-   "icons/favicon-32.png": "138b39a402ed6e0398851a18b4a160b247478ac387ca3047f761bd2fa1bfe1a6",
-   "icons/icon-192.png": "a4f7ff4982a16b5092600b40449d76c2859dd483c29a840acb8c9e0ed7b6fcc4",
-   "icons/icon-512.png": "4f9d1c0523ce62e2166896e6602fbb26d511845de1a85f05fe4f7254721f86b3",
-   "icons/icon.svg": "2ee189f7483a7311b306df09b479867536507e10230f034b8840d6e5488fd3ad",
-   "icons/maskable-192.png": "c0ef6dd5bfe9ded35a7364e1b46ff1926a7f92794ab81a5567a88364e291fb23",
-   "icons/maskable-512.png": "ef41c8ee2fd67eb607cc8558082b8a051d4154991ad099bad446098b9a132ac5",
-   "index.html": "48cbfe1c2b540aa9cfc4b71f7ec1d3381037fde8f9deb482707406e063a9c910",
-   "manifest.webmanifest": "ffa7167e3797889adbdcf0c8cd2b6a0aff4701993bef5b91c88f4c607f745017",
-   "static/app.js": "ec2761d9f3a6b3a30be593743ce90f7698550c65fd6949d32ce39a300dda6c0b",
-   "static/awraq.css": "d67283f40ca99d10b6703f74a0df2a082c08572ad85440e7d820e545c50e6795",
-   "static/interview.js": "96c239761a5f5313cf8709391498c6649fe4f1a41973fbffbcb3657088d1bddb",
-   "static/islamic.js": "9c2a85485a3ad36a96fdad3b5abd9601460fdadd717b8aa2010466f5c65c30d6",
-   "static/jszip.min.js": "acc7e41455a80765b5fd9c7ee1b8078a6d160bbbca455aeae854de65c947d59e",
-   "static/lint.js": "cde157085320dacdfdbb205ab6c30922195b8fc1259d040c6824a8302a89c4e9",
-   "static/local.js": "7c5092dd2a312d75ec5bb551ac8fd4221465d006592e58bca4dcda7adc04fab5",
-   "static/ministry-logo.js": "036d4c1a941f7e1e7c679993dedddf49607cca4fb6723ae81c385255da6bdd98",
-   "static/preview.js": "80958bba8c4680d1149b8f2e849fe472a2cf4b53b573c108b9f77abae862b9e4",
-   "static/promo/poster-ex-s.jpg": "72f67c9f59814b97a40ebf6c78e79fa6b28d4fac03f86f101b3746ea08c1e020",
-   "static/promo/poster-ex.jpg": "0d11cce465ceeb2249bd0cb5ec212a7403511e292fe4f03cf46fbc4f875cca0d",
-   "static/promo/poster-prep-s.jpg": "427c568bed6f66988dbb46d25aab861572fecf74aa937f7705df4e1deee29370",
-   "static/promo/poster-prep.jpg": "39d37e5890058ecab5bc936a67a4cd8e13c589a85bfd4247021f656a445cefd3",
-   "static/promo/poster-ws-s.jpg": "b7970321d3b02ebdc2fec99bc5f12474b5ad85589b40ea991a6f6722f53bb23a",
-   "static/promo/poster-ws.jpg": "b51a31ee8065392a736ae0a1f372174a4e818fa6abdd38d9049ed8892626b160",
-   "static/promo/v-ex.jpg": "3114aa7a1a08e6090ea8d6933c132757786d19d10d81ce4848f15e0d3432d542",
-   "static/promo/v-prep.jpg": "51e311e286b220c468f37773fe96685f8940b2c5cc5349fbb0b331e582beef99",
-   "static/promo/v-start.jpg": "48028fb5f60f79d610c1e884e7aec587b57a6e1a95e93d3298646ed3470e6d7f",
-   "static/promo/v-ws.jpg": "08b72f21a055d8778401bb2e6c7c44e31daffa9bea79600848c179b1d3a3ed5c",
-   "static/remedial-tpl.js": "170245d3b4de268fe9207be5533835e6074b8f7d14904aecdcbbab6e1d134fd1",
-   "static/remedial.js": "a476773a8747066033e11a4e84a090f3372f6fbd2b48e613f0653e59cc9dd10c",
-   "static/roster.js": "52739a529aa75a3a87743ac5540d098e9b7f7751ad22f8f1eec77b6f4a814812",
-   "static/sheet-engine.js": "9b3cd10ce2ce55971c29e4c1d68100725c778e59b07c04e695d5503957374946",
-   "static/style.css": "d0f2bc2400399cb6ec4fd2eb5332746988731aa02c19a07873a64827afc84f5e",
-   "static/tools.js": "21a1b50c82eded3d65a416e07f8edc32703537ad66776f067d15ae5f7d099017",
-   "sw.js": "ea461d1666a3a66b5a16f1155aea685fec4dcad288e3034fd2ba4de387e707de",
-   "static/bank.js": "5885e840e9aa3ecb628c29cd8f553f9f34e8d1abaf993b2f3a40cce563cb9f0e"
+  "_ملاحظة": "ملف التحديثات لأدوات المعلمين. تقرؤه الأدوات من GitHub عند فتحها، وإن وجدت رقم إصدار أحدث ظهر زر «حدّث الآن». لا تعدّله يدويًا؛ يُبنى مع كل إصدار.",
+  "musaed-tahdeer": {
+    "name": "مساعد التحضير الإلكتروني",
+    "number": "2.3.2",
+    "version": "2.3.2",
+    "date": "2026-11-18",
+    "dir": "musaed",
+    "message": "صدر مساعد التحضير الإلكتروني 2.3.2.",
+    "notes": [
+      "نافذة «من أدواتنا»: لكل أداة فيديو شرحها وبوسترها (يُفتح ويُحفظ لإرساله)، وفيديو البدء بالأدوات في أعلاها."
+    ],
+    "download": "",
+    "files": {
+      "icons/apple-touch-icon.png": "b009d879c357f660038d28eb6ed3086e2d6ad1d56579a9585a27d45141a9e044",
+      "icons/favicon-16.png": "b22188ec3bd4e58526a15c756793902d630e0eeea11e312f469c843a3e1fa1af",
+      "icons/favicon-32.png": "0e51a443bce3e9ff263f1c50a3bca5f26ac3fe4a5b9fa99c9efbb31cafdfe469",
+      "icons/icon-192.png": "7ea0468f217e3fb99a07e3958f1068d411614aa57c810ade0551be0d4a5fafba",
+      "icons/icon-512.png": "c6b7dd3ed1cc18adf787d91ac840c3df6528ebdb560fe7a68fd9eeed23ac9a4a",
+      "icons/icon.svg": "d0bc9b627407a33bd90ebc5100659ef4fc19da500db07d303118367065cfe95a",
+      "icons/maskable-192.png": "c50937bda3621d523c81b1354d8e828d51c1a46a0ec5a3cc8a3fd062b10eacaf",
+      "icons/maskable-512.png": "424ff50656ff5d9b911a63d17a10026354e7929533112ea41206b02bb0331f6a",
+      "icons/musaed.ico": "1895a53c6410a135e9bbc9dbe530dfb0ac3d1f835e609620fa745d115339c78c",
+      "index.html": "3f6d2cabcbc7c762ee82e11b9a3eb4d5829b66ab53fe7040f1e05ade0e4e0323",
+      "manifest.webmanifest": "4dfa0d288647a4650bde3a438b417fb26cb8ed9b5de720beb7c2d186115f6d9a",
+      "static/app.js": "6df1cfd17752fba02c62bdf026ebbb8e17cdc8a9e3d4df970d92afa2dbf8aec6",
+      "static/docx-export.js": "54d7f9156a534dcbb56d319eff0ed3b854e1062c180c974ce3a9bbf70764ff0b",
+      "static/jszip.min.js": "acc7e41455a80765b5fd9c7ee1b8078a6d160bbbca455aeae854de65c947d59e",
+      "static/lessons.js": "e8a0749f1ef3a8d8c52fd182970f3ff7e29ab3cefc3758ba94aedc600f56eda1",
+      "static/lint.js": "3f5484604e79444fb0237b8cedef189ef64a7fb72e97ef50fb4c7e19f8fd34a4",
+      "static/lists.js": "4a77183cd8d814a3079ea0e68e5e27ae0f4df0cadc089559cefaa0242743b285",
+      "static/local.js": "a712fd53cca15cc7e5b4038c080781b9638229c5ce09c628bed620d8fd3e6afe",
+      "static/planner.js": "cd0226aee9a4714352b88456c6fbe1db576b8ad44c0f39334d3df3b88d454c50",
+      "static/promo/poster-ex-s.jpg": "72f67c9f59814b97a40ebf6c78e79fa6b28d4fac03f86f101b3746ea08c1e020",
+      "static/promo/poster-ex.jpg": "0d11cce465ceeb2249bd0cb5ec212a7403511e292fe4f03cf46fbc4f875cca0d",
+      "static/promo/poster-prep-s.jpg": "427c568bed6f66988dbb46d25aab861572fecf74aa937f7705df4e1deee29370",
+      "static/promo/poster-prep.jpg": "39d37e5890058ecab5bc936a67a4cd8e13c589a85bfd4247021f656a445cefd3",
+      "static/promo/poster-ws-s.jpg": "b7970321d3b02ebdc2fec99bc5f12474b5ad85589b40ea991a6f6722f53bb23a",
+      "static/promo/poster-ws.jpg": "b51a31ee8065392a736ae0a1f372174a4e818fa6abdd38d9049ed8892626b160",
+      "static/promo/v-ex.jpg": "3114aa7a1a08e6090ea8d6933c132757786d19d10d81ce4848f15e0d3432d542",
+      "static/promo/v-prep.jpg": "51e311e286b220c468f37773fe96685f8940b2c5cc5349fbb0b331e582beef99",
+      "static/promo/v-start.jpg": "48028fb5f60f79d610c1e884e7aec587b57a6e1a95e93d3298646ed3470e6d7f",
+      "static/promo/v-ws.jpg": "08b72f21a055d8778401bb2e6c7c44e31daffa9bea79600848c179b1d3a3ed5c",
+      "static/strategy_bank.js": "eafd9ebafd4dfbd6f59ec5bab58f82e21190f0c9fb8954b776997fa304e81661",
+      "static/style.css": "1ec22d574597d788020ad094359d89f716df256aa991a905484eba6a03aee055",
+      "static/template.js": "0685b2d18f6a06da8cb30282e9396a415568256c8b0fb391dbb0abff5fa068b2",
+      "sw.js": "b4dd78a44b69045e9e0843afdeef8c5ee756a0845d26c7fe0bdb9c328d95db4e"
+    }
   },
-  "shared": {
-   "dir": "shared",
-   "files": {
-    "fonts.js": "d3b1411174b16e51a5d06b65e321ca9865ad2cbc640d0703f0f2d4aecbdfe638",
-    "hadith/LICENSE - Open Hadith Data.txt": "4ad58a3a84224e2a00a49d0028d9bf4890d5c7c26a1ddfe97bd1f6f8e149efaa",
-    "hadith/abudawud.js": "2718f3363465f31dbd0dc891fc732c4d653c6c84da18fc5df9236f797770443d",
-    "hadith/bukhari.js": "737f12b33790e9f2db35a6b37d4626a974533541edabe19385ebe2feaa3f31ed",
-    "hadith/ibnmajah.js": "8b4fcd16a32627c22ce45a1adb7975e6dc311159b1f2edc64235f64992d35206",
-    "hadith/muslim.js": "e456727a932527f286d79634d9288d31e506f8b9068f2b86d8a281dd65b9acaa",
-    "hadith/nasai.js": "1ed7c0fea215e63415ab27e1943d143a1776c4765714197eef140d4040604101",
-    "hadith/tirmidhi.js": "5c53fe4d36bee1b14e2cf1ccf4f13aac8f4d23d1a609bbf82a269a6512030da5",
-    "quran-data.js": "fc4cc1b8e23ebe2776a14b3c9626c65020df5545c7bcbbc04647f9bdce62bc7d"
-   },
-   "seeds": {
-    "fonts.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/exam-fonts.js"
+  "muead-awraq": {
+    "name": "معد أوراق العمل",
+    "number": "1.9.5",
+    "version": "1.9.5",
+    "date": "2026-11-23",
+    "dir": "awraq",
+    "message": "صدر معد أوراق العمل 1.9.5.",
+    "notes": [
+      "إجراءات رفع التحصيل: كشيدة في «العلاجيـــة» بالعنوان.",
+      "جدول «فريق العمل المسؤول» لا ينقسم بين صفحتين: «إجراءات الخطة» تبدأ صفحة جديدة والجدول بخط أصغر قليلًا."
     ],
-    "hadith/LICENSE - Open Hadith Data.txt": [
-     "معد الاختبارات المدرسية/البرنامج/static/hadith/LICENSE - Open Hadith Data.txt"
-    ],
-    "hadith/abudawud.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/hadith/abudawud.js"
-    ],
-    "hadith/bukhari.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/hadith/bukhari.js"
-    ],
-    "hadith/ibnmajah.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/hadith/ibnmajah.js"
-    ],
-    "hadith/muslim.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/hadith/muslim.js"
-    ],
-    "hadith/nasai.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/hadith/nasai.js"
-    ],
-    "hadith/tirmidhi.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/hadith/tirmidhi.js"
-    ],
-    "quran-data.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/quran-data.js"
-    ]
-   }
-  }
- },
- "muead-ikhtibarat": {
-  "name": "معد الاختبارات المدرسية",
-  "number": "2.1.12",
-  "version": "2.1.12",
-  "date": "2026-11-18",
-  "dir": "ikhtibar",
-  "message": "صدر معد الاختبارات المدرسية 2.1.12.",
-  "notes": [
-   "نافذة «من أدواتنا»: لكل أداة فيديو شرحها وبوسترها (يُفتح ويُحفظ لإرساله)، وفيديو البدء بالأدوات في أعلاها."
-  ],
-  "download": "",
-  "files": {
-   "fonts/License - KFGQPC HAFS Uthmanic Script.txt": "cac162f4bb0f979d73919c5e39666ddaca90663f11c17bad8bf31632b8111ec0",
-   "fonts/NotoNaskhArabic-Regular.ttf": "6f0a92031367b2f5a2078fe9d24f3433122b61a0bad57c423aad8f3c39aa2e6e",
-   "fonts/OFL - Noto Naskh Arabic.txt": "a7a5a25eb188bf1cd96982030d53e23c33485c69b1044a562254226857ee13af",
-   "fonts/UthmanTN1 Ver10.otf": "db229c0b427bd24bbc2aee0b6bd5629c019cbd1b1e1540672d2bc62bff3e53cd",
-   "fonts/uthmanic_hafs_v22.ttf": "a6e59510dcaf3ec99db49427321a035ed94af555ffc7d27e7f430b5fd5e179f8",
-   "icons/apple-touch-icon.png": "50fdc80743d0c9c49bd36cf9c58efc305cc5fdcc590affb31384c5b884604512",
-   "icons/favicon-16.png": "cc6f1ffe4c14d410527d7c790720c2f919f7f5b8a6a0816a5fb638288d6d83c4",
-   "icons/favicon-32.png": "46e7d11ac932c917df238e703ecffe743302735dca042c7eef1ecb5f71bf342f",
-   "icons/icon-192.png": "81e4049c864c72d86b6c9dab64025bffcd02440557a382a7113b43f7515b9595",
-   "icons/icon-512.png": "064cc7d47f5b7a20a20cfafefc26462d3fed21112da5f527cd2451584533f0f1",
-   "icons/icon.svg": "f22ade16bca54d2c61ea79c573b90cf2427575dad721d77fbc0aac428726ad32",
-   "icons/ikhtibar.ico": "ad9efcb789ca38f0461a63ed7509655d2e9c068fdbab47512806d0fb0cf34a40",
-   "icons/maskable-192.png": "eb02d5bfb759a04bce02966483d221377e152a79fcec42f3d7379af6364b7a79",
-   "icons/maskable-512.png": "2fed1a029a4e8c756a4eb4501ab610d354dd9525bc2a4dbab369be1ba38e48b6",
-   "index.html": "06e9f95b8629a588557a0d6dff9c4cde4c02228bbc9e80418bedcb32497b7d29",
-   "manifest.webmanifest": "f6cc5a7f9d3b6a8285a781db827a7943c30b3b629e33bc0cd443e6a8bcf24727",
-   "static/app.js": "b7a7930d05da24107d7835983bbdffa7117b28cf1dda3ec6d88ed0151ec01e62",
-   "static/awraq.css": "0bc256dd09eebb88c2b0f2317bad4093f8dc3512b116cfe59eee5734884d5351",
-   "static/checker.js": "4e6193fc53b6a3696d1c5440bd809b35d486099919781aedd3ac088843ca7a8c",
-   "static/exam-engine.js": "9d9ffa439f05c40e3abdb9981e866a6617a1c0e7b54388bb9691e6abdad21286",
-   "static/exam-preview.js": "80197c126c07d86aac6c57537c63eee56a13aa63f0f3de57ed333217b04e81bc",
-   "static/exam-template.js": "56dc8ed2809aea3fa0ed0a36232063e5a364e4edabc339810ccbc5e3bfa6f6d7",
-   "static/exam.css": "70b267e9590f2a737f5bde9b3c885c0c9ec3081911e338562961c9837f33683d",
-   "static/importer.js": "2b7840c965cfef23648eaebee3fe8e7bbc5345066439ba999bf1d0283b1aaa2a",
-   "static/jszip.min.js": "acc7e41455a80765b5fd9c7ee1b8078a6d160bbbca455aeae854de65c947d59e",
-   "static/local.js": "3373186f271430f9a1a9067af5a745668dd231f4b38efe47ed6c7772c70cbe73",
-   "static/pdfjs/LICENSE - pdf.js (Apache-2.0).txt": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
-   "static/pdfjs/pdf.min.js": "5b5799e6f8c680663207ac5b42ee14eed2a406fa7af48f50c154f0c0b1566946",
-   "static/pdfjs/pdf.worker.min.js": "feabdf309770ed24bba31a5467836cdc8cf639c705af27d52b585b041bb8527b",
-   "static/promo/poster-ex-s.jpg": "72f67c9f59814b97a40ebf6c78e79fa6b28d4fac03f86f101b3746ea08c1e020",
-   "static/promo/poster-ex.jpg": "0d11cce465ceeb2249bd0cb5ec212a7403511e292fe4f03cf46fbc4f875cca0d",
-   "static/promo/poster-prep-s.jpg": "427c568bed6f66988dbb46d25aab861572fecf74aa937f7705df4e1deee29370",
-   "static/promo/poster-prep.jpg": "39d37e5890058ecab5bc936a67a4cd8e13c589a85bfd4247021f656a445cefd3",
-   "static/promo/poster-ws-s.jpg": "b7970321d3b02ebdc2fec99bc5f12474b5ad85589b40ea991a6f6722f53bb23a",
-   "static/promo/poster-ws.jpg": "b51a31ee8065392a736ae0a1f372174a4e818fa6abdd38d9049ed8892626b160",
-   "static/promo/v-ex.jpg": "3114aa7a1a08e6090ea8d6933c132757786d19d10d81ce4848f15e0d3432d542",
-   "static/promo/v-prep.jpg": "51e311e286b220c468f37773fe96685f8940b2c5cc5349fbb0b331e582beef99",
-   "static/promo/v-start.jpg": "48028fb5f60f79d610c1e884e7aec587b57a6e1a95e93d3298646ed3470e6d7f",
-   "static/promo/v-ws.jpg": "08b72f21a055d8778401bb2e6c7c44e31daffa9bea79600848c179b1d3a3ed5c",
-   "static/spec-words.js": "cc0034d49fef2cc7029d42e99feba9a3224e471c2116edce6a9ab6adec0f1c88",
-   "static/spec.js": "20c64ba9770fff0e18ff3a0993613958292d00a640144ae48cf93479c103afab",
-   "static/style.css": "d0f2bc2400399cb6ec4fd2eb5332746988731aa02c19a07873a64827afc84f5e",
-   "sw.js": "667ff9012814d1ee359a4d95b81038d999bccb44519dfab3e56f478f88b81857"
+    "download": "",
+    "files": {
+      "icons/apple-touch-icon.png": "1bacac75bce23bd75467a6268c1bf4546173916dc7cbc7fb0b131bce81823765",
+      "icons/awraq.ico": "20a50467f172095f548795a594bfd4be4ace49bf35842080d1a062854b5b1460",
+      "icons/favicon-16.png": "7a4967f90650031e0e7dff437d972564f4a0cd903a8a0a46a0b8a9d0e69cd791",
+      "icons/favicon-32.png": "138b39a402ed6e0398851a18b4a160b247478ac387ca3047f761bd2fa1bfe1a6",
+      "icons/icon-192.png": "a4f7ff4982a16b5092600b40449d76c2859dd483c29a840acb8c9e0ed7b6fcc4",
+      "icons/icon-512.png": "4f9d1c0523ce62e2166896e6602fbb26d511845de1a85f05fe4f7254721f86b3",
+      "icons/icon.svg": "2ee189f7483a7311b306df09b479867536507e10230f034b8840d6e5488fd3ad",
+      "icons/maskable-192.png": "c0ef6dd5bfe9ded35a7364e1b46ff1926a7f92794ab81a5567a88364e291fb23",
+      "icons/maskable-512.png": "ef41c8ee2fd67eb607cc8558082b8a051d4154991ad099bad446098b9a132ac5",
+      "index.html": "46658c7b9bb30e70499b71d1a977590ab8a8dd6db51d97cd0c3f86f6e9b8aca5",
+      "manifest.webmanifest": "ffa7167e3797889adbdcf0c8cd2b6a0aff4701993bef5b91c88f4c607f745017",
+      "static/app.js": "ec2761d9f3a6b3a30be593743ce90f7698550c65fd6949d32ce39a300dda6c0b",
+      "static/awraq.css": "d67283f40ca99d10b6703f74a0df2a082c08572ad85440e7d820e545c50e6795",
+      "static/interview.js": "96c239761a5f5313cf8709391498c6649fe4f1a41973fbffbcb3657088d1bddb",
+      "static/islamic.js": "9c2a85485a3ad36a96fdad3b5abd9601460fdadd717b8aa2010466f5c65c30d6",
+      "static/jszip.min.js": "acc7e41455a80765b5fd9c7ee1b8078a6d160bbbca455aeae854de65c947d59e",
+      "static/lint.js": "cde157085320dacdfdbb205ab6c30922195b8fc1259d040c6824a8302a89c4e9",
+      "static/local.js": "7c5092dd2a312d75ec5bb551ac8fd4221465d006592e58bca4dcda7adc04fab5",
+      "static/ministry-logo.js": "036d4c1a941f7e1e7c679993dedddf49607cca4fb6723ae81c385255da6bdd98",
+      "static/preview.js": "80958bba8c4680d1149b8f2e849fe472a2cf4b53b573c108b9f77abae862b9e4",
+      "static/promo/poster-ex-s.jpg": "72f67c9f59814b97a40ebf6c78e79fa6b28d4fac03f86f101b3746ea08c1e020",
+      "static/promo/poster-ex.jpg": "0d11cce465ceeb2249bd0cb5ec212a7403511e292fe4f03cf46fbc4f875cca0d",
+      "static/promo/poster-prep-s.jpg": "427c568bed6f66988dbb46d25aab861572fecf74aa937f7705df4e1deee29370",
+      "static/promo/poster-prep.jpg": "39d37e5890058ecab5bc936a67a4cd8e13c589a85bfd4247021f656a445cefd3",
+      "static/promo/poster-ws-s.jpg": "b7970321d3b02ebdc2fec99bc5f12474b5ad85589b40ea991a6f6722f53bb23a",
+      "static/promo/poster-ws.jpg": "b51a31ee8065392a736ae0a1f372174a4e818fa6abdd38d9049ed8892626b160",
+      "static/promo/v-ex.jpg": "3114aa7a1a08e6090ea8d6933c132757786d19d10d81ce4848f15e0d3432d542",
+      "static/promo/v-prep.jpg": "51e311e286b220c468f37773fe96685f8940b2c5cc5349fbb0b331e582beef99",
+      "static/promo/v-start.jpg": "48028fb5f60f79d610c1e884e7aec587b57a6e1a95e93d3298646ed3470e6d7f",
+      "static/promo/v-ws.jpg": "08b72f21a055d8778401bb2e6c7c44e31daffa9bea79600848c179b1d3a3ed5c",
+      "static/remedial-tpl.js": "ae14d645272d8cf8600bd868023d4387f69dc53e192649a867b37e26dffbac91",
+      "static/remedial.js": "a476773a8747066033e11a4e84a090f3372f6fbd2b48e613f0653e59cc9dd10c",
+      "static/roster.js": "52739a529aa75a3a87743ac5540d098e9b7f7751ad22f8f1eec77b6f4a814812",
+      "static/sheet-engine.js": "9b3cd10ce2ce55971c29e4c1d68100725c778e59b07c04e695d5503957374946",
+      "static/style.css": "d0f2bc2400399cb6ec4fd2eb5332746988731aa02c19a07873a64827afc84f5e",
+      "static/tools.js": "21a1b50c82eded3d65a416e07f8edc32703537ad66776f067d15ae5f7d099017",
+      "sw.js": "ea461d1666a3a66b5a16f1155aea685fec4dcad288e3034fd2ba4de387e707de",
+      "static/bank.js": "5885e840e9aa3ecb628c29cd8f553f9f34e8d1abaf993b2f3a40cce563cb9f0e"
+    },
+    "shared": {
+      "dir": "shared",
+      "files": {
+        "fonts.js": "d3b1411174b16e51a5d06b65e321ca9865ad2cbc640d0703f0f2d4aecbdfe638",
+        "hadith/LICENSE - Open Hadith Data.txt": "4ad58a3a84224e2a00a49d0028d9bf4890d5c7c26a1ddfe97bd1f6f8e149efaa",
+        "hadith/abudawud.js": "2718f3363465f31dbd0dc891fc732c4d653c6c84da18fc5df9236f797770443d",
+        "hadith/bukhari.js": "737f12b33790e9f2db35a6b37d4626a974533541edabe19385ebe2feaa3f31ed",
+        "hadith/ibnmajah.js": "8b4fcd16a32627c22ce45a1adb7975e6dc311159b1f2edc64235f64992d35206",
+        "hadith/muslim.js": "e456727a932527f286d79634d9288d31e506f8b9068f2b86d8a281dd65b9acaa",
+        "hadith/nasai.js": "1ed7c0fea215e63415ab27e1943d143a1776c4765714197eef140d4040604101",
+        "hadith/tirmidhi.js": "5c53fe4d36bee1b14e2cf1ccf4f13aac8f4d23d1a609bbf82a269a6512030da5",
+        "quran-data.js": "fc4cc1b8e23ebe2776a14b3c9626c65020df5545c7bcbbc04647f9bdce62bc7d"
+      },
+      "seeds": {
+        "fonts.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/exam-fonts.js"
+        ],
+        "hadith/LICENSE - Open Hadith Data.txt": [
+          "معد الاختبارات المدرسية/البرنامج/static/hadith/LICENSE - Open Hadith Data.txt"
+        ],
+        "hadith/abudawud.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/hadith/abudawud.js"
+        ],
+        "hadith/bukhari.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/hadith/bukhari.js"
+        ],
+        "hadith/ibnmajah.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/hadith/ibnmajah.js"
+        ],
+        "hadith/muslim.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/hadith/muslim.js"
+        ],
+        "hadith/nasai.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/hadith/nasai.js"
+        ],
+        "hadith/tirmidhi.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/hadith/tirmidhi.js"
+        ],
+        "quran-data.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/quran-data.js"
+        ]
+      }
+    }
   },
-  "shared": {
-   "dir": "shared",
-   "files": {
-    "fonts.js": "d3b1411174b16e51a5d06b65e321ca9865ad2cbc640d0703f0f2d4aecbdfe638",
-    "hadith/LICENSE - Open Hadith Data.txt": "4ad58a3a84224e2a00a49d0028d9bf4890d5c7c26a1ddfe97bd1f6f8e149efaa",
-    "hadith/abudawud.js": "2718f3363465f31dbd0dc891fc732c4d653c6c84da18fc5df9236f797770443d",
-    "hadith/bukhari.js": "737f12b33790e9f2db35a6b37d4626a974533541edabe19385ebe2feaa3f31ed",
-    "hadith/ibnmajah.js": "8b4fcd16a32627c22ce45a1adb7975e6dc311159b1f2edc64235f64992d35206",
-    "hadith/muslim.js": "e456727a932527f286d79634d9288d31e506f8b9068f2b86d8a281dd65b9acaa",
-    "hadith/nasai.js": "1ed7c0fea215e63415ab27e1943d143a1776c4765714197eef140d4040604101",
-    "hadith/tirmidhi.js": "5c53fe4d36bee1b14e2cf1ccf4f13aac8f4d23d1a609bbf82a269a6512030da5",
-    "quran-data.js": "fc4cc1b8e23ebe2776a14b3c9626c65020df5545c7bcbbc04647f9bdce62bc7d"
-   },
-   "seeds": {
-    "fonts.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/exam-fonts.js"
+  "muead-ikhtibarat": {
+    "name": "معد الاختبارات المدرسية",
+    "number": "2.1.12",
+    "version": "2.1.12",
+    "date": "2026-11-18",
+    "dir": "ikhtibar",
+    "message": "صدر معد الاختبارات المدرسية 2.1.12.",
+    "notes": [
+      "نافذة «من أدواتنا»: لكل أداة فيديو شرحها وبوسترها (يُفتح ويُحفظ لإرساله)، وفيديو البدء بالأدوات في أعلاها."
     ],
-    "hadith/LICENSE - Open Hadith Data.txt": [
-     "معد الاختبارات المدرسية/البرنامج/static/hadith/LICENSE - Open Hadith Data.txt"
-    ],
-    "hadith/abudawud.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/hadith/abudawud.js"
-    ],
-    "hadith/bukhari.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/hadith/bukhari.js"
-    ],
-    "hadith/ibnmajah.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/hadith/ibnmajah.js"
-    ],
-    "hadith/muslim.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/hadith/muslim.js"
-    ],
-    "hadith/nasai.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/hadith/nasai.js"
-    ],
-    "hadith/tirmidhi.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/hadith/tirmidhi.js"
-    ],
-    "quran-data.js": [
-     "معد الاختبارات المدرسية/البرنامج/static/quran-data.js"
-    ]
-   }
+    "download": "",
+    "files": {
+      "fonts/License - KFGQPC HAFS Uthmanic Script.txt": "cac162f4bb0f979d73919c5e39666ddaca90663f11c17bad8bf31632b8111ec0",
+      "fonts/NotoNaskhArabic-Regular.ttf": "6f0a92031367b2f5a2078fe9d24f3433122b61a0bad57c423aad8f3c39aa2e6e",
+      "fonts/OFL - Noto Naskh Arabic.txt": "a7a5a25eb188bf1cd96982030d53e23c33485c69b1044a562254226857ee13af",
+      "fonts/UthmanTN1 Ver10.otf": "db229c0b427bd24bbc2aee0b6bd5629c019cbd1b1e1540672d2bc62bff3e53cd",
+      "fonts/uthmanic_hafs_v22.ttf": "a6e59510dcaf3ec99db49427321a035ed94af555ffc7d27e7f430b5fd5e179f8",
+      "icons/apple-touch-icon.png": "50fdc80743d0c9c49bd36cf9c58efc305cc5fdcc590affb31384c5b884604512",
+      "icons/favicon-16.png": "cc6f1ffe4c14d410527d7c790720c2f919f7f5b8a6a0816a5fb638288d6d83c4",
+      "icons/favicon-32.png": "46e7d11ac932c917df238e703ecffe743302735dca042c7eef1ecb5f71bf342f",
+      "icons/icon-192.png": "81e4049c864c72d86b6c9dab64025bffcd02440557a382a7113b43f7515b9595",
+      "icons/icon-512.png": "064cc7d47f5b7a20a20cfafefc26462d3fed21112da5f527cd2451584533f0f1",
+      "icons/icon.svg": "f22ade16bca54d2c61ea79c573b90cf2427575dad721d77fbc0aac428726ad32",
+      "icons/ikhtibar.ico": "ad9efcb789ca38f0461a63ed7509655d2e9c068fdbab47512806d0fb0cf34a40",
+      "icons/maskable-192.png": "eb02d5bfb759a04bce02966483d221377e152a79fcec42f3d7379af6364b7a79",
+      "icons/maskable-512.png": "2fed1a029a4e8c756a4eb4501ab610d354dd9525bc2a4dbab369be1ba38e48b6",
+      "index.html": "06e9f95b8629a588557a0d6dff9c4cde4c02228bbc9e80418bedcb32497b7d29",
+      "manifest.webmanifest": "f6cc5a7f9d3b6a8285a781db827a7943c30b3b629e33bc0cd443e6a8bcf24727",
+      "static/app.js": "b7a7930d05da24107d7835983bbdffa7117b28cf1dda3ec6d88ed0151ec01e62",
+      "static/awraq.css": "0bc256dd09eebb88c2b0f2317bad4093f8dc3512b116cfe59eee5734884d5351",
+      "static/checker.js": "4e6193fc53b6a3696d1c5440bd809b35d486099919781aedd3ac088843ca7a8c",
+      "static/exam-engine.js": "9d9ffa439f05c40e3abdb9981e866a6617a1c0e7b54388bb9691e6abdad21286",
+      "static/exam-preview.js": "80197c126c07d86aac6c57537c63eee56a13aa63f0f3de57ed333217b04e81bc",
+      "static/exam-template.js": "56dc8ed2809aea3fa0ed0a36232063e5a364e4edabc339810ccbc5e3bfa6f6d7",
+      "static/exam.css": "70b267e9590f2a737f5bde9b3c885c0c9ec3081911e338562961c9837f33683d",
+      "static/importer.js": "2b7840c965cfef23648eaebee3fe8e7bbc5345066439ba999bf1d0283b1aaa2a",
+      "static/jszip.min.js": "acc7e41455a80765b5fd9c7ee1b8078a6d160bbbca455aeae854de65c947d59e",
+      "static/local.js": "3373186f271430f9a1a9067af5a745668dd231f4b38efe47ed6c7772c70cbe73",
+      "static/pdfjs/LICENSE - pdf.js (Apache-2.0).txt": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "static/pdfjs/pdf.min.js": "5b5799e6f8c680663207ac5b42ee14eed2a406fa7af48f50c154f0c0b1566946",
+      "static/pdfjs/pdf.worker.min.js": "feabdf309770ed24bba31a5467836cdc8cf639c705af27d52b585b041bb8527b",
+      "static/promo/poster-ex-s.jpg": "72f67c9f59814b97a40ebf6c78e79fa6b28d4fac03f86f101b3746ea08c1e020",
+      "static/promo/poster-ex.jpg": "0d11cce465ceeb2249bd0cb5ec212a7403511e292fe4f03cf46fbc4f875cca0d",
+      "static/promo/poster-prep-s.jpg": "427c568bed6f66988dbb46d25aab861572fecf74aa937f7705df4e1deee29370",
+      "static/promo/poster-prep.jpg": "39d37e5890058ecab5bc936a67a4cd8e13c589a85bfd4247021f656a445cefd3",
+      "static/promo/poster-ws-s.jpg": "b7970321d3b02ebdc2fec99bc5f12474b5ad85589b40ea991a6f6722f53bb23a",
+      "static/promo/poster-ws.jpg": "b51a31ee8065392a736ae0a1f372174a4e818fa6abdd38d9049ed8892626b160",
+      "static/promo/v-ex.jpg": "3114aa7a1a08e6090ea8d6933c132757786d19d10d81ce4848f15e0d3432d542",
+      "static/promo/v-prep.jpg": "51e311e286b220c468f37773fe96685f8940b2c5cc5349fbb0b331e582beef99",
+      "static/promo/v-start.jpg": "48028fb5f60f79d610c1e884e7aec587b57a6e1a95e93d3298646ed3470e6d7f",
+      "static/promo/v-ws.jpg": "08b72f21a055d8778401bb2e6c7c44e31daffa9bea79600848c179b1d3a3ed5c",
+      "static/spec-words.js": "cc0034d49fef2cc7029d42e99feba9a3224e471c2116edce6a9ab6adec0f1c88",
+      "static/spec.js": "20c64ba9770fff0e18ff3a0993613958292d00a640144ae48cf93479c103afab",
+      "static/style.css": "d0f2bc2400399cb6ec4fd2eb5332746988731aa02c19a07873a64827afc84f5e",
+      "sw.js": "667ff9012814d1ee359a4d95b81038d999bccb44519dfab3e56f478f88b81857"
+    },
+    "shared": {
+      "dir": "shared",
+      "files": {
+        "fonts.js": "d3b1411174b16e51a5d06b65e321ca9865ad2cbc640d0703f0f2d4aecbdfe638",
+        "hadith/LICENSE - Open Hadith Data.txt": "4ad58a3a84224e2a00a49d0028d9bf4890d5c7c26a1ddfe97bd1f6f8e149efaa",
+        "hadith/abudawud.js": "2718f3363465f31dbd0dc891fc732c4d653c6c84da18fc5df9236f797770443d",
+        "hadith/bukhari.js": "737f12b33790e9f2db35a6b37d4626a974533541edabe19385ebe2feaa3f31ed",
+        "hadith/ibnmajah.js": "8b4fcd16a32627c22ce45a1adb7975e6dc311159b1f2edc64235f64992d35206",
+        "hadith/muslim.js": "e456727a932527f286d79634d9288d31e506f8b9068f2b86d8a281dd65b9acaa",
+        "hadith/nasai.js": "1ed7c0fea215e63415ab27e1943d143a1776c4765714197eef140d4040604101",
+        "hadith/tirmidhi.js": "5c53fe4d36bee1b14e2cf1ccf4f13aac8f4d23d1a609bbf82a269a6512030da5",
+        "quran-data.js": "fc4cc1b8e23ebe2776a14b3c9626c65020df5545c7bcbbc04647f9bdce62bc7d"
+      },
+      "seeds": {
+        "fonts.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/exam-fonts.js"
+        ],
+        "hadith/LICENSE - Open Hadith Data.txt": [
+          "معد الاختبارات المدرسية/البرنامج/static/hadith/LICENSE - Open Hadith Data.txt"
+        ],
+        "hadith/abudawud.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/hadith/abudawud.js"
+        ],
+        "hadith/bukhari.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/hadith/bukhari.js"
+        ],
+        "hadith/ibnmajah.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/hadith/ibnmajah.js"
+        ],
+        "hadith/muslim.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/hadith/muslim.js"
+        ],
+        "hadith/nasai.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/hadith/nasai.js"
+        ],
+        "hadith/tirmidhi.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/hadith/tirmidhi.js"
+        ],
+        "quran-data.js": [
+          "معد الاختبارات المدرسية/البرنامج/static/quran-data.js"
+        ]
+      }
+    }
   }
- }
 }
