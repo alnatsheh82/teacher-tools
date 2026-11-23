@@ -49,14 +49,16 @@
  },
  "muead-awraq": {
   "name": "معد أوراق العمل",
-  "number": "1.9.2",
-  "version": "1.9.2",
+  "number": "1.9.0",
+  "version": "1.9.0",
   "date": "2026-11-23",
   "dir": "awraq",
-  "message": "صدر معد أوراق العمل 1.9.2.",
+  "message": "صدر معد أوراق العمل 1.9.0.",
   "notes": [
-   "بنك الأوراق: قراءة أدق لأوراق Word (البدائل بلا حروف، رقم السؤال في آخر الجدول، البدائل الطويلة كالآيات، جداول الإجابة، و«السؤال الأول» بعد أول فرع).",
-   "يُؤخذ اسم الدرس والصف من ترويسة الورقة تلقائيًا، مع اختيار الفصل والباب لكل الأوراق مرة واحدة."
+   "«بنك الأوراق»: كل ورقة تصدّرها تُحفظ تحت الصف ← الدرس (والنسخ الجديدة: «المحرمات 2»…)، مع رفع أوراق Word القديمة، وتصدير البنك واستيراده.",
+   "نوع جديد «اختبار وحدة شامل»: تختار الدروس وعدد الأسئلة الموضوعية والمقالية، فتُسحب عشوائيًا من البنك مع زر «استبدال».",
+   "الخطة العلاجية: خطوة «ملفات الطلاب» — ملف Word باسم كل طالب فيه أوراقه ومقابلته، مع الطباعة على الوجهين.",
+   "تحسينات: التقرير الكمي في صفحة واحدة والجدول في المنتصف واسم المعلم في عبارة الشكر؛ الخطة بخط Sakkal Majalla وبالأسود؛ المقابلة: «الصف: العاشر 10/G1-2»."
   ],
   "download": "",
   "files": {
@@ -69,7 +71,7 @@
    "icons/icon.svg": "2ee189f7483a7311b306df09b479867536507e10230f034b8840d6e5488fd3ad",
    "icons/maskable-192.png": "c0ef6dd5bfe9ded35a7364e1b46ff1926a7f92794ab81a5567a88364e291fb23",
    "icons/maskable-512.png": "ef41c8ee2fd67eb607cc8558082b8a051d4154991ad099bad446098b9a132ac5",
-   "index.html": "f1123e0c15dd8b3301816d63050ad7aebdb1e3cd7682c424c215408ce964aa00",
+   "index.html": "df2cff4561be759f826219f26b12060da21da031e0f187d0599e26bbec5620c4",
    "manifest.webmanifest": "ffa7167e3797889adbdcf0c8cd2b6a0aff4701993bef5b91c88f4c607f745017",
    "static/app.js": "ec2761d9f3a6b3a30be593743ce90f7698550c65fd6949d32ce39a300dda6c0b",
    "static/awraq.css": "d67283f40ca99d10b6703f74a0df2a082c08572ad85440e7d820e545c50e6795",
@@ -91,13 +93,13 @@
    "static/promo/v-start.jpg": "48028fb5f60f79d610c1e884e7aec587b57a6e1a95e93d3298646ed3470e6d7f",
    "static/promo/v-ws.jpg": "08b72f21a055d8778401bb2e6c7c44e31daffa9bea79600848c179b1d3a3ed5c",
    "static/remedial-tpl.js": "170245d3b4de268fe9207be5533835e6074b8f7d14904aecdcbbab6e1d134fd1",
-   "static/remedial.js": "33548f9b76af0dbaf766b010226172ebc4bec0e6bbef8e43d1415453d8ac0523",
+   "static/remedial.js": "369c4376837b5acc9e11aab0b45aca36d3a8f0d5f7a2bf0a3038b3f959053d28",
    "static/roster.js": "52739a529aa75a3a87743ac5540d098e9b7f7751ad22f8f1eec77b6f4a814812",
    "static/sheet-engine.js": "9b3cd10ce2ce55971c29e4c1d68100725c778e59b07c04e695d5503957374946",
    "static/style.css": "d0f2bc2400399cb6ec4fd2eb5332746988731aa02c19a07873a64827afc84f5e",
    "static/tools.js": "21a1b50c82eded3d65a416e07f8edc32703537ad66776f067d15ae5f7d099017",
    "sw.js": "ea461d1666a3a66b5a16f1155aea685fec4dcad288e3034fd2ba4de387e707de",
-   "static/bank.js": "9cf116dbf175f16575bd796f6113fdcc37f1afe7d55e2d6ce59f046be49b39a4"
+   "static/bank.js": "aef07c90062e1f366ca9cfe64ed72526ad7bd3ae76cdd319027c478802687f61"
   },
   "shared": {
    "dir": "shared",
