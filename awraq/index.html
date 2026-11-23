@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="static/style.css?v=28">
-<link rel="stylesheet" href="static/awraq.css?v=29">
+<link rel="stylesheet" href="static/awraq.css?v=28c">
 </head>
 <body>
 
@@ -81,10 +81,12 @@
     <div class="field"><span class="field-label">لغة الورقة</span>
       <div class="seg" id="lang_seg"><button type="button" data-v="ar" class="on">العربية</button><button type="button" data-v="en">English</button></div>
     </div>
-    <div class="field w2 kind-field"><span class="field-label">نوع الورقة</span>
-      <div class="seg" id="kind_seg"><button type="button" data-v="worksheet">ورقة عمل</button><button type="button" data-v="support">ورقة دعم</button><button type="button" data-v="enrichment">ورقة إثرائية</button><button type="button" data-v="quiz" class="on">اختبار قصير</button></div>
+    <div class="field"><span class="field-label">نوع الورقة</span>
+      <div class="seg wrap" id="kind_seg"><button type="button" data-v="quiz" class="on">اختبار قصير</button><button type="button" data-v="worksheet">ورقة عمل</button><button type="button" data-v="support">ورقة دعم</button><button type="button" data-v="enrichment">ورقة إثرائية</button></div>
     </div>
-    <label id="grade_wrap">الصف
+    <label>رقم الورقة<input id="number" type="number" min="1" max="99"></label>
+    <label>اسم الدرس<input id="lesson" placeholder="مثال: المادة وتغيراتها"></label>
+    <label>الصف
       <select id="grade">
         <option value="">اختر الصف</option>
         <option>الأول</option><option>الثاني</option><option>الثالث</option><option>الرابع</option>
@@ -92,20 +94,16 @@
         <option>التاسع</option><option>العاشر</option><option>الحادي عشر</option><option>الثاني عشر</option>
       </select>
     </label>
-    <label class="w2" id="lesson_wrap">اسم الدرس في الترويسة<input id="lesson" placeholder="مثال: المادة وتغيراتها"></label>
-    <label>رقم الورقة<input id="number" type="number" min="1" max="99"></label>
     <label>عدد الصفحات
       <select id="pages"><option value="1">صفحة واحدة</option><option value="2">صفحتان</option><option value="3">3 صفحات</option><option value="4">4 صفحات</option><option value="5">5 صفحات</option><option value="6">6 صفحات</option><option value="7">7 صفحات</option><option value="8">8 صفحات</option></select>
     </label>
     <label id="time_wrap">الزمن (بالدقائق)<input id="time_min" type="number" min="1" max="180" placeholder="مثال: 20"></label>
+    <label class="check-line" id="show_time_wrap" hidden><input type="checkbox" id="show_time"> إظهار الزمن في ورقة العمل</label>
+    <label class="check-line" id="grades_wrap" hidden><input type="checkbox" id="grades_on"> إضافة درجات</label>
     <label id="total_wrap">الدرجة الكلية <span class="hint-inline">(وزّعها على الأسئلة، والعدّاد يبين الباقي)</span><input id="total" type="text" inputmode="decimal" placeholder="مثال: 10"></label>
-    <div class="opts-2">
-      <label class="check-line" id="show_time_wrap" hidden><input type="checkbox" id="show_time"> إظهار الزمن في ورقة العمل</label>
-      <label class="check-line" id="grades_wrap" hidden><input type="checkbox" id="grades_on"> إضافة درجات</label>
-      <label class="check-line"><input type="checkbox" id="show_seat"> إضافة رقم الجلوس</label>
-      <label class="check-line" title="نسخة ثانية من الورقة نفسها بترتيب مختلف للفقرات والاختيارات، لمنع الغش بين المتجاورين"><input type="checkbox" id="ab_on"> نموذجان (أ) و(ب)</label>
-      <label class="check-line" title="حجم خط أكبر ومسافات أوسع، يُختار تلقائيًا للصفوف من الأول إلى الثالث"><input type="checkbox" id="big_font"> خط كبير (للصفوف الدنيا)</label>
-    </div>
+    <label class="check-line"><input type="checkbox" id="show_seat"> إضافة رقم الجلوس</label>
+    <label class="check-line" title="حجم خط أكبر ومسافات أوسع، يُختار تلقائيًا للصفوف من الأول إلى الثالث"><input type="checkbox" id="big_font"> خط كبير (للصفوف الدنيا)</label>
+    <label class="check-line" title="نسخة ثانية من الورقة نفسها بترتيب مختلف للفقرات والاختيارات، لمنع الغش بين المتجاورين"><input type="checkbox" id="ab_on"> نموذجان (أ) و(ب)</label>
     <div class="fmt-box">
       <span class="fmt-title">تنسيق الورقة</span>
       <label>التباعد بين الأسئلة
@@ -361,7 +359,7 @@
 
 <script src="static/local.js?v=2026-11-12"></script>
 <script>
-TTLocal.start({ id: 'awraq', app: 'muead-awraq', title: 'معد أوراق العمل', out: 'الأوراق', version: '1.9.6', fallbackName: 'ورقة',
+TTLocal.start({ id: 'awraq', app: 'muead-awraq', title: 'معد أوراق العمل', out: 'الأوراق', version: '1.9.5', fallbackName: 'ورقة',
   store: {
     profile: { key: 'awraq.profile.v1', file: 'الملف الشخصي.json' },
     draft: { key: 'awraq.draft.v1', file: 'المسودة.json' },
@@ -378,10 +376,10 @@ TTLocal.start({ id: 'awraq', app: 'muead-awraq', title: 'معد أوراق ال�
   "static/islamic.js?v=2026-11-12",
   "static/lint.js?v=2026-11-12",
   "static/app.js?v=2026-11-12",
-  "static/interview.js?v=2026-11-23f",
-  "static/bank.js?v=2026-11-23f",
+  "static/interview.js?v=2026-11-23",
+  "static/bank.js?v=2026-11-23e",
   "static/remedial-tpl.js?v=2026-11-23b",
-  "static/remedial.js?v=2026-11-23f"]);
+  "static/remedial.js?v=2026-11-23c"]);
 </script>
 </body>
 </html>
