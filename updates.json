@@ -49,17 +49,14 @@
   },
   "muead-awraq": {
     "name": "معد أوراق العمل",
-    "number": "1.9.6",
-    "version": "1.9.6",
+    "number": "1.9.5",
+    "version": "1.9.5",
     "date": "2026-11-23",
     "dir": "awraq",
-    "message": "صدر معد أوراق العمل 1.9.6.",
+    "message": "صدر معد أوراق العمل 1.9.5.",
     "notes": [
-      "نوع الورقة: الأزرار في سطر واحد: ورقة عمل، ورقة دعم، ورقة إثرائية، اختبار قصير، اختبار وحدة شامل.",
-      "بيانات الورقة: الصف ثم الفصل الدراسي ثم الدرس، وتحتها «اسم الدرس في الترويسة»، والخيارات في عمودين.",
-      "المقابلة الفردية انتقلت إلى «الخطة العلاجية» (الخطوة ٤): زر «بالأسماء» لطلاب الدعم وزر «بدون اسم».",
-      "ملفات الطلاب: زرّا «الدعم» و«الإثراء» مع عدد المختار، والدروس سطرًا سطرًا تحت كل باب مع «اختيار الكل».",
-      "إجراءات رفع التحصيل: كشيدة «العلاجيـــة»، وجدول فريق العمل في صفحة واحدة."
+      "إجراءات رفع التحصيل: كشيدة في «العلاجيـــة» بالعنوان.",
+      "جدول «فريق العمل المسؤول» لا ينقسم بين صفحتين: «إجراءات الخطة» تبدأ صفحة جديدة والجدول بخط أصغر قليلًا."
     ],
     "download": "",
     "files": {
@@ -72,11 +69,11 @@
       "icons/icon.svg": "2ee189f7483a7311b306df09b479867536507e10230f034b8840d6e5488fd3ad",
       "icons/maskable-192.png": "c0ef6dd5bfe9ded35a7364e1b46ff1926a7f92794ab81a5567a88364e291fb23",
       "icons/maskable-512.png": "ef41c8ee2fd67eb607cc8558082b8a051d4154991ad099bad446098b9a132ac5",
-      "index.html": "ab6a484f11b4a2a23cbbe3fe9d56ea2746817d03ed7a966956915f0731b79dc4",
+      "index.html": "46658c7b9bb30e70499b71d1a977590ab8a8dd6db51d97cd0c3f86f6e9b8aca5",
       "manifest.webmanifest": "ffa7167e3797889adbdcf0c8cd2b6a0aff4701993bef5b91c88f4c607f745017",
       "static/app.js": "ec2761d9f3a6b3a30be593743ce90f7698550c65fd6949d32ce39a300dda6c0b",
-      "static/awraq.css": "aa883d95441a08ee9567edafd6e455403d9b8e35cfde0d440bc466f841672363",
-      "static/interview.js": "4e06e51fc6d6ad42818a3d6250c0509fe902ea425f2a5a7e245d171d3234c04f",
+      "static/awraq.css": "d67283f40ca99d10b6703f74a0df2a082c08572ad85440e7d820e545c50e6795",
+      "static/interview.js": "96c239761a5f5313cf8709391498c6649fe4f1a41973fbffbcb3657088d1bddb",
       "static/islamic.js": "9c2a85485a3ad36a96fdad3b5abd9601460fdadd717b8aa2010466f5c65c30d6",
       "static/jszip.min.js": "acc7e41455a80765b5fd9c7ee1b8078a6d160bbbca455aeae854de65c947d59e",
       "static/lint.js": "cde157085320dacdfdbb205ab6c30922195b8fc1259d040c6824a8302a89c4e9",
@@ -94,13 +91,13 @@
       "static/promo/v-start.jpg": "48028fb5f60f79d610c1e884e7aec587b57a6e1a95e93d3298646ed3470e6d7f",
       "static/promo/v-ws.jpg": "08b72f21a055d8778401bb2e6c7c44e31daffa9bea79600848c179b1d3a3ed5c",
       "static/remedial-tpl.js": "ae14d645272d8cf8600bd868023d4387f69dc53e192649a867b37e26dffbac91",
-      "static/remedial.js": "6fcc0174cdb7201cd46e02befae5d6aadac4d4a82172e2beb364b4fd98095e54",
+      "static/remedial.js": "a476773a8747066033e11a4e84a090f3372f6fbd2b48e613f0653e59cc9dd10c",
       "static/roster.js": "52739a529aa75a3a87743ac5540d098e9b7f7751ad22f8f1eec77b6f4a814812",
       "static/sheet-engine.js": "9b3cd10ce2ce55971c29e4c1d68100725c778e59b07c04e695d5503957374946",
       "static/style.css": "d0f2bc2400399cb6ec4fd2eb5332746988731aa02c19a07873a64827afc84f5e",
       "static/tools.js": "21a1b50c82eded3d65a416e07f8edc32703537ad66776f067d15ae5f7d099017",
       "sw.js": "ea461d1666a3a66b5a16f1155aea685fec4dcad288e3034fd2ba4de387e707de",
-      "static/bank.js": "fa2f1e15e72a4e692f31725ad148d3b98ac407c8eb19b6f89933ef855529096d"
+      "static/bank.js": "5885e840e9aa3ecb628c29cd8f553f9f34e8d1abaf993b2f3a40cce563cb9f0e"
     },
     "shared": {
       "dir": "shared",
