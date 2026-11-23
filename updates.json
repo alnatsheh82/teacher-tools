@@ -49,15 +49,13 @@
  },
  "muead-awraq": {
   "name": "معد أوراق العمل",
-  "number": "1.9.3",
-  "version": "1.9.3",
+  "number": "1.9.4",
+  "version": "1.9.4",
   "date": "2026-11-23",
   "dir": "awraq",
-  "message": "صدر معد أوراق العمل 1.9.3.",
+  "message": "صدر معد أوراق العمل 1.9.4.",
   "notes": [
-   "بنك الأوراق: عمود «المجال» (القرآن الكريم، الحديث الشريف، العقيدة الإسلامية، الفقه الإسلامي، السيرة والبحوث الإسلامية، الآداب والأخلاق الإسلامية) والترتيب بحسبه، مع تعديل الباب والمجال لكل درس من القائمة.",
-   "رفع أوراق Word: عمود المجال، و«لكل الأوراق» للفصل والباب والمجال.",
-   "بيانات الورقة: الفصل الدراسي والدرس فقط."
+   "ملفات الطلاب: الأوراق داخل ملف كل طالب مرقّمة: ورقة دعم (1)، (2)، (3)…"
   ],
   "download": "",
   "files": {
@@ -70,7 +68,7 @@
    "icons/icon.svg": "2ee189f7483a7311b306df09b479867536507e10230f034b8840d6e5488fd3ad",
    "icons/maskable-192.png": "c0ef6dd5bfe9ded35a7364e1b46ff1926a7f92794ab81a5567a88364e291fb23",
    "icons/maskable-512.png": "ef41c8ee2fd67eb607cc8558082b8a051d4154991ad099bad446098b9a132ac5",
-   "index.html": "3f56c1aeda5b6d0ba37f91d726ef4c06bc701461634f79d178bcbb6d7c13a7aa",
+   "index.html": "48cbfe1c2b540aa9cfc4b71f7ec1d3381037fde8f9deb482707406e063a9c910",
    "manifest.webmanifest": "ffa7167e3797889adbdcf0c8cd2b6a0aff4701993bef5b91c88f4c607f745017",
    "static/app.js": "ec2761d9f3a6b3a30be593743ce90f7698550c65fd6949d32ce39a300dda6c0b",
    "static/awraq.css": "d67283f40ca99d10b6703f74a0df2a082c08572ad85440e7d820e545c50e6795",
@@ -92,13 +90,13 @@
    "static/promo/v-start.jpg": "48028fb5f60f79d610c1e884e7aec587b57a6e1a95e93d3298646ed3470e6d7f",
    "static/promo/v-ws.jpg": "08b72f21a055d8778401bb2e6c7c44e31daffa9bea79600848c179b1d3a3ed5c",
    "static/remedial-tpl.js": "170245d3b4de268fe9207be5533835e6074b8f7d14904aecdcbbab6e1d134fd1",
-   "static/remedial.js": "33548f9b76af0dbaf766b010226172ebc4bec0e6bbef8e43d1415453d8ac0523",
+   "static/remedial.js": "a476773a8747066033e11a4e84a090f3372f6fbd2b48e613f0653e59cc9dd10c",
    "static/roster.js": "52739a529aa75a3a87743ac5540d098e9b7f7751ad22f8f1eec77b6f4a814812",
    "static/sheet-engine.js": "9b3cd10ce2ce55971c29e4c1d68100725c778e59b07c04e695d5503957374946",
    "static/style.css": "d0f2bc2400399cb6ec4fd2eb5332746988731aa02c19a07873a64827afc84f5e",
    "static/tools.js": "21a1b50c82eded3d65a416e07f8edc32703537ad66776f067d15ae5f7d099017",
    "sw.js": "ea461d1666a3a66b5a16f1155aea685fec4dcad288e3034fd2ba4de387e707de",
-   "static/bank.js": "46eee3ef56f36db8274c0aa40ccf97048ae7702c3a3d7353c2b3d9cff170e5c9"
+   "static/bank.js": "5885e840e9aa3ecb628c29cd8f553f9f34e8d1abaf993b2f3a40cce563cb9f0e"
   },
   "shared": {
    "dir": "shared",
