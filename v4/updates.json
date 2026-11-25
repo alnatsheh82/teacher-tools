@@ -13,7 +13,7 @@
    "صفحة «أدوات المعلمين» داخل كل أداة تفتح أخواتها المثبّتة على جهازك.",
    "الملفات المشتركة (المصحف والأحاديث والخطوط) داخل مجلد كل أداة تحتاجها."
   ],
-  "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/musaed-tahdeer-4.0.0.zip",
+  "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%20%D8%A7%D9%84%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A.zip",
   "files": {
    "icons/apple-touch-icon.png": "b009d879c357f660038d28eb6ed3086e2d6ad1d56579a9585a27d45141a9e044",
    "icons/favicon-16.png": "b22188ec3bd4e58526a15c756793902d630e0eeea11e312f469c843a3e1fa1af",
@@ -64,7 +64,7 @@
    "صفحة «أدوات المعلمين» داخل كل أداة تفتح أخواتها المثبّتة على جهازك.",
    "الملفات المشتركة (المصحف والأحاديث والخطوط) داخل مجلد كل أداة تحتاجها."
   ],
-  "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/muead-awraq-4.0.0.zip",
+  "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/%D9%85%D8%B9%D8%AF%20%D8%A3%D9%88%D8%B1%D8%A7%D9%82%20%D8%A7%D9%84%D8%B9%D9%85%D9%84.zip",
   "files": {
    "icons/apple-touch-icon.png": "1bacac75bce23bd75467a6268c1bf4546173916dc7cbc7fb0b131bce81823765",
    "icons/awraq.ico": "20a50467f172095f548795a594bfd4be4ace49bf35842080d1a062854b5b1460",
@@ -134,7 +134,7 @@
    "صفحة «أدوات المعلمين» داخل كل أداة تفتح أخواتها المثبّتة على جهازك.",
    "الملفات المشتركة (المصحف والأحاديث والخطوط) داخل مجلد كل أداة تحتاجها."
   ],
-  "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/muead-ikhtibarat-4.0.0.zip",
+  "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/%D9%85%D8%B9%D8%AF%20%D8%A7%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AF%D8%B1%D8%B3%D9%8A%D8%A9.zip",
   "files": {
    "fonts/License - KFGQPC HAFS Uthmanic Script.txt": "cac162f4bb0f979d73919c5e39666ddaca90663f11c17bad8bf31632b8111ec0",
    "fonts/NotoNaskhArabic-Regular.ttf": "6f0a92031367b2f5a2078fe9d24f3433122b61a0bad57c423aad8f3c39aa2e6e",

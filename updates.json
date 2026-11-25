@@ -13,7 +13,7 @@
       "عند فتحها اختر مجلد «مساعد التحضير الإلكتروني» الجديد للحفظ، فتنتقل بياناتك تلقائيًا.",
       "انسخ ملفات Word القديمة إلى المجلد الجديد إن أردت، ثم احذف مجلد «أدوات المعلمين» القديم."
     ],
-    "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/musaed-tahdeer-4.0.0.zip"
+    "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%20%D8%A7%D9%84%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A.zip"
   },
   "muead-awraq": {
     "name": "معد أوراق العمل",
@@ -28,7 +28,7 @@
       "عند فتحها اختر مجلد «معد أوراق العمل» الجديد للحفظ، فتنتقل بياناتك تلقائيًا.",
       "انسخ ملفات Word القديمة إلى المجلد الجديد إن أردت، ثم احذف مجلد «أدوات المعلمين» القديم."
     ],
-    "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/muead-awraq-4.0.0.zip"
+    "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/%D9%85%D8%B9%D8%AF%20%D8%A3%D9%88%D8%B1%D8%A7%D9%82%20%D8%A7%D9%84%D8%B9%D9%85%D9%84.zip"
   },
   "muead-ikhtibarat": {
     "name": "معد الاختبارات المدرسية",
@@ -43,6 +43,6 @@
       "عند فتحها اختر مجلد «معد الاختبارات المدرسية» الجديد للحفظ، فتنتقل بياناتك تلقائيًا.",
       "انسخ ملفات Word القديمة إلى المجلد الجديد إن أردت، ثم احذف مجلد «أدوات المعلمين» القديم."
     ],
-    "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/muead-ikhtibarat-4.0.0.zip"
+    "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/%D9%85%D8%B9%D8%AF%20%D8%A7%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AF%D8%B1%D8%B3%D9%8A%D8%A9.zip"
   }
 }

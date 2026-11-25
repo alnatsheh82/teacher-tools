@@ -11,7 +11,7 @@
    "إصلاح ظهور علامات الرسم العثماني عند إدراج آية في خانات الكتابة.",
    "إضافة «تواصل معنا» بالبريد الإلكتروني في نافذة «عن الأداة»، وترتيب سطور الحقوق."
   ],
-  "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/misk-al-khitam-2.6.1.zip",
+  "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/%D9%85%D8%B3%D9%83%20%D8%A7%D9%84%D8%AE%D8%AA%D8%A7%D9%85.zip",
   "files": {
    "app/arcade.js": "57a88f1cc948162e09ce174257428db24a60b18b6c292c19d5392c791b21dc72",
    "app/backup.js": "a342f9047d2645e23078a856df2104ba2d3c1a204831b08e22acaaa41aa393d1",
