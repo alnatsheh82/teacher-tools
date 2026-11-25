@@ -1149,3 +1149,5 @@ button.score-pill:not(.turn):hover{outline:2px dashed var(--primary);outline-off
 .up-bar { background: color-mix(in srgb, #16a34a 14%, var(--card)); border-color: #16a34a; }
 .up-bar strong { color: #15803d; }
 .up-notes { margin: 0; padding-inline-start: 20px; display: grid; gap: 6px; }
+/* الحقول: خط المصحف احتياطًا لعلامات الرسم العثماني حتى لا تظهر مربعات عند إدراج آية */
+textarea,input:not([type]),input[type=text],input[type=search]{font-family:'MiskSym','Cairo','kfgqpc_hafs_uthmanic_script','Amiri',sans-serif}

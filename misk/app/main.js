@@ -1,7 +1,7 @@
 /* مِسك الختام — الشاشات: القائمة الجانبية، أنشطتي، اختيار القالب، المحرّر، العرض، الإعدادات */
 (function () {
   var MK = window.MK, h = MK.h, ar = MK.toArabicDigits;
-  var VERSION = '2.6';
+  var VERSION = '2.6.1';
   var RIGHTS = '© 2026 مِسك الختام — فكرة وتصميم: أ. محمد سعيد النتشة، مدرسة قطر التقنية الثانوية للبنين. جميع الحقوق محفوظة.';
   var GRADES = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس', 'السابع', 'الثامن', 'التاسع', 'العاشر', 'الحادي عشر', 'الثاني عشر'].map(function (g) { return 'الصف ' + g; });
   var TERMS = ['الأول', 'الثاني'];
@@ -787,7 +787,13 @@
       h('p', null, 'أداة مجانية تعمل بلا إنترنت لصنع أنشطة التهيئة والغلق البنائي والختامي وعرضها في الصف.'),
       h('p', { class: 'hint', style: { color: 'var(--muted)' } }, 'الإصدار ' + VERSION),
       h('p', { class: 'hint quran-src' }, 'النص القرآني وخطه من مجمع الملك فهد لطباعة المصحف الشريف (الإصدار 22)، برواية حفص عن عاصم وبالرسم العثماني، ويُستخدم مجانًا دون تعديل.'),
-      h('p', { style: { fontWeight: 700, marginTop: '16px' } }, RIGHTS)));
+      h('div', { class: 'about-contact', style: { margin: '14px auto 0', padding: '10px 16px', borderRadius: '14px', background: 'var(--soft, rgba(0,0,0,.04))', display: 'inline-block' } },
+        h('div', { style: { fontWeight: 700, marginBottom: '4px' } }, 'تواصل معنا'),
+        h('a', { href: 'mailto:m.alnatsheh0701@education.qa', dir: 'ltr', style: { fontWeight: 700, fontSize: '17px', color: 'var(--primary, #8A1538)', direction: 'ltr', unicodeBidi: 'isolate' } }, 'm.alnatsheh0701@education.qa')),
+      h('div', { style: { fontWeight: 700, marginTop: '16px', lineHeight: 1.8 } },
+        h('div', null, '© 2026 مِسك الختام — فكرة وتصميم: أ. محمد سعيد النتشة'),
+        h('div', null, 'مدرسة قطر التقنية الثانوية للبنين'),
+        h('div', null, 'جميع الحقوق محفوظة.'))));
   }
 
   MK.play = play;
