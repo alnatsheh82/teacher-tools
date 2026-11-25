@@ -178,7 +178,9 @@
     return bar;
   };
   // يُستدعى عند فتح الأداة: يضع الشريط في مكانه إن وُجد تحديث
+  var WEB = location.protocol !== 'file:'; // نسخة الإنترنت المثبّتة تتحدّث وحدها
   U.auto = function (slot) {
+    if (WEB) return;
     if (U.done) { var b0 = U.banner(); if (b0) slot.appendChild(b0); return; }
     if (!navigator.onLine) return;
     U.done = true;
@@ -186,6 +188,7 @@
   };
   // زر «تحقق من التحديثات» في الإعدادات
   U.section = function () {
+    if (WEB) return h('p', { class: 'hint' }, 'الإصدار الحالي ' + MK.VERSION + '. يصلك كل إصدار جديد تلقائيًا عند فتح الأداة وأنت متصل بالإنترنت.');
     var out = h('p', { class: 'hint' }, 'الإصدار الحالي ' + MK.VERSION + '. يصل التحديث مستقلًا عن بقية أدوات المعلمين.');
     var btn = h('button', { type: 'button', class: 'btn small soft', style: { alignSelf: 'flex-start' }, onclick: function () {
       btn.disabled = true; out.textContent = 'أبحث عن تحديث…';

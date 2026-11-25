@@ -2,14 +2,14 @@
  "_ملاحظة": "ملف تحديثات مِسك الختام وحده، مستقل عن بقية أدوات المعلمين. يُبنى مع كل إصدار، فلا تعدّله يدويًا.",
  "misk-alkhitam": {
   "name": "مِسك الختام",
-  "number": "2.6.1",
-  "version": "2.6.1",
+  "number": "2.7.0",
+  "version": "2.7.0",
   "date": "2026-11-25",
   "dir": "misk",
-  "message": "صدر مِسك الختام 2.6.1.",
+  "message": "صدر مِسك الختام 2.7.0.",
   "notes": [
-   "إصلاح ظهور علامات الرسم العثماني عند إدراج آية في خانات الكتابة.",
-   "إضافة «تواصل معنا» بالبريد الإلكتروني في نافذة «عن الأداة»، وترتيب سطور الحقوق."
+   "ثبّت مِسك الختام على جهازك من صفحته على الإنترنت بزر «ثبّت»: أيقونة بشعاره على سطح المكتب وفي قائمة «ابدأ»، ويعمل بعدها دون إنترنت ويتحدّث وحده.",
+   "في نسخة الملفات زر «افتح صفحة التثبيت» في الصفحة الرئيسية لمن يريد التثبيت."
   ],
   "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/%D9%85%D8%B3%D9%83%20%D8%A7%D9%84%D8%AE%D8%AA%D8%A7%D9%85.zip",
   "files": {
@@ -21,25 +21,32 @@
    "app/feedback.js": "6a98bdfdeee26ad1fb819c6cb886d2f4d2c865e78bd0c96cdeb8a81ac2839b33",
    "app/fonts.css": "626af3903463a791aca804a3cc102c17dbb488eeb710f427353d77009a57df96",
    "app/helpers.js": "46439eb4bf22fa832a7c7227cb80dbb9a7872227829f9198e66cf53f1776da9a",
+   "app/icon-192.png": "98af25142130e59051aa5e260ccb89921526f6023834d344211e12f0f4ed5960",
    "app/icon-32.png": "81b2fe31419a9bcb6373814be46b173a2703f2c35c9811107da4c0d6c179d19e",
+   "app/icon-512.png": "16fb158150340346cbbe84efa877b539942042193e89f15a0778c8ef22a2f3d2",
+   "app/icon-maskable-512.png": "65fcbaa29900338e97c1ba8c3f14d7c45539cb860a75e1031da7d7d67f94e98d",
    "app/import.js": "1427a01e11e05431fe05c6b876b0be08a73e03d16336894b18280f601ce13e2e",
-   "app/main.js": "c2ddc915456043addceed9ab904ca62e4c7a6d973635219cb409a40f3c19ac4f",
+   "app/install.js": "78fe635a6d59250275cdaf81551de72b6c6603d47a54de629233873e273f6998",
+   "app/main.js": "57c12c90b382f0e8c725677363ec1df86c7d38b5925999d7895b44e714b6adb5",
    "app/misk.ico": "62a4bf0999455a54658e21d198ad7dfbe71d4dcef148fb5861260d961bae26fa",
    "app/rounds-import.js": "801e4756185dec73a1c475ac5b1a5556049a56599f2e19e450e9c34dd9f70414",
    "app/samples.js": "b2b6dc0195f8a3046d8d8e095e2b0f7a1559670300422f3ca97b4ca8358e7259",
    "app/shared/fonts.js": "d3b1411174b16e51a5d06b65e321ca9865ad2cbc640d0703f0f2d4aecbdfe638",
    "app/shared/quran-data.js": "fc4cc1b8e23ebe2776a14b3c9626c65020df5545c7bcbbc04647f9bdce62bc7d",
    "app/storage.js": "e06169c8719612e1e3f9067c5094cb08586fddca1286baa572793db7cade528e",
-   "app/styles.css": "556043d5e8ea0527f986eef9d3d7d1737b95b798f97ecfe6fae541b8de8246d3",
+   "app/styles.css": "129edf666543540bb76c1f3340ed05758db1745bb61f48134b1fa5026376b6a3",
    "app/templates.js": "012a594d2f758cee5f6052dca2592ab548b2cc8c2418e900c0aa4c8923e4ea1a",
    "app/templates2.js": "ac9fe6c8a329117bb0f0a6468d1b7d84ef3128c6cd7cceaee340cf756a7b4fba",
    "app/templates3.js": "0b5326533cacc0ddbacba0f19d593d221fc3f7fa376b584f60d6e2050a73d154",
-   "app/updater.js": "d58af8d8e6eb340230a0121b852140af7f54d2c601219ce753e9eebf670a6d30",
+   "app/updater.js": "a572c9c42d3778d43fce2a41030ffc12f80c044caacb7d1180310948ddf744d3",
    "app/wordwall.js": "19eb968bdffb775ab9941225b5c48f5380ef6afc8afe4c62a3a3db4f86c48e33",
    "app/نماذج/نموذج أسئلة لوحة التحديات.docx": "f0abf7ad4bf44ff5a6598f583c53347b87d41d51f5661ffeeaad9deab19ad1a1",
    "app/نماذج/نموذج أسئلة لوحة التحديات.pptx": "aec3f554f1658ecea5a23ce16c09d44f99f3a70232e10e8a5d085d1189f7ebc2",
+   "index.html": "9b28790b94ea1ad887eda9e96c7e8194f5395ed9b8802337f6053d4ed9571e7d",
+   "manifest.webmanifest": "526b012817aa3be99b278b273658d5e565c077d0e77f441111ae139a5f671c7f",
+   "sw.js": "1f220f46da60f3485883f56c231c747cfc1f00e3d809cd0777cd97ea8143e1b6",
    "أدوات المعلمين.html": "b4b36b723279ff07390f77fcac0d313a6a300067bdfb043e7db1107801b5a55f",
-   "ابدأ.html": "002dd4054e96a109b7b33a6d683fa7d34d7b09a12fc991500d14445601d3b0f1"
+   "ابدأ.html": "9b28790b94ea1ad887eda9e96c7e8194f5395ed9b8802337f6053d4ed9571e7d"
   },
   "from": {
    "app/shared/quran-data.js": "shared/quran-data.js"

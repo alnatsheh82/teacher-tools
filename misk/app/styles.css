@@ -1151,3 +1151,9 @@ button.score-pill:not(.turn):hover{outline:2px dashed var(--primary);outline-off
 .up-notes { margin: 0; padding-inline-start: 20px; display: grid; gap: 6px; }
 /* الحقول: خط المصحف احتياطًا لعلامات الرسم العثماني حتى لا تظهر مربعات عند إدراج آية */
 textarea,input:not([type]),input[type=text],input[type=search]{font-family:'MiskSym','Cairo','kfgqpc_hafs_uthmanic_script','Amiri',sans-serif}
+/* شريط التثبيت على الجهاز */
+.notice.install-bar{background:var(--primary);color:var(--primary-ink);border-color:var(--primary-dark);padding:14px 18px;font-size:1.05em}
+.notice.install-bar>svg{stroke:var(--gold)}
+.notice.install-bar .btn:not(.ghost) svg{stroke:var(--ink)}
+.notice.install-bar .btn:not(.ghost){background:var(--gold);color:var(--ink);font-size:1.05em;padding:10px 22px}
+.notice.install-bar .btn.ghost{color:var(--primary-ink);border-color:currentColor}

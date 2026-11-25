@@ -1,7 +1,7 @@
 /* مِسك الختام — الشاشات: القائمة الجانبية، أنشطتي، اختيار القالب، المحرّر، العرض، الإعدادات */
 (function () {
   var MK = window.MK, h = MK.h, ar = MK.toArabicDigits;
-  var VERSION = '2.6.1';
+  var VERSION = '2.7.0';
   var RIGHTS = '© 2026 مِسك الختام — فكرة وتصميم: أ. محمد سعيد النتشة، مدرسة قطر التقنية الثانوية للبنين. جميع الحقوق محفوظة.';
   var GRADES = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس', 'السابع', 'الثامن', 'التاسع', 'العاشر', 'الحادي عشر', 'الثاني عشر'].map(function (g) { return 'الصف ' + g; });
   var TERMS = ['الأول', 'الثاني'];
@@ -67,6 +67,7 @@
       MK.logo(120, { face: document.body.getAttribute('data-theme') === 'fun' }),
       h('div', { class: 'txt' }, h('h1', null, 'مِسك الختام'), h('p', null, MK.DESC),
         (P.school || P.teacher) ? h('div', { class: 'home-school' }, P.logo ? h('img', { src: P.logo, alt: '' }) : null, h('span', null, [P.teacher, P.school].filter(Boolean).join(' — '))) : null)));
+    var inSlot = h('div'); m.appendChild(inSlot); if (MK.install) MK.install.place(inSlot);
     var note = folderLine(); if (note) m.appendChild(note);
     var upSlot = h('div'); m.appendChild(upSlot); MK.updater.auto(upSlot);
     var bkSlot = h('div'); m.appendChild(bkSlot);
@@ -217,7 +218,7 @@
       h('span', null, 'اسمح للأداة بفتح مجلد «', h('strong', null, S.folderName), '» لعرض أنشطتك.'), h('span', { class: 'spacer' }),
       h('button', { type: 'button', class: 'btn small', onclick: function () { S.reconnect().then(MK.loadClasses).then(showActs).catch(function () { MK.toast('لم يُمنح الإذن'); }); } }, 'اسمح بالوصول'));
     if (!S.supported) return h('div', { class: 'notice' }, MK.icon('info'), 'متصفحك لا يدعم الحفظ في مجلد، فتُحفظ الأنشطة داخل المتصفح.');
-    return h('div', { class: 'notice' }, MK.icon('folder'), h('span', null, 'اختر مكان حفظ ملفاتك: مجلد «مسك الختام» في «المستندات». إلى ذلك الحين تُحفظ الأنشطة داخل المتصفح.'), h('span', { class: 'spacer' }),
+    return h('div', { class: 'notice' }, MK.icon('folder'), h('span', null, location.protocol === 'file:' ? 'اختر مكان حفظ ملفاتك: مجلد «مسك الختام» في «المستندات». إلى ذلك الحين تُحفظ الأنشطة داخل المتصفح.' : 'اختر مجلدًا لحفظ أنشطتك على جهازك، مثل «مسك الختام» في «المستندات» (أنشئه من نافذة الاختيار إن لم يكن موجودًا). إلى ذلك الحين تُحفظ الأنشطة داخل المتصفح.'), h('span', { class: 'spacer' }),
       h('button', { type: 'button', class: 'btn small', onclick: pickFolder }, 'اختر المجلد'));
   }
   function pickFolder() {
