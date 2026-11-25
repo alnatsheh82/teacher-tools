@@ -4,7 +4,7 @@
 كل ما يكتبه المعلم وأسماء طلابه يُحفظ على جهازه فقط، ولا يُرسَل شيء منه عبر الإنترنت.
 
 ## التحميل (الإصدار 4.0.0)
-من صفحة [الإصدارات](https://github.com/alnatsheh82/teacher-tools/releases/tag/v4.0.0):
+من مجلد [downloads](https://github.com/alnatsheh82/teacher-tools/tree/main/downloads) (افتح الملف ثم اضغط «Download raw file»):
 
 | الأداة | الملف |
 |---|---|

@@ -18,7 +18,7 @@
    "المطابقة: يتّسع بنك الكلمات للشاشة مهما كثرت الأزواج.",
    "صفحة «أدوات المعلمين» داخل الأداة تفتح أخواتها المثبّتة."
   ],
-  "download": "https://github.com/alnatsheh82/misk-al-khitam",
+  "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/misk-al-khitam-2.6.zip",
   "files": {
    "app/arcade.js": "57a88f1cc948162e09ce174257428db24a60b18b6c292c19d5392c791b21dc72",
    "app/backup.js": "a342f9047d2645e23078a856df2104ba2d3c1a204831b08e22acaaa41aa393d1",
