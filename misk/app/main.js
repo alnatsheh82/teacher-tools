@@ -1,7 +1,7 @@
 /* مِسك الختام — الشاشات: القائمة الجانبية، أنشطتي، اختيار القالب، المحرّر، العرض، الإعدادات */
 (function () {
   var MK = window.MK, h = MK.h, ar = MK.toArabicDigits;
-  var VERSION = '2.4';
+  var VERSION = '2.5';
   var RIGHTS = '© 2026 مِسك الختام — فكرة وتصميم: أ. محمد سعيد النتشة، مدرسة قطر التقنية الثانوية للبنين. جميع الحقوق محفوظة.';
   var GRADES = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس', 'السابع', 'الثامن', 'التاسع', 'العاشر', 'الحادي عشر', 'الثاني عشر'].map(function (g) { return 'الصف ' + g; });
   var TERMS = ['الأول', 'الثاني'];
@@ -216,7 +216,7 @@
       h('span', null, 'اسمح للأداة بفتح مجلد «', h('strong', null, S.folderName), '» لعرض أنشطتك.'), h('span', { class: 'spacer' }),
       h('button', { type: 'button', class: 'btn small', onclick: function () { S.reconnect().then(MK.loadClasses).then(showActs).catch(function () { MK.toast('لم يُمنح الإذن'); }); } }, 'اسمح بالوصول'));
     if (!S.supported) return h('div', { class: 'notice' }, MK.icon('info'), 'متصفحك لا يدعم الحفظ في مجلد، فتُحفظ الأنشطة داخل المتصفح.');
-    return h('div', { class: 'notice' }, MK.icon('folder'), h('span', null, 'لم يُربط مجلد «مسك الختام» بعد، فتُحفظ الأنشطة داخل المتصفح.'), h('span', { class: 'spacer' }),
+    return h('div', { class: 'notice' }, MK.icon('folder'), h('span', null, 'اختر مكان حفظ ملفاتك: مجلد «أدوات المعلمين» في «المستندات». إلى ذلك الحين تُحفظ الأنشطة داخل المتصفح.'), h('span', { class: 'spacer' }),
       h('button', { type: 'button', class: 'btn small', onclick: pickFolder }, 'اختر المجلد'));
   }
   // بيانات في مجلد قديم: انقلها إلى «مسك الختام/البيانات» ضمن أدوات المعلمين
@@ -225,7 +225,7 @@
     if (!S.isLegacy || !S.isLegacy()) return null;
     try { if (localStorage.getItem('misk.legacy.later')) return null; } catch (e) { }
     var bar = h('div', { class: 'notice' }, MK.icon('folder'),
-      h('span', null, 'أنشطتك في مجلد «', h('strong', null, S.folderName), '». انقلها إلى مجلد «البيانات» داخل «أدوات المعلمين ← مسك الختام» ليكون كل شيء في مكانه.'),
+      h('span', null, 'أنشطتك في مجلد «', h('strong', null, S.folderName), '». انقلها إلى «أدوات المعلمين ← مسك الختام ← البيانات» ليكون كل شيء في مكانه.'),
       h('span', { class: 'spacer' }),
       h('button', { type: 'button', class: 'btn small', onclick: moveFamily }, 'انقلها الآن'),
       h('button', { type: 'button', class: 'btn small ghost', onclick: function () { try { localStorage.setItem('misk.legacy.later', '1'); } catch (e) { } bar.remove(); } }, 'لاحقًا'));
@@ -237,7 +237,7 @@
       MK.loadClasses().then(goHome, goHome);
     }).catch(function (e) {
       if (e && e.name === 'AbortError') return;
-      MK.toast(e && (e.name === 'NotFamily' || e.name === 'PickedProgram') ? 'اختر مجلد «مسك الختام» الذي فيه «البرنامج» و«البيانات»' : 'تعذّر النقل');
+      MK.toast(e && (e.name === 'NotFamily' || e.name === 'PickedProgram') ? 'اختر مجلد «أدوات المعلمين» في «المستندات»' : 'تعذّر النقل');
     });
   }
   MK.moveFamily = moveFamily;
@@ -246,7 +246,7 @@
       MK.toast(n ? 'رُبط المجلد ونُقل إليه ' + ar(n) + ' نشاط' : 'رُبط المجلد، وستُحفظ أنشطتك فيه');
       MK.loadClasses().then(goHome, goHome);
     }).catch(function (e) {
-      if (e && e.name === 'PickedProgram') MK.toast('اختر مجلد «مسك الختام» نفسه، لا مجلد «البرنامج» الذي داخله');
+      if (e && e.name === 'PickedProgram') MK.toast('اختر مجلد «أدوات المعلمين»، لا مجلد «البرنامج»');
       else if (e && e.name !== 'AbortError') MK.toast('تعذّر ربط المجلد');
     });
   }
@@ -778,9 +778,9 @@
     if (!S.supported) folderBox.appendChild(h('p', { class: 'hint' }, 'هذا المتصفح لا يدعم الحفظ في مجلد. استخدم كروم أو إيدج.'));
     else {
       folderBox.appendChild(h('p', null, S.mode === 'local' ? 'الأنشطة محفوظة داخل المتصفح.' : 'المجلد الحالي: ', S.folderName ? h('strong', null, S.folderName) : null));
-      folderBox.appendChild(h('p', { class: 'hint' }, 'المكان المقترح: المستندات ← أدوات المعلمين ← مسك الختام. تُحفظ الأنشطة في «البيانات»، وملفات الأداة في «البرنامج».'));
+      folderBox.appendChild(h('p', { class: 'hint' }, 'اختر مجلد «أدوات المعلمين» في «المستندات» (المجلد نفسه الذي اخترته في الأدوات الأخرى). تُحفظ أنشطتك في «مسك الختام ← البيانات».'));
       folderBox.appendChild(h('div', { style: { display: 'flex', gap: '8px', flexWrap: 'wrap' } },
-        h('button', { type: 'button', class: 'btn small', onclick: function () { close(); pickFolder(); } }, MK.icon('folder'), S.mode === 'local' ? 'اختر مجلد «مسك الختام»' : 'غيّر المجلد'),
+        h('button', { type: 'button', class: 'btn small', onclick: function () { close(); pickFolder(); } }, MK.icon('folder'), S.mode === 'local' ? 'اختر مجلد «أدوات المعلمين»' : 'غيّر المجلد'),
         S.isLegacy() ? h('button', { type: 'button', class: 'btn small soft', onclick: function () { close(); moveFamily(); } }, 'انقلها إلى «البيانات»') : null,
         S.mode !== 'local' ? h('button', { type: 'button', class: 'btn small ghost', onclick: function () { S.forgetFolder().then(MK.loadClasses).then(function () { close(); MK.toast('فُصل المجلد، والأنشطة فيه لم تُحذف'); goHome(); }); } }, 'افصل المجلد') : null));
     }

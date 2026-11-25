@@ -27,6 +27,7 @@
   function localAll() { try { return JSON.parse(localStorage.getItem(LKEY) || '{}'); } catch (e) { return {}; } }
   function localPut(map) { localStorage.setItem(LKEY, JSON.stringify(map)); }
 
+  var BASE = 'أدوات المعلمين';
   var S = {
     mode: 'local', // local | folder | needs-permission
     folderName: '',
@@ -38,10 +39,42 @@
   }
   function fileNameFor(act) { return safeName(act.title) + ' — ' + act.id + '.misk.json'; }
 
+  // مجلد «أدوات المعلمين» الذي اختاره المعلم في الأدوات الأخرى (للقراءة فقط، لا نكتب في قاعدتها)
+  function familyBase() {
+    return new Promise(function (res) {
+      try {
+        var r = indexedDB.open('teacher-tools');
+        r.onupgradeneeded = function () { r.transaction.abort(); }; // غير موجودة: لا ننشئها
+        r.onerror = function () { res(null); };
+        r.onsuccess = function () {
+          var db = r.result;
+          try {
+            var q = db.transaction('kv', 'readonly').objectStore('kv').get('base');
+            q.onsuccess = function () { db.close(); res(q.result && q.result.name === BASE ? q.result : null); };
+            q.onerror = function () { db.close(); res(null); };
+          } catch (e) { db.close(); res(null); }
+        };
+      } catch (e) { res(null); }
+    });
+  }
+  S.familyBase = familyBase;
+  var pendingBase = null;
+  function adopt(r) {
+    dirHandle = r.data; S.folderName = r.data.name; S.mode = 'folder'; pendingBase = null;
+    return idbSet('dir', r.data).then(function () { if (r.prog) return idbSet('prog', r.prog); })
+      .then(function () { return S.migrateLocal(); });
+  }
   S.init = function () {
     if (!S.supported) { S.mode = 'local'; return Promise.resolve(S.mode); }
     return idbGet('dir').then(function (hd) {
-      if (!hd) { S.mode = 'local'; return S.mode; }
+      if (!hd) return S.familyBase().then(function (b) {
+        if (!b) { S.mode = 'local'; return S.mode; }
+        // اختار المعلم «أدوات المعلمين» في أداة أخرى: نستعمله دون أن نسأله مرة ثانية
+        return b.queryPermission({ mode: 'readwrite' }).then(function (p) {
+          if (p === 'granted') return S.resolveFamily(b).then(adopt).then(function () { return S.mode; });
+          pendingBase = b; S.folderName = BASE; S.mode = 'needs-permission'; return S.mode;
+        });
+      });
       dirHandle = hd; S.folderName = hd.name;
       return hd.queryPermission({ mode: 'readwrite' }).then(function (p) {
         S.mode = p === 'granted' ? 'folder' : 'needs-permission';
@@ -58,7 +91,7 @@
     var out = { data: hd, prog: null };
     if (hd.name === DATA) return Promise.resolve(out);
     if (hd.name === PROG) return Promise.reject({ name: 'PickedProgram' });
-    return sub(hd, TOOL).then(function (t) { return t || hd; }).then(function (root) {
+    return sub(hd, TOOL, hd.name === BASE).then(function (t) { return t || hd; }).then(function (root) {
       return sub(root, PROG).then(function (pg) {
         if (!pg && root === hd && hd.name !== TOOL) return out; // مجلد عادي: يُستعمل كما هو
         out.prog = pg;
@@ -67,12 +100,7 @@
     });
   };
   S.chooseFolder = function () {
-    return window.showDirectoryPicker({ id: 'misk-activities', mode: 'readwrite' }).then(S.resolveFamily).then(function (r) {
-      var hd = r.data;
-      dirHandle = hd; S.folderName = hd.name; S.mode = 'folder';
-      return idbSet('dir', hd).then(function () { if (r.prog) return idbSet('prog', r.prog); })
-        .then(function () { return S.migrateLocal(); });
-    });
+    return window.showDirectoryPicker({ id: 'misk-activities', mode: 'readwrite' }).then(S.resolveFamily).then(adopt);
   };
   S.progHandle = function () { return idbGet('prog').catch(function () { return null; }); };
   S.setProgHandle = function (hd) { return idbSet('prog', hd); };
@@ -96,7 +124,11 @@
   }
   S.moveToFamily = function () {
     var src = dirHandle;
-    return window.showDirectoryPicker({ id: 'misk-family', mode: 'readwrite' }).then(S.resolveFamily).then(function (r) {
+    var pick = function () { return window.showDirectoryPicker({ id: 'misk-family', mode: 'readwrite' }); };
+    return S.familyBase().then(function (b) {
+      if (!b) return pick();
+      return b.requestPermission({ mode: 'readwrite' }).then(function (p) { return p === 'granted' ? b : pick(); });
+    }).then(S.resolveFamily).then(function (r) {
       if (r.data.name !== DATA) throw { name: 'NotFamily' };
       return (src && src.name !== DATA ? copyDir(src, r.data) : Promise.resolve()).then(function () {
         dirHandle = r.data; S.folderName = DATA; S.mode = 'folder';
@@ -106,6 +138,10 @@
     });
   };
   S.reconnect = function () {
+    if (pendingBase) return pendingBase.requestPermission({ mode: 'readwrite' }).then(function (p) {
+      if (p !== 'granted') throw { name: 'Denied' };
+      return S.resolveFamily(pendingBase).then(adopt);
+    });
     if (!dirHandle) return S.chooseFolder();
     return dirHandle.requestPermission({ mode: 'readwrite' }).then(function (p) {
       S.mode = p === 'granted' ? 'folder' : 'needs-permission';

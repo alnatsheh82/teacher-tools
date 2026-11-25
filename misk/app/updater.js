@@ -44,7 +44,7 @@
       var close = MK.modal('اختر مجلد البرنامج',
         h('div', null,
           h('p', null, 'يحتاج التحديث إلى إذن الكتابة في مجلد البرنامج مرة واحدة.'),
-          h('p', null, 'اختر مجلد «', h('strong', null, 'مسك الختام'), '» (أو «البرنامج» الذي فيه ملف ابدأ.html)، ثم اضغط «السماح».')),
+          h('p', null, 'اختر مجلد «', h('strong', null, 'أدوات المعلمين'), '» في «المستندات»، ثم اضغط «السماح».')),
         [{ label: 'اختر المجلد', onClick: function () {
           window.showDirectoryPicker({ id: 'misk-program', mode: 'readwrite' }).then(function (hd) {
             return looksLikeProgram(hd).then(function (ok) {
@@ -62,6 +62,17 @@
   function programDir() {
     if (typeof window.showDirectoryPicker !== 'function') return Promise.reject({ name: 'NoFS' });
     return MK.store.progHandle().then(function (p) {
+      if (p) return p;
+      // مجلد «أدوات المعلمين» المختار في الأدوات الأخرى
+      return MK.store.familyBase().then(function (b) {
+        if (!b) return null;
+        return b.requestPermission({ mode: 'readwrite' }).then(function (perm) {
+          if (perm !== 'granted') return null;
+          return b.getDirectoryHandle('مسك الختام').then(function (t) { return t.getDirectoryHandle('البرنامج'); })
+            .then(function (pg) { MK.store.setProgHandle(pg); return pg; }).catch(function () { return null; });
+        });
+      });
+    }).then(function (p) {
       if (!p) return askProgram();
       return p.requestPermission({ mode: 'readwrite' }).then(function (perm) {
         if (perm !== 'granted') return askProgram();
