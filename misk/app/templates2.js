@@ -228,6 +228,19 @@
   };
 
   // ====== ٢) المطابقة ======
+  // إذا لم يتسع المحتوى للشاشة (أسطر كثيرة أو عرض صغير) نصغّره درجة أو درجتين حتى لا يختفي بنك الكلمات
+  function fitBody(body) {
+    function over() { return body.scrollHeight > body.clientHeight + 2; }
+    function run() {
+      body.classList.remove('fit1', 'fit2');
+      if (over()) { body.classList.add('fit1'); if (over()) { body.classList.remove('fit1'); body.classList.add('fit2'); } }
+    }
+    requestAnimationFrame(function () { requestAnimationFrame(run); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+    var onR = function () { if (!body.isConnected) return window.removeEventListener('resize', onR); run(); };
+    window.addEventListener('resize', onR);
+  }
+  MK.fitBody = fitBody;
   var match = {
     id: 'match', name: 'المطابقة', icon: 'swap', teamsOk: true, timerOk: false,
     desc: 'يسحب الطالب كل تعريف إلى مصطلحه المناسب.',
@@ -268,6 +281,7 @@
         var pool = h('div', { class: 'pool' });
         body.appendChild(grid); body.appendChild(pool);
         var pl = placer({ slots: slots, bank: pairs.map(function (p) { return { text: p.b }; }), poolEl: pool, chipClass: 'wide' });
+        fitBody(body);
         var checkB = h('button', {
           type: 'button', class: 'btn big', onclick: function () {
             var r = pl.check(); if (!r) return;

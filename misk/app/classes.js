@@ -103,6 +103,9 @@
   function num(x) { return parseFloat(String(x).replace('%', '').replace(/[٠-٩]/g, function (d) { return '٠١٢٣٤٥٦٧٨٩'.indexOf(d); })); }
   function parseRoster(rows) {
     var out = [], hdr = null, ci = {}, levelFrom = '', scoreRows = [];
+    // إن كان في الملف عمود «اسم الطالب» في أي ورقة، فلا نأخذ إلا الصفوف التي تحت هذا العنوان،
+    // فلا تدخل العناوين ولا أوراق الإعدادات وقوائم المعلمين أسماءً للطلاب
+    var hasHeader = rows.some(function (r) { return r.some(function (x) { return H_NAME.test(norm(x)); }); });
     rows.forEach(function (r) {
       if (!r.length) { hdr = null; return; }
       var cells = r.map(norm);
@@ -113,12 +116,14 @@
         return;
       }
       if (!hdr) {
+        if (hasHeader) return;
         var c0 = r.findIndex(function (x) { return x && /[A-Za-zء-ي]/.test(x) && x.length > 3; });
         if (c0 < 0) return;
         ci = { name: c0, sec: -1, lv: -1, sc: -1 }; hdr = 'none';
       }
       var nm = (r[ci.name] || '').trim();
       if (!nm || nm.length > 60 || !/[A-Za-zء-ي]/.test(nm)) return;
+      if (hdr === 'none' && (/[:|：]/.test(nm) || nm.split(/\s+/).length > 6)) return; // عنوان أو جملة، لا اسم
       var st = { name: nm, section: ci.sec >= 0 ? (r[ci.sec] || '').trim() : '', level: ci.lv >= 0 ? levelOf(r[ci.lv]) : '' };
       if (st.level) levelFrom = 'عمود المستوى';
       else if (ci.sc >= 0) { var n = num(r[ci.sc]); if (!isNaN(n)) scoreRows.push({ st: st, v: n }); }

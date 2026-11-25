@@ -3,6 +3,9 @@
   var MK = window.MK, h = MK.h, ar = MK.toArabicDigits;
 
   // ---------- قراءة ملف Word ----------
+  // حد المحتوى بعد فك الضغط (لكل جزء من الملف): يحمي المتصفح من الملفات المضخَّمة
+  var MAX_UNZIP = 40 * 1048576;
+  var BIG = 'محتوى الملف بعد فكّه أكبر من المسموح (40 م.ب). قسّم الملف أو احذف منه الصور الكبيرة.';
   function unzipEntry(buf, name) {
     var dv = new DataView(buf), eocd = -1;
     for (var i = buf.byteLength - 22; i >= Math.max(0, buf.byteLength - 65557); i--) { if (dv.getUint32(i, true) === 0x06054b50) { eocd = i; break; } }
@@ -16,9 +19,26 @@
       if (fname === name) {
         var start = lho + 30 + dv.getUint16(lho + 26, true) + dv.getUint16(lho + 28, true);
         var data = new Uint8Array(buf, start, csize);
+        var usize = dv.getUint32(p + 24, true);
+        if (usize > MAX_UNZIP || (method === 0 && csize > MAX_UNZIP)) return Promise.reject(BIG);
         if (method === 0) return Promise.resolve(dec.decode(data));
-        var ds = new DecompressionStream('deflate-raw');
-        return new Response(new Blob([data]).stream().pipeThrough(ds)).arrayBuffer().then(function (b) { return dec.decode(b); });
+        if (method !== 8) return Promise.reject(new Error('zip'));
+        // فك الضغط بحدّ أعلى: يتوقف إن تجاوز المحتوى الحد مهما ادّعى رأس الملف
+        var reader = new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw')).getReader();
+        var chunks = [], total = 0;
+        return (function pump() {
+          return reader.read().then(function (r) {
+            if (r.done) {
+              var out = new Uint8Array(total), o = 0;
+              chunks.forEach(function (c) { out.set(c, o); o += c.length; });
+              return dec.decode(out);
+            }
+            total += r.value.length;
+            if (total > MAX_UNZIP) { reader.cancel().catch(function () { }); throw BIG; }
+            chunks.push(r.value);
+            return pump();
+          });
+        })();
       }
       p += 46 + nlen + elen + clen;
     }

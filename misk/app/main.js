@@ -1,7 +1,7 @@
 /* مِسك الختام — الشاشات: القائمة الجانبية، أنشطتي، اختيار القالب، المحرّر، العرض، الإعدادات */
 (function () {
   var MK = window.MK, h = MK.h, ar = MK.toArabicDigits;
-  var VERSION = '2.5';
+  var VERSION = '2.6';
   var RIGHTS = '© 2026 مِسك الختام — فكرة وتصميم: أ. محمد سعيد النتشة، مدرسة قطر التقنية الثانوية للبنين. جميع الحقوق محفوظة.';
   var GRADES = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس', 'السابع', 'الثامن', 'التاسع', 'العاشر', 'الحادي عشر', 'الثاني عشر'].map(function (g) { return 'الصف ' + g; });
   var TERMS = ['الأول', 'الثاني'];
@@ -24,7 +24,8 @@
     var aside = h('aside', { class: 'side' }, brand, navEl,
       h('div', { class: 'side-bottom' },
         h('button', { type: 'button', class: 'nav-item', onclick: openSettings }, MK.icon('gear'), 'الإعدادات'),
-        h('button', { type: 'button', class: 'nav-item', onclick: openAbout }, MK.icon('info'), 'عن الأداة')));
+        h('button', { type: 'button', class: 'nav-item', onclick: openAbout }, MK.icon('info'), 'عن الأداة'),
+        location.protocol === 'file:' ? h('a', { class: 'nav-item', href: 'أدوات المعلمين.html', target: '_blank' }, MK.icon('cards'), 'أدوات المعلمين') : null));
     mainEl = h('main'); MK.mainEl = mainEl;
     app.appendChild(h('div', { class: 'layout' }, aside, mainEl));
     app.appendChild(h('footer', { class: 'rights' }, RIGHTS));
@@ -42,6 +43,7 @@
     b.appendChild(MK.logo(46, { decor: true })); b.appendChild(h('span', { class: 'brand-txt' }, h('span', { class: 'name' }, 'مِسك الختام'), h('span', { class: 'desc' }, MK.DESC)));
   }
   function setTheme(id) { MK.setTheme(id); refreshBrand(); }
+  MK.applySettings = function () { setTheme(MK.settings.theme); };
   function go(v) {
     if (editorDirty) { confirmLeave(function () { go(v); }); return; }
     MK.afterSave = null;
@@ -79,7 +81,6 @@
     MK.store.list().then(function (l) { activities = l; draw(); }).catch(function () { activities = []; draw(); });
     function draw() {
       var bkb = MK.backupBanner && MK.backupBanner(); if (bkb) bkSlot.appendChild(bkb);
-      var lg = legacyLine(); if (lg) bkSlot.appendChild(lg);
       var lessons = {}; activities.forEach(function (a) { lessons[(a.grade || '') + '|' + (a.term || '') + '|' + a.title] = 1; });
       [[activities.length, 'نشاطًا'], [Object.keys(lessons).length, 'درسًا'], [MK.classes.classes.length, 'شعبة']].forEach(function (x) {
         stats.appendChild(h('div', { class: 'stat' }, h('b', null, ar(x[0])), h('span', null, x[1])));
@@ -216,37 +217,15 @@
       h('span', null, 'اسمح للأداة بفتح مجلد «', h('strong', null, S.folderName), '» لعرض أنشطتك.'), h('span', { class: 'spacer' }),
       h('button', { type: 'button', class: 'btn small', onclick: function () { S.reconnect().then(MK.loadClasses).then(showActs).catch(function () { MK.toast('لم يُمنح الإذن'); }); } }, 'اسمح بالوصول'));
     if (!S.supported) return h('div', { class: 'notice' }, MK.icon('info'), 'متصفحك لا يدعم الحفظ في مجلد، فتُحفظ الأنشطة داخل المتصفح.');
-    return h('div', { class: 'notice' }, MK.icon('folder'), h('span', null, 'اختر مكان حفظ ملفاتك: مجلد «أدوات المعلمين» في «المستندات». إلى ذلك الحين تُحفظ الأنشطة داخل المتصفح.'), h('span', { class: 'spacer' }),
+    return h('div', { class: 'notice' }, MK.icon('folder'), h('span', null, 'اختر مكان حفظ ملفاتك: مجلد «مسك الختام» في «المستندات». إلى ذلك الحين تُحفظ الأنشطة داخل المتصفح.'), h('span', { class: 'spacer' }),
       h('button', { type: 'button', class: 'btn small', onclick: pickFolder }, 'اختر المجلد'));
   }
-  // بيانات في مجلد قديم: انقلها إلى «مسك الختام/البيانات» ضمن أدوات المعلمين
-  function legacyLine() {
-    var S = MK.store;
-    if (!S.isLegacy || !S.isLegacy()) return null;
-    try { if (localStorage.getItem('misk.legacy.later')) return null; } catch (e) { }
-    var bar = h('div', { class: 'notice' }, MK.icon('folder'),
-      h('span', null, 'أنشطتك في مجلد «', h('strong', null, S.folderName), '». انقلها إلى «أدوات المعلمين ← مسك الختام ← البيانات» ليكون كل شيء في مكانه.'),
-      h('span', { class: 'spacer' }),
-      h('button', { type: 'button', class: 'btn small', onclick: moveFamily }, 'انقلها الآن'),
-      h('button', { type: 'button', class: 'btn small ghost', onclick: function () { try { localStorage.setItem('misk.legacy.later', '1'); } catch (e) { } bar.remove(); } }, 'لاحقًا'));
-    return bar;
-  }
-  function moveFamily() {
-    MK.store.moveToFamily().then(function () {
-      MK.toast('نُسخت أنشطتك إلى مجلد «البيانات»، وبقي المجلد القديم كما هو');
-      MK.loadClasses().then(goHome, goHome);
-    }).catch(function (e) {
-      if (e && e.name === 'AbortError') return;
-      MK.toast(e && (e.name === 'NotFamily' || e.name === 'PickedProgram') ? 'اختر مجلد «أدوات المعلمين» في «المستندات»' : 'تعذّر النقل');
-    });
-  }
-  MK.moveFamily = moveFamily;
   function pickFolder() {
     MK.store.chooseFolder().then(function (n) {
       MK.toast(n ? 'رُبط المجلد ونُقل إليه ' + ar(n) + ' نشاط' : 'رُبط المجلد، وستُحفظ أنشطتك فيه');
       MK.loadClasses().then(goHome, goHome);
     }).catch(function (e) {
-      if (e && e.name === 'PickedProgram') MK.toast('اختر مجلد «أدوات المعلمين»، لا مجلد «البرنامج»');
+      if (e && e.name === 'PickedProgram') MK.toast('اختر مجلد «مسك الختام»، لا مجلد «البرنامج»');
       else if (e && e.name !== 'AbortError') MK.toast('تعذّر ربط المجلد');
     });
   }
@@ -269,7 +248,9 @@
       }, MK.icon('copy')));
       row.appendChild(h('button', {
         type: 'button', class: 'mini-x', title: 'حذف', 'aria-label': 'حذف', onclick: function () {
-          MK.confirm('حذف النشاط', 'هل تريد حذف نشاط «' + (tpl ? tpl.name : '') + '» من درس «' + a.title + '»؟ لا يمكن التراجع.', 'احذف', function () {
+          var inR = (MK.allActs ? MK.allActs() : []).filter(function (r) { return r.template === 'rounds' && r.content && Array.isArray(r.content.ids) && r.content.ids.indexOf(a.id) >= 0; });
+          var warn = inR.length ? ' تنبيه: هذا النشاط جزء من ' + (inR.length === 1 ? 'جولة' : ar(inR.length) + ' جولات') + ': ' + inR.map(function (r) { return '«' + r.title + '»'; }).join('، ') + '. إن حذفته فلن يظهر فيها.' : '';
+          MK.confirm('حذف النشاط', 'هل تريد حذف نشاط «' + (tpl ? tpl.name : '') + '» من درس «' + a.title + '»؟ لا يمكن التراجع.' + warn, 'احذف', function () {
             MK.store.remove(a).then(function () { MK.toast('حُذف النشاط'); showActs(); });
           }, true);
         }
@@ -778,10 +759,9 @@
     if (!S.supported) folderBox.appendChild(h('p', { class: 'hint' }, 'هذا المتصفح لا يدعم الحفظ في مجلد. استخدم كروم أو إيدج.'));
     else {
       folderBox.appendChild(h('p', null, S.mode === 'local' ? 'الأنشطة محفوظة داخل المتصفح.' : 'المجلد الحالي: ', S.folderName ? h('strong', null, S.folderName) : null));
-      folderBox.appendChild(h('p', { class: 'hint' }, 'اختر مجلد «أدوات المعلمين» في «المستندات» (المجلد نفسه الذي اخترته في الأدوات الأخرى). تُحفظ أنشطتك في «مسك الختام ← البيانات».'));
+      folderBox.appendChild(h('p', { class: 'hint' }, 'اختر مجلد «مسك الختام» في «المستندات». تُحفظ أنشطتك في «مسك الختام ← البيانات» على جهازك فقط.'));
       folderBox.appendChild(h('div', { style: { display: 'flex', gap: '8px', flexWrap: 'wrap' } },
-        h('button', { type: 'button', class: 'btn small', onclick: function () { close(); pickFolder(); } }, MK.icon('folder'), S.mode === 'local' ? 'اختر مجلد «أدوات المعلمين»' : 'غيّر المجلد'),
-        S.isLegacy() ? h('button', { type: 'button', class: 'btn small soft', onclick: function () { close(); moveFamily(); } }, 'انقلها إلى «البيانات»') : null,
+        h('button', { type: 'button', class: 'btn small', onclick: function () { close(); pickFolder(); } }, MK.icon('folder'), S.mode === 'local' ? 'اختر مجلد «مسك الختام»' : 'غيّر المجلد'),
         S.mode !== 'local' ? h('button', { type: 'button', class: 'btn small ghost', onclick: function () { S.forgetFolder().then(MK.loadClasses).then(function () { close(); MK.toast('فُصل المجلد، والأنشطة فيه لم تُحذف'); goHome(); }); } }, 'افصل المجلد') : null));
     }
     var body = h('div', null,

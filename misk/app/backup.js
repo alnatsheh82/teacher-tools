@@ -85,19 +85,39 @@
 
   // ================= النسخ الاحتياطي =================
   function today() { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
-  MK.makeBackup = function () {
+  function backupData(withStudents) {
     var acts = (MK.allActs ? MK.allActs() : []).map(function (a) { var x = MK.clone(a); delete x.sample; return x; });
-    var settings = MK.clone(MK.settings); delete settings.lastBackup;
-    var data = { app: 'misk-backup', v: 1, created: Date.now(), version: MK.VERSION || '', acts: acts, classes: MK.classes || { classes: [] }, profile: MK.profile || {}, settings: settings };
+    var settings = MK.clone(MK.settings); delete settings.lastBackup; delete settings.backupSnooze;
+    return { app: 'misk-backup', v: 1, created: Date.now(), version: MK.VERSION || '', students: !!withStudents,
+      acts: acts, classes: withStudents ? (MK.classes || { classes: [] }) : { classes: [] }, profile: MK.profile || {}, settings: settings };
+  }
+  function download(data, name) {
     var blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
     var el = document.createElement('a'); el.href = URL.createObjectURL(blob);
-    el.download = 'مسك الختام — نسخة احتياطية ' + today() + '.misk-backup.json';
+    el.download = name;
     document.body.appendChild(el); el.click(); el.remove();
     setTimeout(function () { URL.revokeObjectURL(el.href); }, 3000);
-    MK.settings.lastBackup = Date.now(); MK.saveSettings();
-    MK.toast('حُفظت النسخة الاحتياطية: ' + ar(acts.length) + ' نشاط و' + ar(((MK.classes || {}).classes || []).length) + ' شعبة');
-    var bn = document.querySelector('.backup-banner'); if (bn) bn.remove();
+  }
+  MK._backupData = backupData;
+  // النسخة الاحتياطية: كاملة (فيها أسماء الطلاب) أو الأنشطة فقط
+  MK.makeBackup = function () {
+    var nCls = ((MK.classes || {}).classes || []).length;
+    function go(withStudents) {
+      var data = backupData(withStudents);
+      download(data, 'مسك الختام — ' + (withStudents ? 'نسخة احتياطية ' : 'الأنشطة فقط ') + today() + '.misk-backup.json');
+      if (withStudents || !nCls) { MK.settings.lastBackup = Date.now(); MK.saveSettings(); }
+      MK.toast('حُفظت النسخة: ' + ar(data.acts.length) + ' نشاط' + (withStudents && nCls ? ' و' + ar(nCls) + ' شعبة' : ''));
+      var bn = document.querySelector('.backup-banner'); if (bn && (withStudents || !nCls)) bn.remove();
+    }
+    if (!nCls) return go(false);
+    MK.modal('نسخة احتياطية', h('div', { class: 'bk-body' },
+      h('p', { class: 'privacy' }, MK.icon('info'), ' النسخة الكاملة فيها ', h('b', null, 'أسماء طلابك وسجل مشاركتهم'), '. احفظها على جهازك أو في حسابك المدرسي، ولا ترسلها لأحد.'),
+      h('p', { class: 'hint' }, 'لمشاركة أنشطتك مع زميل اختر «الأنشطة فقط»: لا أسماء فيها ولا سجلّات.')),
+      [{ label: 'نسخة كاملة', onClick: function () { go(true); } },
+       { label: 'الأنشطة فقط', cls: 'soft', onClick: function () { go(false); } },
+       { label: 'إلغاء', cls: 'ghost' }]);
   };
+  // الاستعادة: نسخة تلقائية قبلها، ثم تقرير بما نجح وما تعذّر
   MK.restoreBackup = function (done) {
     var fi = h('input', { type: 'file', accept: '.json,application/json', class: 'hidden' });
     document.body.appendChild(fi);
@@ -109,31 +129,64 @@
         var good = [], bad = 0;
         d.acts.forEach(function (a) { var r = MK.sanitizeAct(a); if (r.ok || (r.act && a.template === 'rounds')) good.push(r.act); else if (r.act && r.act.needsAnswers) good.push(r.act); else bad++; });
         var nCls = (d.classes && Array.isArray(d.classes.classes)) ? d.classes.classes.length : 0;
-        var opt = { acts: true, classes: nCls > 0, profile: !!(d.profile && (d.profile.school || d.profile.teacher || d.profile.logo)) };
+        var hasSet = d.settings && typeof d.settings === 'object' && !Array.isArray(d.settings);
+        var opt = { acts: good.length > 0, classes: nCls > 0, profile: !!(d.profile && (d.profile.school || d.profile.teacher || d.profile.logo)), settings: !!hasSet, pre: true };
         function cb(key, label) { var c = h('input', { type: 'checkbox', checked: opt[key] || null }); c.addEventListener('change', function () { opt[key] = c.checked; }); return h('label', { class: 'toggle' }, c, label); }
         var when = d.created ? new Date(d.created).toLocaleDateString('ar-QA-u-nu-latn', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
         var body = h('div', { class: 'bk-body' },
           h('p', null, 'نسخة بتاريخ ', h('b', null, when), '، فيها:'),
-          cb('acts', ar(good.length) + ' نشاط' + (bad ? ' (و' + ar(bad) + ' تالف سيُتجاهل)' : '')),
+          (good.length || bad) ? cb('acts', ar(good.length) + ' نشاط' + (bad ? ' (و' + ar(bad) + ' تالف سيُتجاهل)' : '')) : null,
           nCls ? cb('classes', ar(nCls) + ' شعبة مع أسماء الطلاب وسجل المشاركة') : null,
           opt.profile ? cb('profile', 'ملفي: اسم المعلم والمدرسة والشعار والمجالات') : null,
+          hasSet ? cb('settings', 'الإعدادات: الألوان والصوت والمؤقت والعرض') : null,
+          h('hr'),
+          cb('pre', 'خذ نسخة من بياناتي الحالية قبل الاستعادة (مستحسن)'),
           h('p', { class: 'hint' }, 'الأنشطة التي لها المعرّف نفسه تُستبدل بنسختها في الملف، وما عداها يبقى كما هو.'));
-        MK.modal('استعادة نسخة احتياطية', body, [{ label: 'استعد', onClick: function () {
-          var p = Promise.resolve(), n = 0;
-          if (opt.acts) good.forEach(function (a) { p = p.then(function () { return MK.store.save(a).then(function () { n++; }); }); });
-          if (opt.classes) p = p.then(function () {
-            var cur = MK.classes || { app: 'misk-classes', v: 1, classes: [] };
-            d.classes.classes.forEach(function (c) { if (!c || !c.id || !Array.isArray(c.students)) return; var i = cur.classes.findIndex(function (x) { return x.id === c.id; }); if (i >= 0) cur.classes[i] = c; else cur.classes.push(c); });
-            MK.classes = cur; return MK.saveClasses();
-          });
-          if (opt.profile) p = p.then(function () { MK.profile = Object.assign({}, MK.profile || {}, d.profile); return MK.store.saveProfile(MK.profile); });
-          p.then(function () { MK.toast('استُعيد ' + ar(n) + ' نشاط'); if (done) done(); })
-            .catch(function () { MK.toast('تعذّرت استعادة بعض البيانات'); if (done) done(); });
-        } }, { label: 'إلغاء', cls: 'soft' }]);
+        MK.modal('استعادة نسخة احتياطية', body, [{ label: 'استعد', onClick: function () { run(d, good, bad, opt, done); } }, { label: 'إلغاء', cls: 'soft' }]);
       }).catch(function (m) { MK.fileError(m); });
     });
     fi.click();
   };
+  function run(d, good, bad, opt, done) {
+    var rep = [], n = 0, fail = 0;
+    function line(ok, text) { rep.push({ ok: ok, text: text }); }
+    var p = Promise.resolve();
+    if (opt.pre) p = p.then(function () {
+      download(backupData(true), 'مسك الختام — قبل الاستعادة ' + today() + '.misk-backup.json');
+      line(true, 'نُزّلت نسخة من بياناتك الحالية قبل الاستعادة');
+    });
+    if (opt.acts) {
+      good.forEach(function (a) { p = p.then(function () { return MK.store.save(a).then(function () { n++; }, function () { fail++; }); }); });
+      p = p.then(function () {
+        line(fail === 0, 'الأنشطة: استُعيد ' + ar(n) + (fail ? '، وتعذّر ' + ar(fail) : '') + (bad ? '، وتُجوهل ' + ar(bad) + ' تالف' : ''));
+      });
+    }
+    if (opt.classes) p = p.then(function () {
+      var cur = MK.classes || { app: 'misk-classes', v: 1, classes: [] }, k = 0;
+      d.classes.classes.forEach(function (c) { if (!c || !c.id || !Array.isArray(c.students)) return; k++; var i = cur.classes.findIndex(function (x) { return x.id === c.id; }); if (i >= 0) cur.classes[i] = c; else cur.classes.push(c); });
+      MK.classes = cur;
+      return Promise.resolve(MK.saveClasses()).then(function () { line(true, 'الشُّعب: استُعيدت ' + ar(k) + ' شعبة'); }, function () { line(false, 'الشُّعب: تعذّر حفظها'); });
+    });
+    if (opt.profile) p = p.then(function () {
+      MK.profile = Object.assign({}, MK.profile || {}, d.profile);
+      return MK.store.saveProfile(MK.profile).then(function () { line(true, 'ملفي: استُعيد'); }, function () { line(false, 'ملفي: تعذّر حفظه'); });
+    });
+    if (opt.settings) p = p.then(function () {
+      try {
+        var keep = { lastBackup: MK.settings.lastBackup, backupSnooze: MK.settings.backupSnooze };
+        Object.keys(d.settings).forEach(function (k) { if (k !== 'lastBackup' && k !== 'backupSnooze') MK.settings[k] = d.settings[k]; });
+        Object.assign(MK.settings, keep); MK.saveSettings();
+        if (MK.applySettings) MK.applySettings();
+        line(true, 'الإعدادات: استُعيدت');
+      } catch (e) { line(false, 'الإعدادات: تعذّرت استعادتها'); }
+    });
+    p.catch(function () { line(false, 'توقفت الاستعادة بسبب خطأ غير متوقع'); }).then(function () {
+      var allOk = rep.every(function (r) { return r.ok; });
+      MK.modal(allOk ? 'تمت الاستعادة' : 'تمت الاستعادة جزئيًا', h('ul', { class: 'bk-report' }, rep.map(function (r) {
+        return h('li', { class: r.ok ? 'ok' : 'bad' }, (r.ok ? '✓ ' : '✗ ') + r.text);
+      })), [{ label: 'حسنًا', onClick: function () { if (done) done(); } }]);
+    });
+  }
   MK.backupSection = function () {
     var last = MK.settings.lastBackup;
     return h('div', { class: 'bk-sec' },
@@ -182,9 +235,28 @@
         box.appendChild(body); box.appendChild(foot);
         var ended = false;
         var ctx = { act: san.act || act, body: body, foot: foot, setProgress: function () { }, addPoints: function () { }, addRaw: function () { }, nextTurn: function () { }, mascot: function () { }, end: function () { ended = true; }, teamCount: function () { return 1; }, teamName: function () { return ''; } };
+        var errs = [], onErr = function (ev) { errs.push(ev.message || 'خطأ'); };
+        window.addEventListener('error', onErr);
         var clean = tpl.play(ctx);
-        var shown = body.childNodes.length > 0;
-        setTimeout(function () { try { if (clean) clean(); } catch (e) { } row(tpl.name, shown, shown ? '' : 'لم يُعرض شيء'); next(); }, 60);
+        var shown = body.childNodes.length > 0, clicks = 0;
+        // تجربة اللعب: نضغط عناصر النشاط كما يفعل الطالب، صحيحة وخاطئة، حتى ينتهي أو تنفد المحاولات
+        var finish = function () {
+          window.removeEventListener('error', onErr);
+          try { if (clean) clean(); } catch (e) { errs.push(e.message); }
+          var ok = shown && !errs.length;
+          var note = !shown ? 'لم يُعرض شيء' : errs.length ? 'خطأ أثناء اللعب: ' + String(errs[0]).slice(0, 60) : (clicks ? ar(clicks) + ' تفاعلًا' + (ended ? '، ووصل إلى النهاية' : '') : 'عُرض');
+          row(tpl.name, ok, note); next();
+        };
+        var step = function (n) {
+          if (ended || n <= 0 || errs.length) return finish();
+          var els = [].slice.call(body.querySelectorAll('button:not([disabled]), [role="button"], .card, .opt, .tile, .choice, .cell'))
+            .filter(function (e) { return !e.closest('.st-skip') && e.offsetParent !== null; });
+          if (!els.length) return finish();
+          var el = els[(n * 7) % els.length];
+          try { el.click(); clicks++; } catch (e) { errs.push(e.message); }
+          setTimeout(function () { step(n - 1); }, 25);
+        };
+        setTimeout(function () { step(40); }, 60);
       } catch (e) { row(tpl.name, false, String(e && e.message || e).slice(0, 80)); next(); }
     }
     function storage() {
@@ -196,6 +268,11 @@
           var fontsOk = document.fonts && document.fonts.check ? document.fonts.check('20px "kfgqpc_hafs_uthmanic_script"', 'ب') : true;
           row('خط المصحف', fontsOk);
           row('قراءة ملفات Word وPowerPoint', typeof DecompressionStream !== 'undefined', typeof DecompressionStream !== 'undefined' ? '' : 'المتصفح لا يدعمها');
+          var all = MK.allActs ? MK.allActs() : [], ids = {};
+          all.forEach(function (a) { ids[a.id] = 1; });
+          var rs = all.filter(function (a) { return a.template === 'rounds' && a.content && Array.isArray(a.content.ids); });
+          var broken = rs.filter(function (r) { return r.content.ids.some(function (id) { return !ids[id]; }); });
+          row('الجولات المتتابعة', !broken.length, !rs.length ? 'لا توجد جولات بعد' : broken.length ? 'في ' + broken.map(function (r) { return '«' + r.title + '»'; }).join('، ') + ' نشاط محذوف' : ar(rs.length) + ' جولة، وكل أنشطتها موجودة');
           row('الحفظ في مجلد', !!window.showDirectoryPicker, window.showDirectoryPicker ? '' : 'المتصفح لا يدعمه، وستُحفظ الأنشطة داخله');
           var bad = results.filter(function (x) { return !x; }).length;
           sum.textContent = bad ? 'انتهى الفحص: ' + ar(results.length - bad) + ' سليم، و' + ar(bad) + ' فيه مشكلة.' : 'انتهى الفحص: كل شيء سليم ✓ (' + ar(results.length) + ' بندًا)';
