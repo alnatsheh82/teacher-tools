@@ -2,13 +2,13 @@
  "_ملاحظة": "ملف تحديثات أدوات المعلمين المستقلة (الإصدار 4 فما بعده). كل أداة تقرأ مدخلها فقط وتحدّث نفسها. يُبنى مع كل إصدار، فلا تعدّله يدويًا.",
  "musaed-tahdeer": {
   "name": "مساعد التحضير الإلكتروني",
-  "number": "5.0.0",
-  "version": "5.0.0",
+  "number": "5.0.1",
+  "version": "5.0.1",
   "date": "2026-11-27",
   "dir": "v4/musaed",
-  "message": "صدر مساعد التحضير الإلكتروني 5.0.0.",
+  "message": "صدر مساعد التحضير الإلكتروني 5.0.1.",
   "notes": [
-   "صفحة «أدوات المعلمين»: الأداة غير المثبّتة صار لها زر «حمّل» يفتح رابط تحميلها."
+   "صفحة «أدوات المعلمين»: زر «حمّل» لكل أداة غير مثبّتة، يفتح رابط تحميلها من OneDrive."
   ],
   "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%20%D8%A7%D9%84%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A.zip",
   "files": {
@@ -21,7 +21,7 @@
    "icons/maskable-192.png": "c50937bda3621d523c81b1354d8e828d51c1a46a0ec5a3cc8a3fd062b10eacaf",
    "icons/maskable-512.png": "424ff50656ff5d9b911a63d17a10026354e7929533112ea41206b02bb0331f6a",
    "icons/musaed.ico": "1895a53c6410a135e9bbc9dbe530dfb0ac3d1f835e609620fa745d115339c78c",
-   "index.html": "db1caeb1c9c8192e98819720e879dc4bc292ba34e65f33e96e1efbd82e4f2fd2",
+   "index.html": "6763483dc9d189ca00e8f540d6862afc12942d5dd36778772bff68445bac0fa7",
    "manifest.webmanifest": "4dfa0d288647a4650bde3a438b417fb26cb8ed9b5de720beb7c2d186115f6d9a",
    "static/app.js": "6df1cfd17752fba02c62bdf026ebbb8e17cdc8a9e3d4df970d92afa2dbf8aec6",
    "static/docx-export.js": "54d7f9156a534dcbb56d319eff0ed3b854e1062c180c974ce3a9bbf70764ff0b",
@@ -45,18 +45,18 @@
    "static/style.css": "1ec22d574597d788020ad094359d89f716df256aa991a905484eba6a03aee055",
    "static/template.js": "0685b2d18f6a06da8cb30282e9396a415568256c8b0fb391dbb0abff5fa068b2",
    "sw.js": "b4dd78a44b69045e9e0843afdeef8c5ee756a0845d26c7fe0bdb9c328d95db4e",
-   "أدوات المعلمين.html": "d8214c9229c0d10ce3427dc4b7d36813c179e2898188d08a76737c7af0b966be"
+   "أدوات المعلمين.html": "0e828afbdcf2060b2b1045c9562c0aede6e187bcbc6b2625c59f37ae1158c3e7"
   }
  },
  "muead-awraq": {
   "name": "معد أوراق العمل",
-  "number": "5.0.0",
-  "version": "5.0.0",
+  "number": "5.0.1",
+  "version": "5.0.1",
   "date": "2026-11-27",
   "dir": "v4/awraq",
-  "message": "صدر معد أوراق العمل 5.0.0.",
+  "message": "صدر معد أوراق العمل 5.0.1.",
   "notes": [
-   "صفحة «أدوات المعلمين»: الأداة غير المثبّتة صار لها زر «حمّل» يفتح رابط تحميلها."
+   "صفحة «أدوات المعلمين»: زر «حمّل» لكل أداة غير مثبّتة، يفتح رابط تحميلها من OneDrive."
   ],
   "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/%D9%85%D8%B9%D8%AF%20%D8%A3%D9%88%D8%B1%D8%A7%D9%82%20%D8%A7%D9%84%D8%B9%D9%85%D9%84.zip",
   "files": {
@@ -69,7 +69,7 @@
    "icons/icon.svg": "2ee189f7483a7311b306df09b479867536507e10230f034b8840d6e5488fd3ad",
    "icons/maskable-192.png": "c0ef6dd5bfe9ded35a7364e1b46ff1926a7f92794ab81a5567a88364e291fb23",
    "icons/maskable-512.png": "ef41c8ee2fd67eb607cc8558082b8a051d4154991ad099bad446098b9a132ac5",
-   "index.html": "7bcefa6de008f0b3ac3c84556f975d5abd0aa1cbba493208e4de93d0443e7200",
+   "index.html": "276dde8eba7f3e621d9fc06a5ff86ad15f4b5e08ec22872356f6aa44fd7d4996",
    "manifest.webmanifest": "ffa7167e3797889adbdcf0c8cd2b6a0aff4701993bef5b91c88f4c607f745017",
    "static/app.js": "ec2761d9f3a6b3a30be593743ce90f7698550c65fd6949d32ce39a300dda6c0b",
    "static/awraq.css": "aa883d95441a08ee9567edafd6e455403d9b8e35cfde0d440bc466f841672363",
@@ -98,7 +98,7 @@
    "static/style.css": "d0f2bc2400399cb6ec4fd2eb5332746988731aa02c19a07873a64827afc84f5e",
    "static/tools.js": "21a1b50c82eded3d65a416e07f8edc32703537ad66776f067d15ae5f7d099017",
    "sw.js": "ea461d1666a3a66b5a16f1155aea685fec4dcad288e3034fd2ba4de387e707de",
-   "أدوات المعلمين.html": "d8214c9229c0d10ce3427dc4b7d36813c179e2898188d08a76737c7af0b966be"
+   "أدوات المعلمين.html": "0e828afbdcf2060b2b1045c9562c0aede6e187bcbc6b2625c59f37ae1158c3e7"
   },
   "shared": {
    "dir": "shared",
@@ -117,13 +117,13 @@
  },
  "muead-ikhtibarat": {
   "name": "معد الاختبارات المدرسية",
-  "number": "5.0.0",
-  "version": "5.0.0",
+  "number": "5.0.1",
+  "version": "5.0.1",
   "date": "2026-11-27",
   "dir": "v4/ikhtibar",
-  "message": "صدر معد الاختبارات المدرسية 5.0.0.",
+  "message": "صدر معد الاختبارات المدرسية 5.0.1.",
   "notes": [
-   "صفحة «أدوات المعلمين»: الأداة غير المثبّتة صار لها زر «حمّل» يفتح رابط تحميلها."
+   "صفحة «أدوات المعلمين»: زر «حمّل» لكل أداة غير مثبّتة، يفتح رابط تحميلها من OneDrive."
   ],
   "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/%D9%85%D8%B9%D8%AF%20%D8%A7%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AF%D8%B1%D8%B3%D9%8A%D8%A9.zip",
   "files": {
@@ -141,7 +141,7 @@
    "icons/ikhtibar.ico": "ad9efcb789ca38f0461a63ed7509655d2e9c068fdbab47512806d0fb0cf34a40",
    "icons/maskable-192.png": "eb02d5bfb759a04bce02966483d221377e152a79fcec42f3d7379af6364b7a79",
    "icons/maskable-512.png": "2fed1a029a4e8c756a4eb4501ab610d354dd9525bc2a4dbab369be1ba38e48b6",
-   "index.html": "1844311084ef39684f3827aec1c1a3dedc97c608ac2b724a54bb1d737de0c3dd",
+   "index.html": "e20ca91883f55d984169c7bb3095a6ee5595de9df9cfcae6aa759a687b19e47e",
    "manifest.webmanifest": "f6cc5a7f9d3b6a8285a781db827a7943c30b3b629e33bc0cd443e6a8bcf24727",
    "static/app.js": "b7a7930d05da24107d7835983bbdffa7117b28cf1dda3ec6d88ed0151ec01e62",
    "static/awraq.css": "0bc256dd09eebb88c2b0f2317bad4093f8dc3512b116cfe59eee5734884d5351",
@@ -179,7 +179,7 @@
    "static/spec.js": "20c64ba9770fff0e18ff3a0993613958292d00a640144ae48cf93479c103afab",
    "static/style.css": "d0f2bc2400399cb6ec4fd2eb5332746988731aa02c19a07873a64827afc84f5e",
    "sw.js": "667ff9012814d1ee359a4d95b81038d999bccb44519dfab3e56f478f88b81857",
-   "أدوات المعلمين.html": "d8214c9229c0d10ce3427dc4b7d36813c179e2898188d08a76737c7af0b966be"
+   "أدوات المعلمين.html": "0e828afbdcf2060b2b1045c9562c0aede6e187bcbc6b2625c59f37ae1158c3e7"
   },
   "shared": {
    "dir": "shared",
