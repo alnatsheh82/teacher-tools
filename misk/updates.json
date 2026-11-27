@@ -2,11 +2,11 @@
  "_ملاحظة": "ملف تحديثات مِسك الختام وحده، مستقل عن بقية أدوات المعلمين. يُبنى مع كل إصدار، فلا تعدّله يدويًا.",
  "misk-alkhitam": {
   "name": "مِسك الختام",
-  "number": "2.7.1",
-  "version": "2.7.1",
+  "number": "3.0.0",
+  "version": "3.0.0",
   "date": "2026-11-27",
   "dir": "misk",
-  "message": "صدر مِسك الختام 2.7.1.",
+  "message": "صدر مِسك الختام 3.0.0.",
   "notes": [
    "شعار مِسك الختام الجديد على أيقونة سطح المكتب، بألوان الأداة.",
    "أيقونة سطح المكتب تعمل الآن على أجهزة المدارس: تجد الأداة في «المستندات» أيًّا كان اسم المستخدم."
@@ -26,7 +26,7 @@
    "app/icon-512.png": "16fb158150340346cbbe84efa877b539942042193e89f15a0778c8ef22a2f3d2",
    "app/icon-maskable-512.png": "65fcbaa29900338e97c1ba8c3f14d7c45539cb860a75e1031da7d7d67f94e98d",
    "app/import.js": "1427a01e11e05431fe05c6b876b0be08a73e03d16336894b18280f601ce13e2e",
-   "app/main.js": "350ab2bae2f4f3738ae1ef83aa1fe52632d77f0d89182d68b33ca0e793b1e4e3",
+   "app/main.js": "998b79d29e90f1e18d5eeb52002868acc38938c1db1a7d93b1fcb84598e64236",
    "app/misk.ico": "a79c5537445b2b281d925871094929c8ac2e49fe19e771e7e09a6cbf1116f17d",
    "app/rounds-import.js": "801e4756185dec73a1c475ac5b1a5556049a56599f2e19e450e9c34dd9f70414",
    "app/samples.js": "b2b6dc0195f8a3046d8d8e095e2b0f7a1559670300422f3ca97b4ca8358e7259",
@@ -44,8 +44,8 @@
    "app/نماذج/نموذج أسئلة لوحة التحديات.pptx": "aec3f554f1658ecea5a23ce16c09d44f99f3a70232e10e8a5d085d1189f7ebc2",
    "index.html": "c7a9d671f302c1afa25e6abf45ab34de6a7899b464209540cc6e484fff6d0906",
    "manifest.webmanifest": "526b012817aa3be99b278b273658d5e565c077d0e77f441111ae139a5f671c7f",
-   "sw.js": "3d756e4ee6e1b31d46fa647e1e59c6f079974b06bd1276a9be2ac70f7861dc3b",
-   "أدوات المعلمين.html": "aa25e217f543c6a766a7867342d005e49b5ad486037e1f65ac421fcb80d762e6",
+   "sw.js": "28320d21c19d9c7a23c2a0dda13487361fbb868bc785deb46e4d470b567af032",
+   "أدوات المعلمين.html": "d8214c9229c0d10ce3427dc4b7d36813c179e2898188d08a76737c7af0b966be",
    "ابدأ.html": "c7a9d671f302c1afa25e6abf45ab34de6a7899b464209540cc6e484fff6d0906"
   },
   "from": {
