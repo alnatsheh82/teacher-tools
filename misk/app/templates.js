@@ -99,18 +99,26 @@
         });
         if (q.opts.length === 3) grid.style.gridTemplateColumns = 'repeat(3,minmax(0,1fr))';
         body.appendChild(grid);
-        var done = false;
+        var done = false, tries = 0;
+        ctx.mark();
         function answer(i) {
-          if (done) return; done = true; stopTimer();
+          if (done) return;
           var right = i >= 0 && q.opts[i].ok;
+          // خطأ في المحاولة الأولى: محاولة ثانية بنصف الدرجة (إن بقي أكثر من خيار)
+          if (!right && i >= 0 && tries === 0 && q.opts.length > 2) {
+            tries = 1; btns[i].disabled = true; btns[i].classList.add('wrong'); MK.sound.wrong(); ctx.mascot('sad');
+            MK.toast(MK.t('حاول مرة أخرى'));
+            return;
+          }
+          done = true; stopTimer();
           btns.forEach(function (b, j) {
             b.disabled = true;
             if (q.opts[j].ok) b.classList.add('right');
             else if (j === i) b.classList.add('wrong');
             else b.classList.add('dim');
           });
-          if (right) { correctCount++; MK.sound.correct(); ctx.addPoints(10); ctx.mascot('cheer'); }
-          else { if (i >= 0) MK.sound.wrong(); ctx.mascot('sad'); if (q.explain && q.explain.trim()) body.appendChild(MK.explainBox(q.explain)); }
+          if (right) { correctCount++; MK.sound.correct(); ctx.right(tries + 1); ctx.mascot('cheer'); }
+          else { ctx.wrong(); if (i >= 0) MK.sound.wrong(); ctx.mascot('sad'); if (q.explain && q.explain.trim()) body.appendChild(MK.explainBox(q.explain)); }
           var last = idx === qs.length - 1;
           ctx.foot.appendChild(h('button', {
             type: 'button', class: 'btn big', onclick: function () {
@@ -331,7 +339,7 @@
       if (c.shuffle) items = MK.shuffle(items);
       var ii = 0, solvedCount = 0, cleanup = [];
       function show() {
-        var it = items[ii], chunks = chunksOf(it.definition), hints = 0, solved = false;
+        var it = items[ii], chunks = chunksOf(it.definition), hints = 0, fails = 0, solved = false; ctx.mark();
         ctx.setProgress(ii / items.length);
         var body = MK.clear(ctx.body); MK.clear(ctx.foot);
         var chips = chunks.map(function (t, k) { return { id: k, text: t, locked: false }; });
@@ -454,7 +462,7 @@
           });
           if (allOk) win();
           else {
-            MK.sound.wrong(); ctx.mascot('sad');
+            fails++; MK.sound.wrong(); ctx.mascot('sad');
             setTimeout(function () {
               slots.forEach(function (id, i) { if (id != null && !chips[id].locked) { slots[i] = null; where[id] = 'pool'; chipEls[id].classList.remove('no'); } });
               layout();
@@ -481,7 +489,8 @@
         function win() {
           solved = true; solvedCount++;
           MK.sound.correct(); ctx.mascot('cheer');
-          ctx.addPoints(Math.max(4, 10 - hints * 3));
+          var att = fails + hints === 0 ? 1 : fails + hints === 1 ? 2 : 3;
+          if (att <= 2) ctx.right(att, { n: chunks.length }); else ctx.wrong();
           slotsEl.classList.add('flash-ok');
           var last = ii === items.length - 1;
           MK.clear(ctx.foot);

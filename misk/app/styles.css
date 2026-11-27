@@ -1027,7 +1027,7 @@ input,textarea,select,button{font-family:inherit}
 .th-board span{background:var(--ink);color:var(--gold);font-weight:900;font-size:11px;text-align:center;border-radius:5px;padding:2px 0}
 .th-board span.used{opacity:.25}
 .bd-edit{display:flex;flex-direction:column;gap:12px}
-.bd-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.bd-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(max(320px,30%),1fr));gap:16px}
 .bd-col{display:flex;flex-direction:column;gap:8px;background:var(--surface2);border-radius:16px;padding:10px}
 .bd-col-h{display:flex;gap:8px;align-items:center}.bd-col-h input{flex:1;font-weight:800}
 .bd-cell{display:grid;grid-template-columns:auto 1fr;gap:6px;padding:8px !important;margin:0 !important}
@@ -1151,9 +1151,23 @@ button.score-pill:not(.turn):hover{outline:2px dashed var(--primary);outline-off
 .up-notes { margin: 0; padding-inline-start: 20px; display: grid; gap: 6px; }
 /* الحقول: خط المصحف احتياطًا لعلامات الرسم العثماني حتى لا تظهر مربعات عند إدراج آية */
 textarea,input:not([type]),input[type=text],input[type=search]{font-family:'MiskSym','Cairo','kfgqpc_hafs_uthmanic_script','Amiri',sans-serif}
-/* شريط التثبيت على الجهاز */
-.notice.install-bar{background:var(--primary);color:var(--primary-ink);border-color:var(--primary-dark);padding:14px 18px;font-size:1.05em}
-.notice.install-bar>svg{stroke:var(--gold)}
-.notice.install-bar .btn:not(.ghost) svg{stroke:var(--ink)}
-.notice.install-bar .btn:not(.ghost){background:var(--gold);color:var(--ink);font-size:1.05em;padding:10px 22px}
-.notice.install-bar .btn.ghost{color:var(--primary-ink);border-color:currentColor}
+/* SCORM */
+.mini-x.scorm-x{width:auto;padding:0 8px;font-size:11px;font-weight:900;letter-spacing:.5px}
+.scorm-help ol{padding-inline-start:22px;line-height:1.9}
+body.player .layout{display:none}
+.player-done{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;background:var(--bg)}
+.player-done .pd-card{background:var(--surface);border:2px solid var(--line);border-radius:24px;padding:36px 48px;text-align:center;max-width:520px}
+.player-done h2{font-family:var(--font-title);color:var(--primary);font-size:44px;margin:0 0 10px}
+/* النتيجة المفصّلة */
+.end-stat{font-size:clamp(15px,1.5vw,20px);font-weight:800;color:var(--muted);margin:4px 0 8px;text-align:center}
+.team-box .team-stat{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-top:4px;line-height:1.5}
+
+/* لوحة التحديات: المحرّر والصورة */
+.bd-cell{display:flex;flex-direction:column;gap:6px}
+.bd-cell-h{display:flex;align-items:center;gap:6px}
+.bd-cell textarea{resize:none;overflow:hidden;min-height:44px;line-height:1.5}
+.bd-img-ed .bd-thumb{display:flex;align-items:center;gap:8px}
+.bd-img-ed .bd-thumb img{max-width:140px;max-height:90px;border-radius:10px;border:1px solid var(--line)}
+.bd-q-img{display:flex;justify-content:center}
+.bd-q-img img{max-width:100%;max-height:34vh;border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,.15);background:#fff}
+.bd-board.many{gap:7px;min-height:0}.bd-board.many .bd-tile{min-height:0;font-size:clamp(18px,2.4vw,40px);box-shadow:0 4px 0 rgba(0,0,0,.25)}.bd-board.many .bd-head{min-height:48px;padding:6px}

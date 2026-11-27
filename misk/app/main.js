@@ -1,7 +1,7 @@
 /* مِسك الختام — الشاشات: القائمة الجانبية، أنشطتي، اختيار القالب، المحرّر، العرض، الإعدادات */
 (function () {
   var MK = window.MK, h = MK.h, ar = MK.toArabicDigits;
-  var VERSION = '3.0.0';
+  var VERSION = '3.1.0';
   var RIGHTS = '© 2026 مِسك الختام — فكرة وتصميم: أ. محمد سعيد النتشة، مدرسة قطر التقنية الثانوية للبنين. جميع الحقوق محفوظة.';
   var GRADES = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس', 'السابع', 'الثامن', 'التاسع', 'العاشر', 'الحادي عشر', 'الثاني عشر'].map(function (g) { return 'الصف ' + g; });
   var TERMS = ['الأول', 'الثاني'];
@@ -67,7 +67,6 @@
       MK.logo(120, { face: document.body.getAttribute('data-theme') === 'fun' }),
       h('div', { class: 'txt' }, h('h1', null, 'مِسك الختام'), h('p', null, MK.DESC),
         (P.school || P.teacher) ? h('div', { class: 'home-school' }, P.logo ? h('img', { src: P.logo, alt: '' }) : null, h('span', null, [P.teacher, P.school].filter(Boolean).join(' — '))) : null)));
-    var inSlot = h('div'); m.appendChild(inSlot); if (MK.install) MK.install.place(inSlot);
     var note = folderLine(); if (note) m.appendChild(note);
     var upSlot = h('div'); m.appendChild(upSlot); MK.updater.auto(upSlot);
     var bkSlot = h('div'); m.appendChild(bkSlot);
@@ -218,7 +217,7 @@
       h('span', null, 'اسمح للأداة بفتح مجلد «', h('strong', null, S.folderName), '» لعرض أنشطتك.'), h('span', { class: 'spacer' }),
       h('button', { type: 'button', class: 'btn small', onclick: function () { S.reconnect().then(MK.loadClasses).then(showActs).catch(function () { MK.toast('لم يُمنح الإذن'); }); } }, 'اسمح بالوصول'));
     if (!S.supported) return h('div', { class: 'notice' }, MK.icon('info'), 'متصفحك لا يدعم الحفظ في مجلد، فتُحفظ الأنشطة داخل المتصفح.');
-    return h('div', { class: 'notice' }, MK.icon('folder'), h('span', null, location.protocol === 'file:' ? 'اختر مكان حفظ ملفاتك: مجلد «مسك الختام» في «المستندات». إلى ذلك الحين تُحفظ الأنشطة داخل المتصفح.' : 'اختر مجلدًا لحفظ أنشطتك على جهازك، مثل «مسك الختام» في «المستندات» (أنشئه من نافذة الاختيار إن لم يكن موجودًا). إلى ذلك الحين تُحفظ الأنشطة داخل المتصفح.'), h('span', { class: 'spacer' }),
+    return h('div', { class: 'notice' }, MK.icon('folder'), h('span', null, 'اختر مكان حفظ ملفاتك: مجلد «مسك الختام» في «المستندات». إلى ذلك الحين تُحفظ الأنشطة داخل المتصفح.'), h('span', { class: 'spacer' }),
       h('button', { type: 'button', class: 'btn small', onclick: pickFolder }, 'اختر المجلد'));
   }
   function pickFolder() {
@@ -241,6 +240,7 @@
       row.appendChild(h('span', { class: 'spacer' }));
       row.appendChild(h('button', { type: 'button', class: 'mini-x', title: 'تعديل', 'aria-label': 'تعديل', onclick: function () { openEditor(MK.clone(a), false); } }, MK.icon('edit')));
       row.appendChild(h('button', { type: 'button', class: 'mini-x', title: 'تصدير ملف', 'aria-label': 'تصدير ملف', onclick: function () { MK.store.exportFile(a); } }, MK.icon('download')));
+      if (MK.exportScorm) row.appendChild(h('button', { type: 'button', class: 'mini-x scorm-x', title: 'تصدير SCORM لمنصة التعلم', 'aria-label': 'تصدير SCORM', onclick: function () { MK.exportScorm(a); } }, 'SCORM'));
       row.appendChild(h('button', {
         type: 'button', class: 'mini-x', title: 'نسخة مكررة', 'aria-label': 'نسخة مكررة', onclick: function () {
           var c = MK.clone(a); c.id = MK.uid(); c.created = 0;
@@ -471,6 +471,7 @@
           h('button', { type: 'button', class: 'btn big', style: { width: '100%', marginBottom: '10px' }, onclick: function () { if (validate()) play(act, true); } }, MK.icon('play'), 'عرض وتجربة'),
           h('button', { type: 'button', class: 'btn ghost', style: { width: '100%', marginBottom: '10px' }, onclick: function () { save(function () { openEditor(act, false); }); } }, MK.icon('save'), 'حفظ'),
           h('button', { type: 'button', class: 'btn soft', style: { width: '100%' }, onclick: function () { if (validate(true)) MK.store.exportFile(act); } }, MK.icon('download'), 'تصدير ملف'),
+          MK.exportScorm ? h('button', { type: 'button', class: 'btn soft', style: { width: '100%', marginTop: '10px' }, onclick: function () { if (validate(true)) MK.exportScorm(act); } }, MK.icon('upload'), 'تصدير SCORM لمنصة التعلم') : null,
           errEl),
         h('div', { class: 'panel' }, h('h3', null, 'الإعدادات'), opts),
         h('div', { class: 'panel' }, h('h3', null, 'ألوان العرض'), MK.themePicker(act.theme, function (id) { act.theme = id; editorDirty = true; setTheme(id); })),
@@ -496,6 +497,19 @@
       function () { document.body.classList.remove('playing'); MK.setTheme(prevTheme); refreshBrand(); });
   }
 
+  function playSolo(act) {
+    var tpl = MK.templates[act.template];
+    if (!tpl) return;
+    if (act.template === 'rounds') act._list = act.content.ids.map(function (id) { return activities.filter(function (a) { return a.id === id; })[0]; }).filter(Boolean);
+    if (!act.settings) act.settings = {};
+    act.settings.teams = false;
+    var prevTheme = document.body.getAttribute('data-theme');
+    MK.setTheme(act.theme); document.body.classList.add('playing');
+    MK.lang = act.lang === 'en' ? 'en' : 'ar';
+    run(act, tpl, false, prevTheme, { cls: null, pool: [], hideNames: false, mode: 'solo', teams: null });
+  }
+  MK.playSolo = playSolo;
+
   function run(act, tpl, fromEditor, prevTheme, o) {
     var teams = o.mode === 'teams';
     // الجولات: عدة أنشطة في عرض واحد
@@ -506,6 +520,9 @@
     if (R) MK.lang = curAct.lang === 'en' ? 'en' : 'ar';
     var players = teams ? o.teams : [{ name: MK.t('النقاط'), score: 0 }];
     var turn = 0, cleanup = null, current = null, stuScore = {}, stuAtt = {};
+    var qT0 = performance.now(), stats = {};
+    function pstat() { var k = teams ? turn : 0; return stats[k] || (stats[k] = { r1: 0, r2: 0, w: 0, earned: 0, n: 0 }); }
+    function statLine(s) { return s && s.n ? MK.t('من أول مرة: ') + ar(s.r1) + '  •  ' + MK.t('بعد محاولة: ') + ar(s.r2) + '  •  ' + MK.t('خاطئة: ') + ar(s.w) : ''; }
     var FB = MK.fb(act), mult = FB.points / 10;
 
     var scoresEl = h('div', { class: 'scores' + (teams && players.length > 3 ? ' many' : '') });
@@ -648,9 +665,9 @@
     var ctx = {
       act: curAct, body: body, foot: foot,
       setProgress: function (f) { prog.style.width = Math.round(f * 100) + '%'; },
-      addPoints: function (n) {
+      addPoints: function (n, txt) {
         n = Math.round(n * mult * 10) / 10;
-        if (n > 0) { MK.showPraise(stage, act); streak++; }
+        if (n > 0) { MK.showPraise(stage, act, txt || null); streak++; }
         players[teams ? turn : 0].score += n;
         if (n > 0) { flyPts(n, teams ? turn : 0); onStreak(); }
         drawScores(teams ? turn : 0);
@@ -661,6 +678,26 @@
         if (!teams && current) stuScore[current.id] = { name: current.name, score: ((stuScore[current.id] || {}).score || 0) + n };
         MK.showPraise(stage, act, txt || null);
       },
+      // ===== احتساب الدرجة: أول محاولة (ثلثا الدرجة على الأقل وتكتمل بالسرعة) / بعد خطأ (النصف) =====
+      mark: function () { qT0 = performance.now(); },
+      right: function (attempt, opt) {
+        opt = opt || {};
+        if (attempt > 2) { ctx.wrong(); return 0; }
+        var f, fast = false;
+        if (attempt === 2) f = 0.5;
+        else if (opt.noSpeed) { f = 1; }
+        else {
+          var el = (opt.elapsed != null ? opt.elapsed : (performance.now() - qT0) / 1000) / Math.max(1, opt.n || 1), T = +(opt.timer != null ? opt.timer : (curAct.settings && curAct.settings.timer)) || 0, sp;
+          if (T && !opt.n) sp = Math.max(0, Math.min(1, 1 - el / T));
+          else sp = el <= 5 ? 1 : el >= 20 ? 0 : 1 - (el - 5) / 15;
+          f = 2 / 3 + sp / 3; fast = sp >= 0.75;
+        }
+        var ps = pstat(); ps[attempt === 2 ? 'r2' : 'r1']++; ps.earned += 10 * f; ps.n++;
+        var ptxt = attempt === 2 ? MK.t('أحسنت التصحيح!') : fast ? MK.t('ممتاز وسريع! ⚡') : null;
+        if (opt.raw) ctx.addRaw(Math.round(opt.raw * f), ptxt || MK.t('أحسنت!')); else ctx.addPoints(10 * f, ptxt);
+        return 10 * f;
+      },
+      wrong: function (n) { var ps = pstat(); n = n == null ? 1 : n; ps.w += n; ps.n += n; },
       teamCount: function () { return teams ? players.length : 1; },
       teamName: function () { return teams ? teamTitle(players[turn].name) : (current ? current.name : ''); },
       nextTurn: function () { if (!teams && current) stuAtt[current.id] = (stuAtt[current.id] || 0) + 1; if (teams) { turn = (turn + 1) % players.length; drawScores(); } },
@@ -701,7 +738,7 @@
           var wt = MK.tierOf(Math.min(1, best / share), act);
           head(wt, winners.length === players.length ? '' : winners.map(function (w) { return teamTitle(w.name); }).join(MK.t(' و')));
           if (winners.length === players.length && players.length > 1) box.appendChild(h('div', { class: 'big-score' }, MK.t('تعادل!')));
-          box.appendChild(h('div', { class: 'teams-result' }, players.map(function (p) { return h('div', { class: 'team-box' + (p.score === best && winners.length < players.length ? ' win' : '') }, teamTitle(p.name), h('b', null, ar(p.score))); })));
+          box.appendChild(h('div', { class: 'teams-result' }, players.map(function (p, pi) { return h('div', { class: 'team-box' + (p.score === best && winners.length < players.length ? ' win' : '') }, teamTitle(p.name), h('b', null, ar(Math.round(p.score))), stats[pi] && stats[pi].n ? h('small', { class: 'team-stat' }, statLine(stats[pi])) : null); })));
         } else {
           var stus = Object.keys(stuScore).map(function (k) { return Object.assign({ id: k }, stuScore[k]); }).sort(function (a, b) { return b.score - a.score; });
           var overall = !scored ? 1 : (r.total ? r.correct / r.total : 0);
@@ -714,8 +751,10 @@
             head(MK.tierOf(overall, act), current ? current.name : '');
           }
           box.appendChild(h('div', { class: 'big-score' }, MK.t('الإجابات الصحيحة: ') + ar(r.correct) + MK.t(' من ') + ar(r.total)));
-          if (!stus.length && scored) box.appendChild(h('div', { class: 'big-score', style: { color: 'var(--primary)' } }, MK.t('النقاط: ') + ar(players[0].score)));
+          if (stats[0] && stats[0].n) box.appendChild(h('div', { class: 'end-stat' }, statLine(stats[0])));
+          if (!stus.length && scored) box.appendChild(h('div', { class: 'big-score', style: { color: 'var(--primary)' } }, MK.t('النقاط: ') + ar(Math.round(players[0].score))));
         }
+        if (MK.onFinish && !teams) { try { var s0 = stats[0]; MK.onFinish({ pct: !scored ? 1 : s0 && s0.n ? s0.earned / (10 * s0.n) : (r.total ? r.correct / r.total : 0), correct: r.correct, total: r.total, points: players[0].score, scored: scored }); } catch (e) { } }
         if (R) box.appendChild(h('div', { class: 'rounds-sum' }, R.res.map(function (x, i) {
           return h('div', { class: 'rs-row' }, h('b', null, MK.t('الجولة ') + ar(i + 1)), h('span', null, MK.t(x.name)), h('em', null, x.scored ? ar(x.r.correct) + ' / ' + ar(x.r.total) : '✓'));
         })));
@@ -742,6 +781,7 @@
       document.removeEventListener('keydown', onEsc);
       MK.setTheme(prevTheme); refreshBrand(); MK.lang = 'ar'; MK.paused = false;
       if (MK._wrongOrig) MK.sound.wrong = MK._wrongOrig;
+      if (window.MISK_PLAYER && MK.playerDone) MK.playerDone(function () { playSolo(MK.clone(window.MISK_PLAYER.act)); });
     }
     function onEsc(e) { if (e.key === 'Escape' && !document.fullscreenElement && !document.querySelector('.modal-bg')) exit(); }
     document.addEventListener('keydown', onEsc);
@@ -808,6 +848,12 @@
   document.addEventListener('DOMContentLoaded', function () {
     MK.setTheme(MK.settings.theme);
     shell();
+    if (window.MISK_PLAYER) { // حزمة SCORM: يلعب الطالب النشاط وحده
+      document.body.classList.add('player');
+      activities = (window.MISK_PLAYER.acts || []).map(MK.clone);
+      playSolo(MK.clone(window.MISK_PLAYER.act));
+      return;
+    }
     MK.store.init().then(MK.loadClasses).then(MK.loadProfile).then(function () { go('home'); }, function () { go('home'); });
     window.addEventListener('beforeunload', function (e) { if (editorDirty) { e.preventDefault(); e.returnValue = ''; } });
   });

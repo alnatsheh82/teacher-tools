@@ -234,7 +234,7 @@
         var body = h('div', { class: 'stage-body' }), foot = h('div');
         box.appendChild(body); box.appendChild(foot);
         var ended = false;
-        var ctx = { act: san.act || act, body: body, foot: foot, setProgress: function () { }, addPoints: function () { }, addRaw: function () { }, nextTurn: function () { }, mascot: function () { }, end: function () { ended = true; }, teamCount: function () { return 1; }, teamName: function () { return ''; } };
+        var ctx = { act: san.act || act, body: body, foot: foot, setProgress: function () { }, addPoints: function () { }, addRaw: function () { }, mark: function () { }, right: function () { return 0; }, wrong: function () { }, nextTurn: function () { }, mascot: function () { }, end: function () { ended = true; }, teamCount: function () { return 1; }, teamName: function () { return ''; } };
         var errs = [], onErr = function (ev) { errs.push(ev.message || 'خطأ'); };
         window.addEventListener('error', onErr);
         var clean = tpl.play(ctx);

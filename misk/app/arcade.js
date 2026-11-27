@@ -59,14 +59,16 @@
     }
     var api = {
       arena: arena, prompt: prompt, legend: legend, S: S, W: W, H: H, say: say,
-      setPrompt: function (node) { MK.clear(prompt).appendChild(node); prompt.classList.remove('pop-in'); void prompt.offsetWidth; prompt.classList.add('pop-in'); },
+      setPrompt: function (node) { S.miss = 0; MK.clear(prompt).appendChild(node); prompt.classList.remove('pop-in'); void prompt.offsetWidth; prompt.classList.add('pop-in'); },
       hold: function (ms) { S.hold = performance.now() + ms; },
       float: function (x, y, txt, cls) {
         var f = h('div', { class: 'ac-float ' + (cls || ''), style: { left: x + 'px', top: y + 'px' } }, txt);
         arena.appendChild(f); setTimeout(function () { f.remove(); }, 900);
       },
       right: function (x, y) {
-        S.good++; S.done++; ctx.addPoints(10); MK.sound.correct(); ctx.mascot('cheer'); ctx.nextTurn();
+        var m = S.miss || 0; S.miss = 0;
+        if (m < 2) { S.good++; ctx.right(m + 1, { noSpeed: true }); } else ctx.wrong();
+        S.done++; MK.sound.correct(); ctx.mascot('cheer'); ctx.nextTurn();
         if (x != null) api.float(x, y, '+' + MK.fb(ctx.act).points, 'ok');
         drawCnt(); return api.checkEnd();
       },
@@ -75,7 +77,7 @@
         MK.sound.wrong(); ctx.mascot('sad');
         if (x != null) api.float(x, y, '✗', 'no');
         if (S.lives !== Infinity) { S.lives--; drawHearts(); hearts.classList.remove('shake'); void hearts.offsetWidth; hearts.classList.add('shake'); }
-        if (countDone) { S.done++; ctx.nextTurn(); drawCnt(); }
+        if (countDone) { S.miss = 0; ctx.wrong(); S.done++; ctx.nextTurn(); drawCnt(); } else S.miss = (S.miss || 0) + 1;
         if (correctText != null) {
           var ex = explain && String(explain).trim(), ms = ex ? 3600 : 1500;
           say(h('span', null, T('الإجابة الصحيحة: '), h('b', null, rich(correctText)), ex ? h('span', { class: 'ac-ex' }, '💡 ', rich(ex)) : null), 'no', ms); api.hold(ms);

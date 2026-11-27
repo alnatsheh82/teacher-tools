@@ -89,7 +89,7 @@
         tm.stop();
         var q = qs[idx], body = MK.clear(ctx.body); MK.clear(ctx.foot); MK.clear(main);
         body.appendChild(wrap); drawLadder(); ctx.setProgress(idx / qs.length);
-        var locked = false, sel = -1;
+        var locked = false, sel = -1, tries = 0; ctx.mark();
         tm = MK.startTimer(ctx, sec, function () { reveal(-1); });
         var lifes = h('div', { class: 'gs-life' });
         if (c.lifelines !== false) {
@@ -138,7 +138,15 @@
           }
         }
         function reveal(i) {
-          if (locked) return; locked = true; tm.stop(); MK.clear(ctx.foot);
+          if (locked) return;
+          var ci0 = q.opts.findIndex(function (o) { return o.ok; });
+          var left0 = bs.filter(function (b) { return !b.disabled; }).length;
+          if (i >= 0 && i !== ci0 && tries === 0 && left0 > 2) { // محاولة ثانية بنصف الدرجة
+            tries = 1; bs[i].disabled = true; bs[i].classList.remove('sel'); bs[i].classList.add('wrong'); sel = -1;
+            MK.sound.wrong(); ctx.mascot('sad'); MK.clear(ctx.foot); MK.toast(T('حاول مرة أخرى'));
+            return;
+          }
+          locked = true; tm.stop(); MK.clear(ctx.foot);
           bs.forEach(function (b) { b.disabled = true; });
           // تشويق قبل الكشف
           var beats = 0, dr = setInterval(function () { MK.sound.tick(); if (++beats > 5) clearInterval(dr); }, 220);
@@ -148,8 +156,8 @@
             var right = i === ci;
             if (i >= 0 && !right) bs[i].classList.add('wrong');
             res[idx] = right; drawLadder();
-            if (right) { good++; MK.sound.correct(); ctx.addPoints(10); ctx.mascot('cheer'); }
-            else { MK.sound.wrong(); ctx.mascot('sad'); if (q.explain && q.explain.trim()) main.appendChild(MK.explainBox(q.explain)); }
+            if (right) { good++; MK.sound.correct(); ctx.right(tries + 1); ctx.mascot('cheer'); }
+            else { ctx.wrong(); MK.sound.wrong(); ctx.mascot('sad'); if (q.explain && q.explain.trim()) main.appendChild(MK.explainBox(q.explain)); }
             MK.nextBtn(ctx, idx === qs.length - 1, T('السؤال التالي'), function () { idx++; showQ(); }, function () { return { correct: good, total: qs.length }; });
           }, 1500);
         }
@@ -183,16 +191,16 @@
         var cur, miss;
         function next() {
           if (!left.length) { r++; if (r < rounds.length) setTimeout(round, 700); else finishLater(ctx, { correct: good, total: ps.length }); return; }
-          cur = left.shift(); miss = false;
+          cur = left.shift(); miss = 0; ctx.mark();
           MK.clear(prompt).appendChild(h('span', { class: 'pop-in' }, MK.rich(cur.a)));
         }
         function pick(b) {
           if (!cur || b.classList.contains('gone')) return;
           if (b._p === cur) {
             b.classList.add('gone'); doneN++; ctx.setProgress(doneN / ps.length);
-            if (!miss) { good++; ctx.addPoints(10); }
+            if (miss < 2) { good++; ctx.right(miss + 1); } else ctx.wrong();
             MK.sound.correct(); ctx.mascot('cheer'); cur = null; setTimeout(next, 450);
-          } else { miss = true; MK.sound.wrong(); shake(b); b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); }
+          } else { miss++; MK.sound.wrong(); shake(b); b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); }
         }
         next();
       }
@@ -279,7 +287,7 @@
       function showL() {
         var L = lists[li], want = L.items.slice(), cur = want.map(function (t, i) { return i; });
         do { cur = MK.shuffle(cur); } while (cur.every(function (v, i) { return v === i; }));
-        var locked = want.map(function () { return false; }), first = true, sel = -1;
+        var locked = want.map(function () { return false; }), checks = 0, sel = -1; ctx.mark();
         var body = MK.clear(ctx.body); MK.clear(ctx.foot); ctx.setProgress(li / lists.length);
         body.appendChild(h('div', { class: 'q-count', style: { textAlign: 'center' } }, lists.length > 1 ? T('القائمة ') + ar(li + 1) + T(' من ') + ar(lists.length) : ''));
         body.appendChild(h('div', { class: 'ord-q' }, MK.rich(L.q || T('رتّب العناصر ثم اضغط تحقّق'))));
@@ -313,11 +321,12 @@
           cur.forEach(function (wi, pos) { if (wi === pos) locked[pos] = true; else all = false; });
           draw();
           list.querySelectorAll('.ord-row').forEach(function (r, pos) { if (!locked[pos]) { r.classList.add('no'); shake(r); } });
+          checks++;
           if (all) {
-            if (first) { good++; ctx.addPoints(10); }
+            if (checks <= 2) { good++; ctx.right(checks, { n: want.length }); } else ctx.wrong();
             MK.sound.correct(); ctx.mascot('cheer');
             MK.nextBtn(ctx, li === lists.length - 1, T('التالية'), function () { li++; showL(); }, function () { return { correct: good, total: lists.length }; });
-          } else { first = false; MK.sound.wrong(); ctx.mascot('sad'); ctx.nextTurn(); }
+          } else { MK.sound.wrong(); ctx.mascot('sad'); ctx.nextTurn(); }
         });
         ctx.foot.appendChild(checkB);
       }
@@ -354,7 +363,7 @@
       var gs = ctx.act.content.groups, items = [];
       gs.forEach(function (g, gi) { g.items.forEach(function (t) { items.push({ t: t, g: gi, miss: false }); }); });
       items = MK.shuffle(items);
-      var total = items.length, placed = 0, good = 0, sel = null;
+      var total = items.length, placed = 0, good = 0, sel = null; ctx.mark();
       var body = MK.clear(ctx.body); MK.clear(ctx.foot);
       var info = h('div', { class: 'q-count', style: { textAlign: 'center' } });
       var pool = h('div', { class: 'grp-pool pool' });
@@ -384,10 +393,10 @@
         if (sel) { sel.el.classList.remove('sel'); sel = null; }
         if (it.g === gi) {
           it.done = true; placed++; colEls[gi]._list.appendChild(it.el); it.el.classList.add('ok');
-          if (!it.miss) { good++; ctx.addPoints(10); }
+          var m = it.miss || 0; if (m < 2) { good++; ctx.right(m + 1, { n: 1 }); } else ctx.wrong(); ctx.mark();
           MK.sound.correct(); ctx.setProgress(placed / total); drawInfo();
           if (placed === total) finishLater(ctx, { correct: good, total: total });
-        } else { it.miss = true; MK.sound.wrong(); shake(it.el); it.el.classList.add('no'); setTimeout(function () { it.el.classList.remove('no'); }, 700); shake(colEls[gi]); }
+        } else { it.miss = (it.miss || 0) + 1; MK.sound.wrong(); shake(it.el); it.el.classList.add('no'); setTimeout(function () { it.el.classList.remove('no'); }, 700); shake(colEls[gi]); }
       }
       return function () { };
     }
@@ -598,10 +607,13 @@
         return { el: s, want: L.text };
       });
       var pl = MK.placer({ slots: slots, bank: c.labels.map(function (L) { return { text: L.text }; }), poolEl: pool, chipClass: 'dg-chip' });
-      var first = true, good = 0;
+      var checks = 0, good = 0, okPrev = 0; ctx.mark();
       ctx.foot.appendChild(btn(T('تحقّق'), 'check', function () {
         var r = pl.check(); if (!r) return;
-        if (first) { good = r.okCount; ctx.addPoints(10 * r.okCount); first = false; }
+        var nw = r.okCount - okPrev; okPrev = r.okCount;
+        for (var k = 0; k < nw; k++) { if (checks === 0) ctx.right(1, { n: slots.length }); else if (checks === 1) ctx.right(2); else ctx.wrong(); }
+        if (checks === 0) good = r.okCount; else if (checks === 1) good += nw;
+        checks++;
         ctx.setProgress(r.okCount / slots.length);
         if (r.all) { MK.sound.correct(); ctx.mascot('cheer'); finishLater(ctx, { correct: good, total: slots.length }, 1100); }
         else MK.sound.wrong();
@@ -761,8 +773,8 @@
           var full = p.cells.every(function (k) { return cell[k].v; });
           if (!full) return;
           var ok = p.cells.every(function (k, i) { return sameL(cell[k].v, p.w.L[i]); });
-          if (ok) { p.solved = true; newly++; solved++; good++; ctx.addPoints(10); }
-          else { anyWrong = true; p.cells.forEach(function (k, i) { if (!sameL(cell[k].v, p.w.L[i])) { els[k].classList.add('no'); shake(els[k]); } }); }
+          if (ok) { p.solved = true; newly++; solved++; var fl = p.fails || 0; if (fl < 2) { good++; ctx.right(fl + 1, { noSpeed: true }); } else ctx.wrong(); }
+          else { anyWrong = true; p.fails = (p.fails || 0) + 1; p.cells.forEach(function (k, i) { if (!sameL(cell[k].v, p.w.L[i])) { els[k].classList.add('no'); shake(els[k]); } }); }
         });
         draw();
         if (newly) { MK.sound.correct(); ctx.mascot('cheer'); } else if (anyWrong) MK.sound.wrong(); else MK.toast(T('اضغط خانة أو تعريفًا ثم اكتب'));
@@ -770,7 +782,7 @@
       }
       function reveal() {
         if (cur == null || W[cur].solved || W[cur].revealed) return;
-        var p = W[cur]; p.revealed = true; solved++;
+        var p = W[cur]; p.revealed = true; solved++; ctx.wrong();
         p.cells.forEach(function (k, i) { cell[k].v = p.w.L[i]; });
         MK.sound.reveal(); draw(); progress();
       }
@@ -884,7 +896,7 @@
         if (hit && path.length > 1) {
           hit.found = true; found++; var col = 'f' + (color++ % 6);
           path.forEach(function (x) { x.classList.add('found', col); });
-          hit.li.classList.add('done'); MK.sound.correct(); ctx.addPoints(10); ctx.mascot('cheer'); ctx.setProgress(found / words.length); drawInfo();
+          hit.li.classList.add('done'); MK.sound.correct(); ctx.right(1, { noSpeed: true }); ctx.mascot('cheer'); ctx.setProgress(found / words.length); drawInfo();
           if (found === words.length) { clearInterval(tick); finishLater(ctx, { correct: found, total: words.length }, 1000); }
         } else if (path.length > 2) MK.sound.wrong();
         start = null; path = []; paint();

@@ -43,7 +43,7 @@
     return new Promise(function (res, rej) {
       var close = MK.modal('اختر مجلد البرنامج',
         h('div', null,
-          h('p', null, 'يحتاج التحديث إلى إذن الكتابة في مجلد البرنامج مرة واحدة.'),
+          h('p', null, 'يحتاج التحديث وتصدير SCORM إلى إذن مجلد البرنامج مرة واحدة.'),
           h('p', null, 'اختر مجلد «', h('strong', null, 'مسك الختام'), '» في «المستندات»، ثم اضغط «السماح».')),
         [{ label: 'اختر المجلد', onClick: function () {
           window.showDirectoryPicker({ id: 'misk-program', mode: 'readwrite' }).then(function (hd) {
@@ -71,6 +71,7 @@
       });
     });
   }
+  U.programDir = programDir;
   function dirOf(root, path, create) {
     var parts = path.split('/'); parts.pop();
     return parts.reduce(function (pr, n) { return pr.then(function (d) { return d.getDirectoryHandle(n, { create: !!create }); }); }, Promise.resolve(root));
@@ -178,9 +179,7 @@
     return bar;
   };
   // يُستدعى عند فتح الأداة: يضع الشريط في مكانه إن وُجد تحديث
-  var WEB = location.protocol !== 'file:'; // نسخة الإنترنت المثبّتة تتحدّث وحدها
   U.auto = function (slot) {
-    if (WEB) return;
     if (U.done) { var b0 = U.banner(); if (b0) slot.appendChild(b0); return; }
     if (!navigator.onLine) return;
     U.done = true;
@@ -188,7 +187,6 @@
   };
   // زر «تحقق من التحديثات» في الإعدادات
   U.section = function () {
-    if (WEB) return h('p', { class: 'hint' }, 'الإصدار الحالي ' + MK.VERSION + '. يصلك كل إصدار جديد تلقائيًا عند فتح الأداة وأنت متصل بالإنترنت.');
     var out = h('p', { class: 'hint' }, 'الإصدار الحالي ' + MK.VERSION + '. يصل التحديث مستقلًا عن بقية أدوات المعلمين.');
     var btn = h('button', { type: 'button', class: 'btn small soft', style: { alignSelf: 'flex-start' }, onclick: function () {
       btn.disabled = true; out.textContent = 'أبحث عن تحديث…';

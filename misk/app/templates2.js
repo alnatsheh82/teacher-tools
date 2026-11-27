@@ -200,7 +200,7 @@
         tm.stop();
         var it = items[idx], body = MK.clear(ctx.body); MK.clear(ctx.foot);
         ctx.setProgress(idx / items.length);
-        var done = false;
+        var done = false; ctx.mark();
         tm = startTimer(ctx, +ctx.act.settings.timer || 0, function () { answer(null); });
         body.appendChild(h('div', { class: 'q-top' }, h('div', { class: 'q-count' }, MK.t('العبارة ') + ar(idx + 1) + MK.t(' من ') + ar(items.length)), tm.el));
         var card = h('div', { class: 'tf-card' }, MK.rich(it.text));
@@ -217,8 +217,8 @@
           if (v !== null && !right) (v ? bT : bF).classList.add('wrong');
           card.classList.add(right ? 'ok' : 'no');
           card.appendChild(h('div', { class: 'tf-verdict' }, (MK.lang === 'en' ? 'This statement is ' : 'العبارة ') + (it.answer ? MK.t('صحيحة') : MK.t('خاطئة'))));
-          if (right) { good++; MK.sound.correct(); ctx.addPoints(10); ctx.mascot('cheer'); }
-          else { if (v !== null) MK.sound.wrong(); ctx.mascot('sad'); if (it.explain && it.explain.trim()) body.appendChild(MK.explainBox(it.explain)); }
+          if (right) { good++; MK.sound.correct(); ctx.right(1); ctx.mascot('cheer'); }
+          else { ctx.wrong(); if (v !== null) MK.sound.wrong(); ctx.mascot('sad'); if (it.explain && it.explain.trim()) body.appendChild(MK.explainBox(it.explain)); }
           nextBtn(ctx, idx === items.length - 1, MK.t('العبارة التالية'), function () { idx++; show(); }, function () { return { correct: good, total: items.length }; });
         }
       }
@@ -272,7 +272,7 @@
         var pairs = rounds[ri], body = MK.clear(ctx.body); MK.clear(ctx.foot);
         ctx.setProgress(ri / rounds.length);
         if (rounds.length > 1) body.appendChild(h('div', { class: 'q-count', style: { textAlign: 'center' } }, MK.t('الجولة ') + ar(ri + 1) + MK.t(' من ') + ar(rounds.length)));
-        var grid = h('div', { class: 'match-grid' }), slots = [];
+        var grid = h('div', { class: 'match-grid' }), slots = [], checks = 0, okN = 0; ctx.mark();
         pairs.forEach(function (p) {
           var dz = h('div', { class: 'mslot', 'aria-label': MK.t('خانة ') + p.a });
           slots.push({ el: dz, want: p.b });
@@ -285,14 +285,15 @@
         var checkB = h('button', {
           type: 'button', class: 'btn big', onclick: function () {
             var r = pl.check(); if (!r) return;
-            if (r.newOk) ctx.addPoints(r.newOk * 5);
-            good += r.newOk;
+            for (var k = 0; k < r.newOk; k++) { if (checks === 0) ctx.right(1, { n: slots.length }); else if (checks === 1) ctx.right(2); else ctx.wrong(); }
+            good += r.newOk; okN += r.newOk; checks++;
             if (r.all) win(); else { MK.sound.wrong(); ctx.mascot('sad'); }
           }
         }, MK.icon('check'), MK.t('تحقّق'));
         ctx.foot.appendChild(checkB);
         ctx.foot.appendChild(h('button', { type: 'button', class: 'btn ghost big', onclick: function () { if (pl.hint()) win(); } }, MK.icon('hint'), MK.t('تلميح')));
         function win() {
+          if (slots.length > okN) { ctx.wrong(slots.length - okN); okN = slots.length; }
           MK.sound.correct(); ctx.mascot('cheer'); grid.classList.add('flash-ok');
           nextBtn(ctx, ri === rounds.length - 1, MK.t('الجولة التالية'), function () { ri++; show(); }, function () { return { correct: good, total: all.length }; });
         }
@@ -332,7 +333,7 @@
       function show() {
         var t = texts[ti], parts = clozeParts(t.text), body = MK.clear(ctx.body); MK.clear(ctx.foot);
         ctx.setProgress(ti / texts.length);
-        var para = h('div', { class: 'cloze-text' }), slots = [], bank = [];
+        var para = h('div', { class: 'cloze-text' }), slots = [], bank = [], checks = 0, okN = 0; ctx.mark();
         parts.forEach(function (p, k) {
           if (k % 2 === 0) { if (p) para.appendChild(MK.rich(p)); }
           else { var dz = h('span', { class: 'islot' }); slots.push({ el: dz, want: p.trim() }); bank.push({ text: p.trim() }); para.appendChild(dz); }
@@ -346,13 +347,14 @@
         ctx.foot.appendChild(h('button', {
           type: 'button', class: 'btn big', onclick: function () {
             var r = pl.check(); if (!r) return;
-            if (r.newOk) ctx.addPoints(r.newOk * 5);
-            good += r.newOk;
+            for (var k = 0; k < r.newOk; k++) { if (checks === 0) ctx.right(1, { n: slots.length }); else if (checks === 1) ctx.right(2); else ctx.wrong(); }
+            good += r.newOk; okN += r.newOk; checks++;
             if (r.all) win(); else { MK.sound.wrong(); ctx.mascot('sad'); }
           }
         }, MK.icon('check'), MK.t('تحقّق')));
         ctx.foot.appendChild(h('button', { type: 'button', class: 'btn ghost big', onclick: function () { if (pl.hint()) win(); } }, MK.icon('hint'), MK.t('تلميح')));
         function win() {
+          if (slots.length > okN) { ctx.wrong(slots.length - okN); okN = slots.length; }
           MK.sound.correct(); ctx.mascot('cheer');
           nextBtn(ctx, ti === texts.length - 1, MK.t('النص التالي'), function () { ti++; show(); }, function () { return { correct: good, total: total }; });
         }
@@ -483,11 +485,12 @@
           b.classList.add('opened'); b.disabled = true;
           MK.clear(overlay); overlay.classList.remove('hidden');
           var ans = it.a && it.a.trim() ? h('div', { class: 'reveal-ans hidden' }, MK.rich(it.a)) : null;
-          tm = startTimer(ctx, +ctx.act.settings.timer || 0, function () { });
+          tm = startTimer(ctx, +ctx.act.settings.timer || 0, function () { }); ctx.mark();
           var acts = h('div', { class: 'reveal-acts' });
           if (ans) acts.appendChild(h('button', { type: 'button', class: 'btn ghost big', onclick: function () { ans.classList.remove('hidden'); MK.sound.reveal(); this.remove(); } }, MK.icon('eye'), MK.t('أظهر الإجابة')));
-          acts.appendChild(h('button', { type: 'button', class: 'btn big ok-btn', onclick: function () { good++; ctx.addPoints(10); MK.sound.correct(); ctx.mascot('cheer'); close(); } }, MK.icon('check'), MK.t('إجابة صحيحة')));
-          acts.appendChild(h('button', { type: 'button', class: 'btn soft big', onclick: function () { MK.sound.wrong(); close(); } }, MK.t('لم تُجب')));
+          acts.appendChild(h('button', { type: 'button', class: 'btn big ok-btn', onclick: function () { good++; ctx.right(1); MK.sound.correct(); ctx.mascot('cheer'); close(); } }, MK.icon('check'), MK.t('صحيحة')));
+          acts.appendChild(h('button', { type: 'button', class: 'btn soft big', onclick: function () { good++; ctx.right(2); MK.sound.correct(); close(); } }, MK.t('صحيحة بعد محاولة')));
+          acts.appendChild(h('button', { type: 'button', class: 'btn soft big', onclick: function () { ctx.wrong(); MK.sound.wrong(); close(); } }, MK.t('لم تُجب')));
           overlay.appendChild(h('div', { class: 'reveal-card' }, tm.el ? h('div', { style: { alignSelf: 'center' } }, tm.el) : null, h('div', { class: 'reveal-q' }, MK.rich(it.q)), ans, acts));
         }, 380);
       }

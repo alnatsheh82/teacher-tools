@@ -336,7 +336,7 @@
         pat.forEach(function (row) { row.split('').forEach(function (b) { cg.appendChild(h('span', { class: b === '1' ? 'on' : '' })); }); });
         box.appendChild(h('div', { class: 'th-cwrow' }, cg, h('div', { class: 'th-clue' }, (c.pairs || []).slice(0, 3).map(function (p, i) { return h('div', null, (i + 1) + '. ' + MK.plain(p.a).slice(0, 26)); })))); break;
       case 'board':
-        var bc = (c.cols || []).slice(0, 5), bv = { a: [100, 300, 600, 900], b: [100, 200, 300, 400], c: [200, 400, 600, 800] }[c.vals || 'a'];
+        var bc = (c.cols || []).slice(0, 6), bv = { a: [100, 300, 600, 900], b: [100, 200, 300, 400], c: [200, 400, 600, 800, 1000] }[c.vals || 'a'];
         box.appendChild(h('div', { class: 'th-board', style: { gridTemplateColumns: 'repeat(' + bc.length + ',1fr)' } },
           bc.map(function (col) { return h('b', null, MK.plain(col.name).slice(0, 10)); }).concat([].concat.apply([], bv.map(function (v, ri) { return bc.map(function (col, ci) { return h('span', { class: ri === 1 && ci === 2 ? 'used' : '' }, String(v)); }); }))))); break;
       case 'rounds':
