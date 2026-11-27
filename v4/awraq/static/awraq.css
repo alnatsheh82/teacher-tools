@@ -551,3 +551,7 @@ body { font-family: Tahoma, 'Segoe UI', Arial, "XP Sym", sans-serif; }
     .w2 { grid-column: 1 / -1; }
     .opts-2 { grid-template-columns: 1fr; }
 }
+
+#toolsDialog .promo-get { display: inline-block; margin-top: 8px; margin-inline-start: 14px; background: #78213d; color: #fff; text-decoration: none; border-radius: 10px; padding: 6px 16px; font-size: 14px; font-weight: 700; }
+#toolsDialog .promo-get:hover { background: #5e1830; }
+#toolsDialog .tool-new { display: inline-block; background: #c9a24b; color: #3e0f1f; font-size: 12px; border-radius: 20px; padding: 1px 10px; margin-inline-start: 6px; vertical-align: middle; }
