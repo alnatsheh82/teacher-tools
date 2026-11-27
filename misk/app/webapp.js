@@ -44,6 +44,7 @@
           p.userChoice.then(function (r) { if (r && r.outcome === 'accepted') { I.prompt = null; fill(); } }).catch(function () { });
         }, false);
     }
+    if (!I.offerOnline) return null; // صفحة الإنترنت غير مفعّلة بعد، فلا نعرض الزر في نسخة الملفات
     try { if (localStorage.getItem(LATER)) return null; } catch (x) { }
     return bar(h('span', null, h('strong', null, 'ثبّت مِسك الختام بأيقونته على سطح المكتب'), ' — من صفحته على الإنترنت، بضغطة واحدة.'),
       'افتح صفحة التثبيت', function () { window.open(URL_ONLINE, '_blank'); }, true);

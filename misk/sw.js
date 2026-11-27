@@ -1,6 +1,6 @@
 /* مِسك الختام — يحفظ التطبيق على الجهاز ليعمل دون إنترنت، ويجلب الإصدار الجديد وحده.
    يُولَّد مع كل إصدار من قائمة الملفات، فلا تعدّله يدويًا. */
-var CACHE = "misk-2.7.0-3cc1e9b95b";
+var CACHE = "misk-2.7.1-116e12ffd7";
 var FILES = [
 "index.html",
 "manifest.webmanifest",
@@ -19,7 +19,6 @@ var FILES = [
 "app/icon-512.png",
 "app/icon-maskable-512.png",
 "app/import.js",
-"app/install.js",
 "app/main.js",
 "app/misk.ico",
 "app/rounds-import.js",
@@ -30,6 +29,7 @@ var FILES = [
 "app/templates2.js",
 "app/templates3.js",
 "app/updater.js",
+"app/webapp.js",
 "app/wordwall.js",
 "app/shared/fonts.js",
 "app/shared/quran-data.js",
