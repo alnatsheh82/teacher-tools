@@ -1171,3 +1171,9 @@ body.player .layout{display:none}
 .bd-q-img{display:flex;justify-content:center}
 .bd-q-img img{max-width:100%;max-height:34vh;border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,.15);background:#fff}
 .bd-board.many{gap:7px;min-height:0}.bd-board.many .bd-tile{min-height:0;font-size:clamp(18px,2.4vw,40px);box-shadow:0 4px 0 rgba(0,0,0,.25)}.bd-board.many .bd-head{min-height:48px;padding:6px}
+
+.verse-hits{max-height:240px;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:6px;margin-top:6px;background:var(--surface)}
+.verse-hit{display:flex;gap:10px;align-items:baseline;width:100%;text-align:right;background:none;border:0;border-radius:8px;padding:6px 8px;cursor:pointer;font:inherit;line-height:1.9}
+.verse-hit:hover{background:var(--surface2)}.verse-hit.on{background:var(--surface2);outline:2px solid var(--primary)}
+.verse-hit .verse-ref{flex:none;font-size:.85em;white-space:nowrap;color:var(--primary)}
+.verse-hit .qr{font-size:1.15em}

@@ -206,10 +206,37 @@
       res = { text: '﴿' + parts.join(' ') + '﴾', ref: '[' + Q.names[s] + ': ' + (a === b ? a : a + '-' + b) + ']', sura: Q.names[s] };
       MK.clear(prev).appendChild(MK.rich(res.text)); prev.appendChild(h('span', { class: 'verse-ref' }, ' ' + res.ref));
     }
+    // البحث بكلمة: بلا تشكيل ولا همزات ولا ألفات، والمسافات لا تؤثر
+    var q = h('input', { type: 'search', placeholder: 'اكتب كلمة من الآية، مثل: الصراط المستقيم', 'aria-label': 'ابحث بكلمة' });
+    var hits = h('div', { class: 'verse-hits' }), tmr = null;
+    function pick(si, ai, el) {
+      sel.value = si; from.value = ai + 1; to.value = ai + 1; upd();
+      Array.prototype.forEach.call(hits.children, function (c) { c.classList.remove('on'); });
+      if (el) el.classList.add('on');
+    }
+    function search() {
+      var key = MK.qNorm(q.value); MK.clear(hits);
+      if (key.length < 2) { hits.style.display = 'none'; return; }
+      var idx = MK.qIndex(), found = [];
+      for (var i = 0; i < idx.length && found.length < 501; i++) if (idx[i].n.indexOf(key) >= 0) found.push(idx[i]);
+      hits.style.display = '';
+      if (!found.length) { hits.appendChild(h('div', { class: 'hint' }, 'لا توجد نتائج. جرّب كلمة أخرى أو جزءًا منها.')); return; }
+      var more = found.length > 500 ? 'أكثر من 500' : found.length;
+      hits.appendChild(h('div', { class: 'hint' }, 'عدد النتائج: ' + more + (found.length > 40 ? ' — يظهر أول 40، أضف كلمة أخرى لتضييق البحث.' : ' — اضغط على الآية لاختيارها.')));
+      found.slice(0, 40).forEach(function (f) {
+        var t = Q.suras[f.s][f.a].replace(/^۞\s*/, '');
+        var b = h('button', { type: 'button', class: 'verse-hit' }, h('span', { class: 'verse-ref' }, Q.names[f.s] + ': ' + (f.a + 1)), h('span', { class: 'qr' }, t));
+        b.addEventListener('click', function () { pick(f.s, f.a, b); });
+        hits.appendChild(b);
+      });
+    }
+    hits.style.display = 'none';
+    q.addEventListener('input', function () { clearTimeout(tmr); tmr = setTimeout(search, 200); });
     sel.addEventListener('change', function () { from.value = 1; to.value = 1; upd(); });
     from.addEventListener('input', function () { if (+to.value < +from.value) to.value = from.value; upd(); });
     to.addEventListener('input', upd);
     var body = h('div', { class: 'verse-dlg' },
+      h('div', { class: 'field' }, h('label', null, 'ابحث بكلمة'), q, hits),
       h('div', { class: 'field' }, h('label', null, 'السورة'), sel, info),
       h('div', { class: 'two-col' }, h('div', { class: 'field' }, h('label', null, 'من الآية'), from), h('div', { class: 'field' }, h('label', null, 'إلى الآية'), to)),
       prev, h('div', { class: 'hint' }, 'نص المصحف برواية حفص بالرسم العثماني، من مجمع الملك فهد لطباعة المصحف الشريف.'));
@@ -217,6 +244,21 @@
     body.appendChild(h('p', { class: 'hint quran-src' }, 'النص من مصحف مجمع الملك فهد لطباعة المصحف الشريف (الإصدار 22)، برواية حفص عن عاصم وبالرسم العثماني.'));
     MK.modal('إدراج آية', body, [{ label: 'إدراج', onClick: function () { onIns(res); } }, { label: 'إلغاء', cls: 'ghost' }]);
     document.querySelector('.modal').classList.add('wide');
+    setTimeout(function () { q.focus(); }, 50);
+  };
+  MK.qNorm = function (t) {
+    return String(t || '')
+      .replace(/و(?=[\u064B-\u065F]*\u0670)/g, '')   // الصلوٰة ← الصلاة
+      .replace(/[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED\u0640]/g, '')
+      .replace(/[اأإآٱءٰ]/g, '').replace(/ؤ/g, 'و').replace(/[ئى]/g, 'ي').replace(/ة/g, 'ه')
+      .replace(/[^\u0621-\u064A]/g, '');
+  };
+  var qIdx = null;
+  MK.qIndex = function () {
+    if (qIdx) return qIdx;
+    var Q = MK.quran(); qIdx = [];
+    Q.suras.forEach(function (ay, s) { ay.forEach(function (t, a) { qIdx.push({ s: s, a: a, n: MK.qNorm(t) }); }); });
+    return qIdx;
   };
 
   // ---------- ملفي: بيانات المعلم والمدرسة ----------

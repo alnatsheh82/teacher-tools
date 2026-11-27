@@ -2,13 +2,13 @@
  "_ملاحظة": "ملف تحديثات مِسك الختام وحده، مستقل عن بقية أدوات المعلمين. يُبنى مع كل إصدار، فلا تعدّله يدويًا.",
  "misk-alkhitam": {
   "name": "مِسك الختام",
-  "number": "3.1.1",
-  "version": "3.1.1",
+  "number": "3.1.2",
+  "version": "3.1.2",
   "date": "2026-11-27",
   "dir": "misk",
-  "message": "صدر مِسك الختام 3.1.1.",
+  "message": "صدر مِسك الختام 3.1.2.",
   "notes": [
-   "صفحة «أدوات المعلمين»: رابط مجلد أدوات المعلمين على OneDrive، وفيه الأدوات كلها."
+   "نافذة «إدراج آية»: بحث بكلمة من الآية دون تشكيل ولا همزات، وبالضغط على النتيجة تُختار السورة والآية."
   ],
   "download": "https://github.com/alnatsheh82/teacher-tools/raw/main/downloads/%D9%85%D8%B3%D9%83%20%D8%A7%D9%84%D8%AE%D8%AA%D8%A7%D9%85.zip",
   "files": {
@@ -19,10 +19,10 @@
    "app/core.js": "6e474964a7fed0dbff113dbb471381cec3e33dd46eb283633a52012464d499a5",
    "app/feedback.js": "6a98bdfdeee26ad1fb819c6cb886d2f4d2c865e78bd0c96cdeb8a81ac2839b33",
    "app/fonts.css": "626af3903463a791aca804a3cc102c17dbb488eeb710f427353d77009a57df96",
-   "app/helpers.js": "1e4d32081f687eaf49bd2e6a15aaec69ce14f92410ccd2a6971fbc29b677119b",
+   "app/helpers.js": "26ba76a6858e4dcfb436e411def53f5e5f658084c43fa4d2037951774992b09f",
    "app/icon-32.png": "81b2fe31419a9bcb6373814be46b173a2703f2c35c9811107da4c0d6c179d19e",
    "app/import.js": "1427a01e11e05431fe05c6b876b0be08a73e03d16336894b18280f601ce13e2e",
-   "app/main.js": "bfbc3fe929d9a630c8d279fabf2a725de7435a7b5c84b7ec4372d06e1636c92c",
+   "app/main.js": "86af2403da32ede3b1b2585963a351a686db67c079b7814e8662de827e80516f",
    "app/misk.ico": "a79c5537445b2b281d925871094929c8ac2e49fe19e771e7e09a6cbf1116f17d",
    "app/rounds-import.js": "801e4756185dec73a1c475ac5b1a5556049a56599f2e19e450e9c34dd9f70414",
    "app/samples.js": "b2b6dc0195f8a3046d8d8e095e2b0f7a1559670300422f3ca97b4ca8358e7259",
@@ -30,7 +30,7 @@
    "app/shared/fonts.js": "d3b1411174b16e51a5d06b65e321ca9865ad2cbc640d0703f0f2d4aecbdfe638",
    "app/shared/quran-data.js": "fc4cc1b8e23ebe2776a14b3c9626c65020df5545c7bcbbc04647f9bdce62bc7d",
    "app/storage.js": "e06169c8719612e1e3f9067c5094cb08586fddca1286baa572793db7cade528e",
-   "app/styles.css": "61698db993cb7af815a9e17aab2aca00df9603b28ea5d1dbd6a92f3243882def",
+   "app/styles.css": "9692e30da28e2aa8776b1f402c515ec5fe6e8850bfe780e022064936f2073f2f",
    "app/templates.js": "455cf3b8f3df5c2d2744053a80fc9dbff1fedefd500d27d82e92a480f91a8eb4",
    "app/templates2.js": "5868c60db39e10ef6d78b45699d05c3026c745d83677711473f0909a73530cb6",
    "app/templates3.js": "54841fd8b8aba4ff71fd737bd849d4b13bc91132c319f4869dbe949ef3196e82",
